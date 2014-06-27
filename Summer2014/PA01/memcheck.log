@@ -1,0 +1,217 @@
+==64777== Memcheck, a memory error detector
+==64777== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==64777== Using Valgrind-3.10.0.SVN and LibVEX; rerun with -h for copyright info
+==64777== Command: ./a.out
+==64777== Parent PID: 55260
+==64777== 
+==64777== WARNING: Support on MacOS 10.8/10.9 is experimental and mostly broken.
+==64777== WARNING: Expect incorrect results, assertions and crashes.
+==64777== WARNING: In particular, Memcheck on 32-bit programs will fail to
+==64777== WARNING: detect any errors associated with heap-allocated data.
+==64777== 
+--64777-- 
+--64777-- Valgrind options:
+--64777--    --tool=memcheck
+--64777--    --leak-check=full
+--64777--    --verbose
+--64777--    --log-file=memcheck.log
+--64777-- Contents of /proc/version:
+--64777--   can't open /proc/version
+--64777-- Arch and hwcaps: AMD64, amd64-cx16-rdtscp-sse3
+--64777-- Page sizes: currently 4096, max supported 4096
+--64777-- Valgrind library directory: /usr/local/lib/valgrind
+--64777-- ./a.out (rx at 0x100000000, rw at 0x100002000)
+--64777--    reading syms   from primary file (19 0)
+--64777--    dSYM directory is missing; consider using --dsymutil=yes
+--64777-- /usr/lib/dyld (rx at 0x7fff5fc00000, rw at 0x7fff5fc34000)
+--64777--    reading syms   from primary file (6 1183)
+--64777-- Scheduler: using generic scheduler lock implementation.
+--64777-- Reading suppressions file: /usr/local/lib/valgrind/default.supp
+==64777== embedded gdbserver: reading from /var/folders/fx/vlf57n957mz8bmg2y6dr4yxr0000h1/T//vgdb-pipe-from-vgdb-to-64777-by-cheng109-on-???
+==64777== embedded gdbserver: writing to   /var/folders/fx/vlf57n957mz8bmg2y6dr4yxr0000h1/T//vgdb-pipe-to-vgdb-from-64777-by-cheng109-on-???
+==64777== embedded gdbserver: shared mem   /var/folders/fx/vlf57n957mz8bmg2y6dr4yxr0000h1/T//vgdb-pipe-shared-mem-vgdb-64777-by-cheng109-on-???
+==64777== 
+==64777== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==64777== don't want to do, unless you know exactly what you're doing,
+==64777== or are doing some strange experiment):
+==64777==   /usr/local/lib/valgrind/../../bin/vgdb --pid=64777 ...command...
+==64777== 
+==64777== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==64777==   /path/to/gdb ./a.out
+==64777== and then give GDB the following command
+==64777==   target remote | /usr/local/lib/valgrind/../../bin/vgdb --pid=64777
+==64777== --pid is optional if only one valgrind process is running
+==64777== 
+--64777-- REDIR: 0x7fff5fc1b798 (arc4random) redirected to 0x2380658de (???)
+--64777-- REDIR: 0x7fff5fc21560 (strcmp) redirected to 0x238065840 (???)
+--64777-- REDIR: 0x7fff5fc1b560 (strlen) redirected to 0x23806580f (???)
+--64777-- REDIR: 0x7fff5fc1b4c0 (strcpy) redirected to 0x23806585c (???)
+--64777-- REDIR: 0x7fff5fc1ec4f (strcat) redirected to 0x238065820 (???)
+--64777-- /usr/local/lib/valgrind/vgpreload_core-amd64-darwin.so (rx at 0x1000, rw at 0x2000)
+--64777--    reading syms   from primary file (3 31)
+--64777--    dSYM= /usr/local/lib/valgrind/vgpreload_core-amd64-darwin.so.dSYM/Contents/Resources/DWARF/vgpreload_core-amd64-darwin.so
+--64777--    reading dwarf3 from dsyms file
+--64777-- /usr/local/lib/valgrind/vgpreload_memcheck-amd64-darwin.so (rx at 0x4000, rw at 0x9000)
+--64777--    reading syms   from primary file (47 245)
+--64777--    dSYM= /usr/local/lib/valgrind/vgpreload_memcheck-amd64-darwin.so.dSYM/Contents/Resources/DWARF/vgpreload_memcheck-amd64-darwin.so
+--64777--    reading dwarf3 from dsyms file
+--64777-- /usr/lib/libSystem.B.dylib (rx at 0xd000, rw at 0xf000)
+--64777--    reading syms   from primary file (31 4)
+--64777-- /usr/lib/system/libcache.dylib (rx at 0x15000, rw at 0x1a000)
+--64777--    reading syms   from primary file (29 24)
+--64777-- /usr/lib/system/libcommonCrypto.dylib (rx at 0x1e000, rw at 0x29000)
+--64777--    reading syms   from primary file (203 183)
+--64777-- /usr/lib/system/libcompiler_rt.dylib (rx at 0x36000, rw at 0x3e000)
+--64777--    reading syms   from primary file (454 8)
+--64777-- /usr/lib/system/libcopyfile.dylib (rx at 0x49000, rw at 0x51000)
+--64777--    reading syms   from primary file (11 28)
+--64777-- /usr/lib/system/libcorecrypto.dylib (rx at 0x57000, rw at 0xa6000)
+--64777--    reading syms   from primary file (341 430)
+--64777-- /usr/lib/system/libdispatch.dylib (rx at 0xb6000, rw at 0xd1000)
+--64777--    reading syms   from primary file (176 737)
+--64777-- /usr/lib/system/libdyld.dylib (rx at 0xea000, rw at 0xee000)
+--64777--    reading syms   from primary file (78 96)
+--64777-- /usr/lib/system/libkeymgr.dylib (rx at 0xf4000, rw at 0xf5000)
+--64777--    reading syms   from primary file (12 4)
+--64777-- /usr/lib/system/liblaunch.dylib (rx at 0xf9000, rw at 0x101000)
+--64777--    reading syms   from primary file (112 1)
+--64777-- /usr/lib/system/libmacho.dylib (rx at 0x108000, rw at 0x10e000)
+--64777--    reading syms   from primary file (86 1)
+--64777-- /usr/lib/system/libquarantine.dylib (rx at 0x113000, rw at 0x116000)
+--64777--    reading syms   from primary file (66 32)
+--64777-- /usr/lib/system/libremovefile.dylib (rx at 0x11b000, rw at 0x11d000)
+--64777--    reading syms   from primary file (15 4)
+--64777-- /usr/lib/system/libsystem_asl.dylib (rx at 0x122000, rw at 0x134000)
+--64777--    reading syms   from primary file (127 106)
+--64777-- /usr/lib/system/libsystem_blocks.dylib (rx at 0x13d000, rw at 0x13f000)
+--64777--    reading syms   from primary file (25 23)
+--64777-- /usr/lib/system/libsystem_c.dylib (rx at 0x143000, rw at 0x1cd000)
+--64777--    reading syms   from primary file (1288 784)
+--64777-- /usr/lib/system/libsystem_configuration.dylib (rx at 0x1f8000, rw at 0x1fb000)
+--64777--    reading syms   from primary file (27 58)
+--64777-- /usr/lib/system/libsystem_dnssd.dylib (rx at 0x200000, rw at 0x209000)
+--64777--    reading syms   from primary file (68 34)
+--64777-- /usr/lib/system/libsystem_info.dylib (rx at 0x20f000, rw at 0x237000)
+--64777--    reading syms   from primary file (526 526)
+--64777-- /usr/lib/system/libsystem_kernel.dylib (rx at 0x24c000, rw at 0x269000)
+--64777--    reading syms   from primary file (931 2486)
+--64777-- /usr/lib/system/libsystem_m.dylib (rx at 0x28c000, rw at 0x2bc000)
+--64777--    reading syms   from primary file (573 1)
+--64777-- /usr/lib/system/libsystem_malloc.dylib (rx at 0x2c6000, rw at 0x2e2000)
+--64777--    reading syms   from primary file (102 199)
+--64777-- /usr/lib/system/libsystem_network.dylib (rx at 0x2eb000, rw at 0x313000)
+--64777--    reading syms   from primary file (168 1053)
+--64777-- /usr/lib/system/libsystem_notify.dylib (rx at 0x32e000, rw at 0x338000)
+--64777--    reading syms   from primary file (137 48)
+--64777-- /usr/lib/system/libsystem_platform.dylib (rx at 0x340000, rw at 0x347000)
+--64777--    reading syms   from primary file (114 1463)
+--64777-- /usr/lib/system/libsystem_pthread.dylib (rx at 0x359000, rw at 0x361000)
+--64777--    reading syms   from primary file (137 54)
+--64777-- /usr/lib/system/libsystem_sandbox.dylib (rx at 0x36c000, rw at 0x36e000)
+--64777--    reading syms   from primary file (61 8)
+--64777-- /usr/lib/system/libsystem_stats.dylib (rx at 0x372000, rw at 0x377000)
+--64777--    reading syms   from primary file (20 44)
+--64777-- /usr/lib/system/libunc.dylib (rx at 0x37d000, rw at 0x37f000)
+--64777--    reading syms   from primary file (31 4)
+--64777-- /usr/lib/system/libunwind.dylib (rx at 0x384000, rw at 0x38a000)
+--64777--    reading syms   from primary file (102 52)
+--64777-- /usr/lib/system/libxpc.dylib (rx at 0x390000, rw at 0x3b5000)
+--64777--    reading syms   from primary file (349 818)
+--64777-- /usr/lib/libobjc.A.dylib (rx at 0x3d1000, rw at 0x57f000)
+--64777--    reading syms   from primary file (342 735)
+--64777-- /usr/lib/libauto.dylib (rx at 0x59f000, rw at 0x5e2000)
+--64777--    reading syms   from primary file (68 742)
+--64777-- /usr/lib/libc++abi.dylib (rx at 0x5f9000, rw at 0x623000)
+--64777--    reading syms   from primary file (331 182)
+--64777-- /usr/lib/libc++.1.dylib (rx at 0x630000, rw at 0x683000)
+--64777--    reading syms   from primary file (2070 1507)
+--64777-- /usr/lib/libDiagnosticMessagesClient.dylib (rx at 0x6de000, rw at 0x6e0000)
+--64777--    reading syms   from primary file (21 14)
+--64777-- REDIR: 0x2d7252 (malloc) redirected to 0x4f90 (malloc)
+--64777-- REDIR: 0x2d5c2f (malloc_default_zone) redirected to 0x6f70 (malloc_default_zone)
+--64777-- REDIR: 0x2d6821 (malloc_zone_malloc) redirected to 0x5300 (malloc_zone_malloc)
+--64777-- REDIR: 0x2d6ee4 (free) redirected to 0x5540 (free)
+--64777-- REDIR: 0x2d6b12 (malloc_zone_calloc) redirected to 0x5be0 (malloc_zone_calloc)
+--64777-- REDIR: 0x2d6cee (malloc_zone_from_ptr) redirected to 0x6f90 (malloc_zone_from_ptr)
+==64777== Conditional jump or move depends on uninitialised value(s)
+==64777==    at 0x391BFB: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==64777==    by 0xEAA7: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==64777==    by 0x7FFF5FC11C2D: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==64777==    by 0x7FFF5FC11DB9: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==64777==    by 0x7FFF5FC0EA61: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==64777==    by 0x7FFF5FC0E9EA: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==64777==    by 0x7FFF5FC0E8F5: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==64777==    by 0x7FFF5FC021B6: dyld::initializeMainExecutable() (in /usr/lib/dyld)
+==64777==    by 0x7FFF5FC0555F: dyld::_main(macho_header const*, unsigned long, int, char const**, char const**, char const**, unsigned long*) (in /usr/lib/dyld)
+==64777==    by 0x7FFF5FC0127A: dyldbootstrap::start(macho_header const*, int, char const**, long, macho_header const*, unsigned long*) (in /usr/lib/dyld)
+==64777==    by 0x7FFF5FC0105D: _dyld_start (in /usr/lib/dyld)
+==64777== 
+--64777-- REDIR: 0x2d7299 (calloc) redirected to 0x5920 (calloc)
+==64777== Invalid read of size 1
+==64777==    at 0x100001BAE: my_strstr (in ./a.out)
+==64777==    by 0x1000017CC: main (in ./a.out)
+==64777==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==64777== 
+==64777== 
+==64777== Process terminating with default action of signal 11 (SIGSEGV)
+==64777==  Access not within mapped region at address 0x0
+==64777==    at 0x100001BAE: my_strstr (in ./a.out)
+==64777==    by 0x1000017CC: main (in ./a.out)
+==64777==  If you believe this happened as a result of a stack
+==64777==  overflow in your program's main thread (unlikely but
+==64777==  possible), you can try to increase the size of the
+==64777==  main thread stack using the --main-stacksize= flag.
+==64777==  The main thread stack size used in this run was 8388608.
+==64777== 
+==64777== HEAP SUMMARY:
+==64777==     in use at exit: 29,480 bytes in 374 blocks
+==64777==   total heap usage: 450 allocs, 76 frees, 35,424 bytes allocated
+==64777== 
+==64777== Searching for pointers to 374 not-freed blocks
+==64777== Checked 9,131,048 bytes
+==64777== 
+==64777== LEAK SUMMARY:
+==64777==    definitely lost: 0 bytes in 0 blocks
+==64777==    indirectly lost: 0 bytes in 0 blocks
+==64777==      possibly lost: 0 bytes in 0 blocks
+==64777==    still reachable: 4,096 bytes in 1 blocks
+==64777==         suppressed: 25,384 bytes in 373 blocks
+==64777== Reachable blocks (those to which a pointer was found) are not shown.
+==64777== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==64777== 
+==64777== Use --track-origins=yes to see where uninitialised values come from
+==64777== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 137 from 35)
+==64777== 
+==64777== 1 errors in context 1 of 2:
+==64777== Invalid read of size 1
+==64777==    at 0x100001BAE: my_strstr (in ./a.out)
+==64777==    by 0x1000017CC: main (in ./a.out)
+==64777==  Address 0x0 is not stack'd, malloc'd or (recently) free'd
+==64777== 
+==64777== 
+==64777== 1 errors in context 2 of 2:
+==64777== Conditional jump or move depends on uninitialised value(s)
+==64777==    at 0x391BFB: _libxpc_initializer (in /usr/lib/system/libxpc.dylib)
+==64777==    by 0xEAA7: libSystem_initializer (in /usr/lib/libSystem.B.dylib)
+==64777==    by 0x7FFF5FC11C2D: ImageLoaderMachO::doModInitFunctions(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==64777==    by 0x7FFF5FC11DB9: ImageLoaderMachO::doInitialization(ImageLoader::LinkContext const&) (in /usr/lib/dyld)
+==64777==    by 0x7FFF5FC0EA61: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==64777==    by 0x7FFF5FC0E9EA: ImageLoader::recursiveInitialization(ImageLoader::LinkContext const&, unsigned int, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==64777==    by 0x7FFF5FC0E8F5: ImageLoader::runInitializers(ImageLoader::LinkContext const&, ImageLoader::InitializerTimingList&) (in /usr/lib/dyld)
+==64777==    by 0x7FFF5FC021B6: dyld::initializeMainExecutable() (in /usr/lib/dyld)
+==64777==    by 0x7FFF5FC0555F: dyld::_main(macho_header const*, unsigned long, int, char const**, char const**, char const**, unsigned long*) (in /usr/lib/dyld)
+==64777==    by 0x7FFF5FC0127A: dyldbootstrap::start(macho_header const*, int, char const**, long, macho_header const*, unsigned long*) (in /usr/lib/dyld)
+==64777==    by 0x7FFF5FC0105D: _dyld_start (in /usr/lib/dyld)
+==64777== 
+--64777-- 
+--64777-- used_suppression:     34 <insert_a_suppression_name_here> /usr/local/lib/valgrind/default.supp:791 suppressed: 13,656 bytes in 252 blocks
+--64777-- used_suppression:      1 <insert_a_suppression_name_here> /usr/local/lib/valgrind/default.supp:741 suppressed: 2,064 bytes in 1 blocks
+--64777-- used_suppression:     13 <insert_a_suppression_name_here> /usr/local/lib/valgrind/default.supp:802 suppressed: 6,981 bytes in 70 blocks
+--64777-- used_suppression:     11 <insert_a_suppression_name_here> /usr/local/lib/valgrind/default.supp:833 suppressed: 1,914 bytes in 29 blocks
+--64777-- used_suppression:     11 <insert_a_suppression_name_here> /usr/local/lib/valgrind/default.supp:823 suppressed: 625 bytes in 16 blocks
+--64777-- used_suppression:      5 <insert_a_suppression_name_here> /usr/local/lib/valgrind/default.supp:781 suppressed: 144 bytes in 5 blocks
+--64777-- used_suppression:      7 <insert_a_suppression_name_here> /usr/local/lib/valgrind/default.supp:914
+--64777-- used_suppression:      6 <insert_a_suppression_name_here> /usr/local/lib/valgrind/default.supp:900
+--64777-- used_suppression:    110 <insert_a_suppression_name_here> /usr/local/lib/valgrind/default.supp:893
+==64777== 
+==64777== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 137 from 35)
