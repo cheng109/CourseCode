@@ -1,0 +1,18 @@
+==59263== Memcheck, a memory error detector
+==59263== Copyright (C) 2002-2012, and GNU GPL'd, by Julian Seward et al.
+==59263== Using Valgrind-3.8.1 and LibVEX; rerun with -h for copyright info
+==59263== Command: ./echo-lite
+==59263== Parent PID: 59257
+==59263== 
+--59263-- 
+--59263-- Valgrind options:
+--59263--    --tool=memcheck
+--59263--    --leak-check=full
+--59263--    --verbose
+--59263--    --log-file=memcheck.log
+--59263--    --track-origins=yes
+--59263-- Contents of /proc/version:
+--59263--   Linux version 2.6.32-431.11.2.el6.x86_64 (mockbuild@x86-027.build.eng.bos.redhat.com) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-4) (GCC) ) #1 SMP Mon Mar 3 13:32:45 EST 2014
+--59263-- Arch and hwcaps: AMD64, amd64-sse3-cx16-lzcnt
+--59263-- Page sizes: currently 4096, max supported 4096
+--59263-- Valgrind library directory: /usr/lib64/valgrind
