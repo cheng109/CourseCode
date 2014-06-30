@@ -8,7 +8,6 @@
 void swapString(const char ** a, const char ** b)
 {
     const char * tmp = *a;
-    
     *a = *b;
     *b = tmp;
     printf("Calling swapString(...)\n");

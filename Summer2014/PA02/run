@@ -1,4 +1,4 @@
 #!/bin/bash
-echo "gcc -Wall -Wshadow -g answer02.c && ./a.out" 
-gcc -Wall -Wshadow -std=c99 -g answer02.c && ./a.out 
-valgrind --tool=memcheck --leak-check=full --verbose --log-file=memcheck.log --track-origins=yes ./a.out
+echo "gcc -Wall -Wshadow -g answer02.c my_test.c && ./a.out" 
+gcc -Wall -Wshadow -std=c99 -g answer02.c mytest.c -o pa02.out && ./pa02.out
+valgrind --tool=memcheck --leak-check=full --verbose --log-file=memcheck.log --track-origins=yes ./pa02.out

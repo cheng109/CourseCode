@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+
+char * strdup(const char* src); 
 /**
  * Append the C-string 'src' to the end of the C-string '*dest'.
  *
