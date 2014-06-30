@@ -6,6 +6,7 @@
 #define TRUE 1
 #define LINE_MAX 2000
 
+
 int main (int argc, char ** argv) {
   int showHelp=FALSE; 
   int lineNumber=FALSE;
