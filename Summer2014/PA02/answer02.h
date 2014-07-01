@@ -2,7 +2,6 @@
 #define PA02_H 
 
 #include <stdlib.h>
-#include <string.h>
 #include <stdio.h>
 
 char * strdup(const char* src); 
