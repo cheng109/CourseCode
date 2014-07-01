@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "test for BMP files"
+gcc -Wall -Wshadow -g answer04.c my_main.c -o ece_test.out && ./ece_test.out ./images/03-unnormalized-hawkes-bay-NZ.ee264 03-hawkes-bay-NZ_mine.ee264
+#gcc -Wall -Wshadow -g diff-plus.c -o diff && ./diff 03-hawkes-bay-NZ_mine.ee264 ./images/03-hawkes-bay-NZ.ee264
+#valgrind --tool=memcheck --leak-check=full --verbose --log-file=memcheck.log --track-origins=yes .
