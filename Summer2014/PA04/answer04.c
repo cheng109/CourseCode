@@ -34,18 +34,14 @@ Image * Image_load(const char * filename){
 
   if(!err) { // Read the header
     read = fread(&header, sizeof(ImageHeader), 1, fp);
-    printf("comment len = %x \n width = %x \n height = %x \n", header.comment_len, header.width, header.height); 
+    printf("read = %zd\n", read); 
     if(read != 1) {
       fprintf(stderr, "Failed to read header from '%s'\n", filename);
       err = TRUE;
     }
   }
 
-  /* if(!err) { // Print the header */
-  /*   BMP_printHeader(&header); */
-  /* } */
-
-  if(!err) { // We're only interested in a subset of valid bmp files
+ if(!err) { // We're only interested in a subset of valid bmp files
     if(!ECE_checkValid(&header)) {
       fprintf(stderr, "Invalid header in '%s'\n", filename);
       err = TRUE;
@@ -108,11 +104,24 @@ Image * Image_load(const char * filename){
     //size_t bytes_per_row = ((header.bits * header.width + 31)/32) * 4;
     //size_t bytes_per_row = ((1 * header.width + 31)/32) * 4;
     //n_bytes = bytes_per_row * header.height;
-    size_t array_len = header.width*header.height;
-    fread(tmp_im->comment, sizeof(uint8_t), header.comment_len, fp);
-    if(!ECE_checkComment(tmp_im->comment, header.comment_len)) 
-      err=TRUE; 
 
+    read = fread(tmp_im->comment, sizeof(uint8_t), header.comment_len, fp);
+
+    if(read<header.comment_len) {
+      fprintf(stderr, "Comment length is more than it can be read\n"); 
+      err=TRUE; 
+    }
+  }
+
+  if(!err) {
+    if(!ECE_checkComment(tmp_im->comment, header.comment_len)) {
+      fprintf(stderr, "No null byte in the comment section\n"); 
+      err=TRUE; 
+    }
+  }
+
+  if(!err) {
+    size_t array_len = header.width*header.height;
     uint8_t * rawECE = malloc(array_len);
     if(rawECE == NULL) {
       fprintf(stderr, "Could not allocate %zd bytes of image data\n",
@@ -319,6 +328,10 @@ static int ECE_checkComment(char * comment, int len) {
     if(comment[i]=='\0') ret=TRUE; 
 
   }
+
+
+
+
   return ret; 
 
 }
