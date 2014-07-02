@@ -8,6 +8,8 @@
 #define FALSE 0
 #define TRUE 1
 
+static int ECE_checkValid(ImageHeader * header);
+static int ECE_checkComment(char * comment, int len) ; 
 /**
  * Loads an ECE264 image file, returning an Image structure.
  * Will return NULL if there is any error.
@@ -43,12 +45,12 @@ Image * Image_load(const char * filename){
   /*   BMP_printHeader(&header); */
   /* } */
 
-  /* if(!err) { // We're only interested in a subset of valid bmp files */
-  /*   if(!BMP_checkValid(&header)) { */
-  /*     fprintf(stderr, "Invalid header in '%s'\n", filename); */
-  /*     err = TRUE; */
-  /*   } */
-  /* } */
+  if(!err) { // We're only interested in a subset of valid bmp files
+    if(!ECE_checkValid(&header)) {
+      fprintf(stderr, "Invalid header in '%s'\n", filename);
+      err = TRUE;
+    }
+  }
 
   if(!err) { // Allocate Image struct
     tmp_im = malloc(sizeof(Image));
@@ -108,7 +110,8 @@ Image * Image_load(const char * filename){
     //n_bytes = bytes_per_row * header.height;
     size_t array_len = header.width*header.height;
     fread(tmp_im->comment, sizeof(uint8_t), header.comment_len, fp);
-
+    if(!ECE_checkComment(tmp_im->comment, header.comment_len)) 
+      err=TRUE; 
 
     uint8_t * rawECE = malloc(array_len);
     if(rawECE == NULL) {
@@ -164,6 +167,8 @@ Image * Image_load(const char * filename){
   }
 
   // Cleanup
+
+
   if(tmp_im != NULL) {
     free(tmp_im->comment); // Remember, you can always free(NULL)
     free(tmp_im->data);
@@ -172,7 +177,7 @@ Image * Image_load(const char * filename){
   if(fp) {
     fclose(fp);
   }
-  printf("Comments = %s\n", im->comment); 
+  if(err) im=NULL; 
   return im;
 }
 
@@ -274,7 +279,11 @@ int Image_save(const char * filename, Image * image) {
  * report an error. 
  */
 
-void Image_free(Image * image);
+void Image_free(Image * image) {
+  free(image->comment); 
+  free(image->data); 
+  free(image); 
+}
 
 /**
  * Performs linear normalization, see README
@@ -296,5 +305,20 @@ void linearNormalization(int width, int height, uint8_t * intensity)  {
 
 }
 
+static int ECE_checkValid(ImageHeader * header) {
+  if(header->magic_number!=ECE264_IMAGE_MAGIC_NUMBER) return FALSE; 
+  if(header->width==0 || header->height ==0) return FALSE; 
+  return TRUE; 
+}
 
 
+static int ECE_checkComment(char * comment, int len) {
+  int i=0; 
+  int ret = FALSE; 
+  for(i=0; i<len; i++) {
+    if(comment[i]=='\0') ret=TRUE; 
+
+  }
+  return ret; 
+
+}
