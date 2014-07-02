@@ -21,7 +21,7 @@ int main(int argc, char ** argv) {
 	     "  cat-lite README   Print the file README to standard output.\n"
 	     "  cat-lite f - g    Print f's contents, then standard input, \n"
 	     "                    then g's contents.\n"
-	     "  cat-lite          Copy standard input to standard input.\n");
+	     "  cat-lite          Copy standard input to standard output.\n");
       return EXIT_SUCCESS; 
     }
 
