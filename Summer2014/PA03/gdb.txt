@@ -1,0 +1,12 @@
+Breakpoint 1 at 0x40057b: file echo-lite.c, line 5.
+Starting program: /home/cheng109/ece264/Summer2014/PA03/echo-lite 
+
+Breakpoint 1, main (argc=1, argv=0x7fffffffdf08) at echo-lite.c:6
+6	  if(argc==1){
+Missing separate debuginfos, use: debuginfo-install glibc-2.12-1.132.el6_5.2.x86_64
+$1 = 1
+7	    printf("\n"); 
+8	    return EXIT_SUCCESS;
+Continuing.
+
+Program exited normally.

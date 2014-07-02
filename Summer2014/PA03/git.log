@@ -1,0 +1,87 @@
+commit 75f4f5d91dd111ab0062cc864c9c62941a8a0a84
+Author: Jun Cheng <cheng109@hansen-fe01.rcac.purdue.edu>
+Date:   Wed Jul 2 10:56:42 2014 -0400
+
+    PASS the tester
+
+commit fd7fce821e8308a3e94d96e3583e1d2852f56c1f
+Author: Jun Cheng <cheng109@hansen-fe01.rcac.purdue.edu>
+Date:   Wed Jul 2 10:47:31 2014 -0400
+
+    update for --help, PASS the tester
+
+commit a0160e4d16339b74b985ebe52e5b2ef942400883
+Author: Jun Cheng <cheng109@hansen-fe01.rcac.purdue.edu>
+Date:   Tue Jul 1 23:59:46 2014 -0400
+
+    update for Validation Check
+
+commit 18842dc8871fb338511f1be785d2d27145bdb4da
+Author: Jun Cheng <cheng109@hansen-fe01.rcac.purdue.edu>
+Date:   Tue Jul 1 21:52:12 2014 -0400
+
+    update save exact the same images
+
+commit 3eb255cc36b30fcafe79b5558f80d1337776c4fe
+Author: Jun Cheng <cheng109@hansen-fe00.rcac.purdue.edu>
+Date:   Tue Jul 1 12:11:33 2014 -0400
+
+    skelaton
+
+commit f807929dee5290e638dbcaebb6bf3adfc0b7b1a6
+Author: Jun Cheng <cheng109@hansen-fe02.rcac.purdue.edu>
+Date:   Tue Jul 1 10:02:45 2014 -0400
+
+    #include <string.h> in answer02.c
+
+commit 1219cf46bb6f96b153182436b691bdb7204a2dd3
+Author: Jun Cheng <cheng109@hansen-fe00.rcac.purdue.edu>
+Date:   Mon Jun 30 16:26:08 2014 -0400
+
+    all but --help option
+
+commit 60b5c5bd026cca3cd47666b757f8354c48761375
+Author: Jun Cheng <cheng109@hansen-fe00.rcac.purdue.edu>
+Date:   Mon Jun 30 14:46:09 2014 -0400
+
+    update for HW03
+
+commit 6ab0ee34fbec138d26599cefe01e92f30e353489
+Author: Jun Cheng <cheng109@hansen-fe00.rcac.purdue.edu>
+Date:   Mon Jun 30 14:36:02 2014 -0400
+
+    update for HW03
+
+commit acfc4b675e91f97e62d1e216da46fa1035980059
+Author: Jun Cheng <cheng109@hansen-fe00.rcac.purdue.edu>
+Date:   Mon Jun 30 14:34:38 2014 -0400
+
+    Update for HW03
+
+commit 51683303cc4b0a3cf282925a989dd50eae800dfe
+Author: Jun Cheng <cheng109@hansen-fe01.rcac.purdue.edu>
+Date:   Fri Jun 27 15:23:18 2014 -0400
+
+    "test"
+    
+
+commit 5dd002e96d4724a8150a6e03eeb074c7cfef2802
+Merge: 04c8520 82e2b57
+Author: Jun Cheng <cheng109@hansen-fe01.rcac.purdue.edu>
+Date:   Fri Jun 27 15:12:12 2014 -0400
+
+    Merge branch 'master' of https://github.com/cheng109/ECE264
+    
+    First copy of committing
+
+commit 04c8520075a06137815920ce55a50da4093a43fd
+Author: Jun Cheng <cheng109@hansen-fe01.rcac.purdue.edu>
+Date:   Fri Jun 27 15:08:29 2014 -0400
+
+    First time commit
+
+commit 82e2b57d2a606a8af93e367a9ac7ea90684302bb
+Author: cheng109 <cheng109@purdue.edu>
+Date:   Thu Jun 26 16:48:11 2014 -0400
+
+    Initial commit
