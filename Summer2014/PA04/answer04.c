@@ -1,25 +1,12 @@
 #include <stdint.h>
 #include "answer04.h"
-//#define ECE264_IMAGE_MAGIC_NUMBER 0x21343632
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <libgen.h>
 
-// Tell gcc not to pad structs with extra bytes.
-// Padding is sometimes included for performance reasons.
-/* #pragma pack(1) */
-
-/* typedef struct ImageHeader_st { */
-/*     uint32_t magic_number; // Should be ECE264_IMAGE_MAGIC_NUMBER */
-/*     uint32_t width;        // [width x height], cannot be zero */
-/*     uint32_t height; */
-/*     uint32_t comment_len;  // A comment embedded in the file */
-/* } ImageHeader; */
-
-/* typedef struct Image_st { */
-/*     int width; */
-/*     int height; */
-/*     char * comment; */
-/*     uint8_t * data; */
-/* } Image; */
-
+#define FALSE 0
+#define TRUE 1
 
 /**
  * Loads an ECE264 image file, returning an Image structure.
@@ -45,6 +32,7 @@ Image * Image_load(const char * filename){
 
   if(!err) { // Read the header
     read = fread(&header, sizeof(ImageHeader), 1, fp);
+    printf("comment len = %x \n width = %x \n height = %x \n", header.comment_len, header.width, header.height); 
     if(read != 1) {
       fprintf(stderr, "Failed to read header from '%s'\n", filename);
       err = TRUE;
@@ -73,21 +61,27 @@ Image * Image_load(const char * filename){
   if(!err) { // Init the Image struct
     tmp_im->width = header.width;
     tmp_im->height = header.height;
-
+    
     // Handle the comment
-    char * filename_cpy = strdup(filename);// we want to call basename
-    char * file_basename = basename(filename_cpy); // requires editable str
-    const char * prefix = "Original BMP file: ";
-    n_bytes = sizeof(char) * (strlen(prefix) + strlen(file_basename) + 1);
-    tmp_im->comment = malloc(n_bytes);
+    /* char * filename_cpy = strdup(filename);// we want to call basename */
+    /* char * file_basename = basename(filename_cpy); // requires editable str */
+    /* const char * prefix = "Original ECE file: "; */
+    /* n_bytes = sizeof(char) * (strlen(prefix) + strlen(file_basename) + 1); */
+
+
+
+    tmp_im->comment = malloc(sizeof(uint8_t)*header.comment_len);
     if(tmp_im->comment == NULL) {
       fprintf(stderr, "Failed to allocate %zd bytes for comment\n",
-	      n_bytes);
+    	      n_bytes);
       err = TRUE;
-    } else {
-      sprintf(tmp_im->comment, "%s%s", prefix, file_basename);
     }
-    free(filename_cpy); // this also takes care of file_basename
+    /* } else { */
+    /*   sprintf(tmp_im->comment, "%s%s", prefix, file_basename); */
+    /* } */
+    /* free(filename_cpy); // this also takes care of file_basename */
+
+    
 
     // Handle image data
     n_bytes = sizeof(uint8_t) * header.width * header.height;
@@ -99,46 +93,59 @@ Image * Image_load(const char * filename){
     }
   }
 
-  if(!err) { // Seek the start of the pixel data
-    if(fseek(fp, header.offset, SEEK_SET) != 0) {
-      fprintf(stderr, "Failed to seek %d, the data of the image data\n",
-	      header.offset);
-      err = TRUE;
-    }
-  }
+  /* if(!err) { // Seek the start of the pixel data */
+  /*   if(fseek(fp, header.offset, SEEK_SET) != 0) { */
+  /*     fprintf(stderr, "Failed to seek %d, the data of the image data\n", */
+  /* 	      header.offset); */
+  /*     err = TRUE; */
+  /*   } */
+  /* } */
+  
 
   if(!err) { // Read pixel data
-    size_t bytes_per_row = ((header.bits * header.width + 31)/32) * 4;
-    n_bytes = bytes_per_row * header.height;
-    uint8_t * rawbmp = malloc(n_bytes);
-    if(rawbmp == NULL) {
+    //size_t bytes_per_row = ((header.bits * header.width + 31)/32) * 4;
+    //size_t bytes_per_row = ((1 * header.width + 31)/32) * 4;
+    //n_bytes = bytes_per_row * header.height;
+    size_t array_len = header.width*header.height;
+    fread(tmp_im->comment, sizeof(uint8_t), header.comment_len, fp);
+
+
+    uint8_t * rawECE = malloc(array_len);
+    if(rawECE == NULL) {
       fprintf(stderr, "Could not allocate %zd bytes of image data\n",
-	      n_bytes);
+  	      array_len);
       err = TRUE;
     } else {
-      read = fread(rawbmp, sizeof(uint8_t), n_bytes, fp);
-      if(n_bytes != read) {
-	fprintf(stderr, "Only read %zd of %zd bytes of image data\n", 
-		read, n_bytes);
-	err = TRUE;
+      read = fread(rawECE, sizeof(uint8_t), array_len, fp);
+      if(array_len!= read) {
+  	fprintf(stderr, "Only read %zd of %zd bytes of image data\n",
+  		read, array_len);
+  	err = TRUE;
       } else {
-	// Must convert RGB to grayscale
-	uint8_t * write_ptr = tmp_im->data;
-	uint8_t * read_ptr;
-	int intensity;
-	int row, col; // row and column
-	for(row = 0; row < header.height; ++row) {
-	  read_ptr = &rawbmp[row * bytes_per_row];
-	  for(col = 0; col < header.width; ++col) {
-	    intensity  = *read_ptr++; // blue
-	    intensity += *read_ptr++; // green
-	    intensity += *read_ptr++; // red
-	    *write_ptr++ = intensity / 3; // now grayscale
-	  }
+  	// Must convert RGB to grayscale
+  	//uint8_t * write_ptr = tmp_im->data;
+  	//uint8_t * read_ptr;
+  	//int intensity;
+	//read_ptr = &rawECE[0]; */
+  	//int row, col; // row and column
+  	/* for(row = 0; row < header.height; ++row) { */
+  	/*   read_ptr = &rawbmp[row * bytes_per_row]; */
+  	/*   for(col = 0; col < header.width; ++col) { */
+  	/*     intensity  = *read_ptr++; // blue */
+  	/*     intensity += *read_ptr++; // green */
+  	/*     intensity += *read_ptr++; // red */
+  	/*     *write_ptr++ = intensity / 3; // now grayscale */
+  	/*   } */
+  	/* } */
+	int ind; 
+	for(ind=0; ind<array_len; ind++) {
+	  tmp_im->data[ind] = rawECE[ind];
 	}
+
+
       }
     }
-    free(rawbmp);
+    free(rawECE);
   }
 
   if(!err) { // We should be at the end of the file now
@@ -146,12 +153,12 @@ Image * Image_load(const char * filename){
     read = fread(&byte, sizeof(uint8_t), 1, fp);
     if(read != 0) {
       fprintf(stderr, "Stray bytes at the end of bmp file '%s'\n",
-	      filename);
+  	      filename);
       err = TRUE;
     }
   }
 
-  if(!err) { // We're winners... 
+  if(!err) { // We're winners...
     im = tmp_im;  // bmp will be returned
     tmp_im = NULL; // and not cleaned up
   }
@@ -165,7 +172,7 @@ Image * Image_load(const char * filename){
   if(fp) {
     fclose(fp);
   }
-
+  printf("Comments = %s\n", im->comment); 
   return im;
 }
 
@@ -191,67 +198,63 @@ int Image_save(const char * filename, Image * image) {
   }
 
   // Number of bytes stored on each row
-  size_t bytes_per_row = ((24 * image->width + 31)/32) * 4;
-
+  //  size_t bytes_per_row = ((24 * image->width + 31)/32) * 4;
+  
   // Prepare the header
-  BMP_Header header;
-  header.type = BMP_MAGIC_NUMBER;
-  header.size = sizeof(BMP_Header) + bytes_per_row * image->height;
-  header.reserved1 = 0;
-  header.reserved2 = 0;
-  header.offset = sizeof(BMP_Header);
-  header.header_size = sizeof(BMP_Header) - 14;
-  header.width = image->width;
-  header.height = image->height;
-  header.planes = 1;
-  header.bits = 24; // BGR
-  header.compression = 0; // no compression
-  header.imagesize = bytes_per_row * image->height;
-  header.xresolution = DEFAULT_DPI_X;
-  header.yresolution = DEFAULT_DPI_Y;
-  header.ncolors = 1 << header.bits;
-  header.importantcolors = 0; // i.e., every color is important
-
+  ImageHeader header; 
+  header.magic_number =  ECE264_IMAGE_MAGIC_NUMBER; 
+  header.width = image->width; 
+  header.height = image->height ; 
+  header.comment_len =strlen(image->comment)+1; 
+  size_t array_len = header.width * header.height; 
   if(!err) {  // Write the header
-    written = fwrite(&header, sizeof(BMP_Header), 1, fp);
+    written = fwrite(&header, sizeof(header), 1, fp);
     if(written != 1) {
       fprintf(stderr, 
 	      "Error: only wrote %zd of %zd of file header to '%s'\n",
-	      written, sizeof(BMP_Header), filename);
+	      written, sizeof(header), filename);
       err = TRUE;
     }
   }
 
+
+  // write comments
+  fwrite(image->comment, sizeof(char), header.comment_len, fp); 
+
+
   if(!err) { // Before writing, we'll need a write buffer
-    buffer = malloc(bytes_per_row);
+    buffer = malloc(array_len);
     if(buffer == NULL) {
       fprintf(stderr, "Error: failed to allocate write buffer\n");
       err = TRUE;
     } else {
       // not strictly necessary, we output file will be tidier.
-      memset(buffer, 0, bytes_per_row); 
+      memset(buffer, 0, array_len); 
     }
   }
 
   if(!err) { // Write pixels
-    uint8_t * read_ptr = image->data;
-    int row, col; // row and column
-    for(row = 0; row < header.height && !err; ++row) {
-      uint8_t * write_ptr = buffer;
-      for(col = 0; col < header.width; ++col) {
-	*write_ptr++ = *read_ptr; // blue
-	*write_ptr++ = *read_ptr; // green
-	*write_ptr++ = *read_ptr; // red
-	read_ptr++; // advance to the next pixel
-      }
+    /* uint8_t * read_ptr = image->data; */
+    /* int row, col; // row and column */
+    /* for(row = 0; row < header.height && !err; ++row) { */
+    /*   uint8_t * write_ptr = buffer; */
+    /*   for(col = 0; col < header.width; ++col) { */
+    /* 	*write_ptr++ = *read_ptr; // blue */
+    /* 	*write_ptr++ = *read_ptr; // green */
+    /* 	*write_ptr++ = *read_ptr; // red */
+    /* 	read_ptr++; // advance to the next pixel */
+    /*   } */
       // Write line to file
-      written = fwrite(buffer, sizeof(uint8_t), bytes_per_row, fp);
-      if(written != bytes_per_row) {
-	fprintf(stderr, "Failed to write pixel data to file\n");
-	err = TRUE;
+    
+    
+    
+    written = fwrite(image->data, sizeof(uint8_t), array_len, fp);
+    if(written != array_len) {
+      fprintf(stderr, "Failed to write pixel data to file\n");
+      err = TRUE;
       }
     }
-  }
+  /* } */
     
   // Cleanup
   free(buffer);
@@ -270,12 +273,28 @@ int Image_save(const char * filename, Image * image) {
  * you do not write this function correctly, then valgrind will 
  * report an error. 
  */
+
 void Image_free(Image * image);
 
 /**
  * Performs linear normalization, see README
  */
-void linearNormalization(int width, int height, uint8_t * intensity);
+void linearNormalization(int width, int height, uint8_t * intensity)  {
+  int min = intensity[0];
+  int max = intensity[0]; 
+  int i; 
+  int len = width*height;
+  for(i=0;i<len; i++) {
+    if(intensity[i]<min) min=intensity[i]; 
+    if(intensity[i]>max) max=intensity[i]; 
+  }
+  
+  int ind; 
+  for(ind=0; ind<len; ind++) {
+    intensity[ind]= (intensity[ind]-min)*255.0/(max-min); 
+  }
+
+}
 
 
 
