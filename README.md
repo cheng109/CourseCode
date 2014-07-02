@@ -3,5 +3,11 @@ ECE264
 
 HWs for ECE264
 
-
-"Hello, world"
+PA01	
+PA02	DONE!
+PA03	DONE!
+PA04	DONE!	
+PA05	
+PA06
+PA07
+PA08
