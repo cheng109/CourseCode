@@ -1,6 +1,6 @@
 // This is the main class for HW5
 // This program is filled with compile errors.
-public class Test {
+public class Main{
 
    public static void main(String[] args) {
       if (args.length != 0) {
@@ -8,7 +8,7 @@ public class Test {
          return;
       }
 
-      Base b = Base( );
+      Base b = new Base( );
       Derived d = new Derived( );
 
       b.f1( ); 
