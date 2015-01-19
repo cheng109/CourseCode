@@ -1,4 +1,0 @@
-gcc -Wall -Wshadow -g echo-lite.c -o echo-lite
-valgrind --tool=memcheck --leak-check=full --verbose --log-file=memcheck.log --track-origins=yes ./echo-lite
-#gcc -Wall -Wshadow -g cat-lite.c -o cat-lite
-#valgrind --tool=memcheck --leak-check=full --verbose --log-file=memcheck.log --track-origins=yes ./cat-lite
