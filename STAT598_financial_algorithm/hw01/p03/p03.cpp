@@ -34,13 +34,14 @@ void removeCharacters(string &str, string remove) {
 
 int main() {
 
-	string output1 = removeCharacters1("counterrevolutionaries","aeiou");
-	cout << output1 << endl;
-
-	string test01 = string("counterrevolutionaries");
-	removeCharacters(test01,"aeiou");
-	cout << test01 << endl;
-
-	cout << "over!" ;
-	return 0;
+  string testString = string("counterrevolutionaries");
+  string remove = string("aeiou"); 
+  cout << "testString: " << testString << endl;
+  cout << "remove: " << remove << endl;
+  string output1 = removeCharacters1(testString,remove);
+  cout << "output01: "<< output1 << endl;
+    
+  removeCharacters(testString,remove);
+  cout << "testString: " << testString << endl;
+  return 0;
 }
