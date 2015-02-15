@@ -116,11 +116,11 @@ bool isOperator(string c) {
 }
 
 ostream &operator <<(ostream &out, const Stack &s){
-	out << "stack: (" << s.getTop() << ")"<<endl;
-	for(int i=0; i<s.getTop(); i++){
-		cout << s.stack[i] <<endl;
+	out << "==>length(" << s.getTop() << "): [";
+	for(int i=0; i<s.getTop()-1; i++){
+		out << s.stack[i] << ", ";
 	}
-	out << endl;
+    out << s.stack[s.getTop()-1] << "]" <<endl;
 	return out;
 
 }
@@ -149,8 +149,8 @@ int rpn(vector<string> input, int len) {
 			else if(*iter=="%")
 				temp=o1%o2;
 			stack.push(temp);
-			cout << "push: " << temp << endl;
-			cout << stack << endl;
+			//cout << "push: " << temp << endl;
+			//cout << stack << endl;
 		}
 
 		iter++;
@@ -161,6 +161,76 @@ int rpn(vector<string> input, int len) {
 }
 
 int main() {
+    
+    // Part (a):
+    int val;
+    Stack *stack = new Stack(5);
+    stack->push(5);
+    stack->push(6);
+    stack->push(25);
+    stack->push(4);
+    stack->push(6);
+    stack->push(3);
+    stack->push(2);
+    cout << endl << "(a) Orginal stack:  (buttom on left) " << endl;
+    cout << *stack;
+    cout << "After peek: ";
+    stack->peek(val) ;
+    cout << val << endl;
+    cout << "After reverse: " << endl;
+    stack->reverse();
+    cout << *stack;
+    cout << "Expand: The stack automatically expands capacity when it is full. " << endl;
+    cout << "Testing copy constructor: " << endl;
+    Stack *copyStack = new Stack(*stack);
+    stack->pop(val);
+    cout<< *stack;
+    cout << *copyStack;
+    cout << "Testing assignment overload: " << endl;
+    *copyStack = *stack;
+    stack->pop(val);
+    cout<< *stack;
+    cout << *copyStack;
+    
+    // Part (b):
+    Queue queue(100);
+    queue.enqueue(6);
+    queue.enqueue(9);
+    queue.enqueue(3);
+    queue.enqueue(8);
+    queue.enqueue(5);
+    cout << endl <<  "(b) Orginal queue:  (buttom on left) " << endl;
+    cout << queue;
+    
+    cout << "After enqueue(10): " << endl;
+    queue.enqueue(10);
+    cout << queue;
+    cout << "After dequeue: " <<endl;
+    queue.dequeue(val);
+    cout << queue;
+    cout << "After peek: ";
+    cout << queue.peek()<< endl;
+    cout << queue ;
+    cout << "After reverse: "<< endl;
+    queue.reverse();
+    cout << queue;
+    
+    cout << "Testing queue copy constructor: " << endl;
+    Queue copyQueue(queue);
+    queue.dequeue(val);
+    cout<< queue;
+    cout << copyQueue;
+    cout << "Testing queue assignment overload: " << endl;
+    copyQueue = queue;
+    queue.dequeue(val);
+    cout<< queue;
+    cout << copyQueue;
+    
+
+    
+    // Part (3)
+    cout << endl <<  "(c)" << endl << "Input:  ";
+    
 	vector<string> input;
 	input.push_back("6");
 	input.push_back("4");
@@ -175,29 +245,12 @@ int main() {
 	input.push_back("-");
 	input.push_back("$");
 
-	cout << rpn(input, 20) << endl ;
-
-	Queue queue(100);
-	queue.enqueue(1);
-	queue.enqueue(2);
-	queue.enqueue(3);
-	queue.enqueue(4);
-	queue.enqueue(5);
-
-	int val;
-	queue.dequeue(val);
-	//queue.dequeue(val);
-	cout << queue.peek()<< endl;
-	cout << queue << endl;
-
-	queue.reverse();
-	cout << queue << endl;
-	Queue q2(queue);
-
-	cout << "q2 " << endl;
-	cout << q2;
-
-
+    
+    for (vector<string>::iterator iter =input.begin(); iter < input.end(); iter++) {
+        cout << *iter << " ";
+        
+    }
+	cout << endl << "Results: " <<  rpn(input, 20) << endl ;
 
 	return SUCCESS;
 }
