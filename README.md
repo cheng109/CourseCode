@@ -19,7 +19,7 @@ STAT 598_Financial_Algorithm
 HWs for  STAT598W
 +++++++++++++++++   
 PA01	DONE!	
-PA02	    
+PA02	DONE!
 PA03	
 PA04	
 PA05	
@@ -27,4 +27,3 @@ PA06
 PA07	
 PA08	
 +++++++++++++++++
-
