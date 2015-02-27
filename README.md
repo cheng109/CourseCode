@@ -20,7 +20,7 @@ HWs for  STAT598W
 +++++++++++++++++   
 PA01	DONE!	
 PA02	DONE!
-PA03	
+PA03	DONE!
 PA04	
 PA05	
 PA06	
