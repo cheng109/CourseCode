@@ -5,3 +5,6 @@ p1:
 p2: 
 	g++ -Wall p2.cpp
 	./a.out	
+p3: 
+	g++ -Wall p3.cpp
+	./a.out
