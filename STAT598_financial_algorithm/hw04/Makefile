@@ -8,3 +8,7 @@ p2:
 p3: 
 	g++ -Wall p3.cpp
 	./a.out
+
+p4: 	
+	g++ -Wall p4.cpp
+	./a.out
