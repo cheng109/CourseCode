@@ -13,7 +13,6 @@ struct node {
 
 void BFS_print(node* root) {
   queue<node*> q; 
-  
   q.push(root); 
   cout << root->value << endl; 
   while(!q.empty()) {
@@ -31,6 +30,25 @@ void BFS_print(node* root) {
   }
 }
 
+void DFS_print(node* root) {
+  // pre-order
+  if(root==NULL) 
+    return; 
+  cout << root->value << endl ; 
+  DFS_print(root->left); 
+  DFS_print(root->right); 
+}
+
+node* mirrorCopy(node* root) {
+  if(root==NULL) 
+    return NULL; 
+  node* n = new node(root->value); 
+  n->left = mirrorCopy(root->right); 
+  n->right = mirrorCopy(root->left); 
+  return n; 
+}
+
+
 int main() {
   node * root =new node(100); 
   root->left = new node(2); 
@@ -40,8 +58,16 @@ int main() {
   root->right->left = new node(44); 
   root->right->right = new node(2); 
 
-  BFS_print(root); 
+  // Part(a)
 
+  BFS_print(root); 
+  // Part(b)
+  DFS_print(root); 
+
+  // Part(c)
+  node* newNode = mirrorCopy(root); 
+  cout << "new tree" << endl; 
+  DFS_print(newNode); 
 
 }
   
