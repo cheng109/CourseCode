@@ -68,6 +68,5 @@ int main() {
   node* newNode = mirrorCopy(root); 
   cout << "new tree" << endl; 
   DFS_print(newNode); 
-
 }
   

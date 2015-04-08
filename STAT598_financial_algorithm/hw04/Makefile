@@ -12,3 +12,10 @@ p3:
 p4: 	
 	g++ -Wall p4.cpp
 	./a.out
+
+p5: 
+	g++ -Wall p5.cpp
+	./a.out
+test: 
+	gcc -Wall -O0 test.c
+	valgrind --tool=memcheck --leak-check=full --verbose --log-file=memcheck.log --track-origins=yes ./a.out
