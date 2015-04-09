@@ -59,14 +59,15 @@ int main() {
   root->right->right = new node(2); 
 
   // Part(a)
-
+  cout << "Part a: BFS print" << endl; 
   BFS_print(root); 
   // Part(b)
+  cout << "Part b: DFS print" << endl; 
   DFS_print(root); 
 
   // Part(c)
+  cout << "Part c: MirrorCopy print" << endl; 
   node* newNode = mirrorCopy(root); 
-  cout << "new tree" << endl; 
   DFS_print(newNode); 
 }
   

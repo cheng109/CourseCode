@@ -22,6 +22,9 @@ int convert(int base, string & s) {
 
 int main() {
   string s="C3455E"; 
+  cout << "Test String: " << s << endl;
+  cout << "Base: " << 16 << endl;
+  cout << "Result:      " << endl; 
   cout << convert(16, s) << endl; 
 
   return 0; 

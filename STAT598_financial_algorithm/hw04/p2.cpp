@@ -32,7 +32,9 @@ bool triplet(int N) {
 }
 
 int main() {
-  if(!triplet(144))
+  int n=144; 
+  cout << "Test Number:" << n << endl; 
+  if(!triplet(n))
     cout << "No triplet found!" << endl;  
 
   return 0; 

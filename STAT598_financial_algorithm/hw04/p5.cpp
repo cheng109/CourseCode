@@ -36,8 +36,7 @@ void solveMaze(array3D maze) {
   vector<Direction> vD; 
   vector<vector<vector<vector<Direction> > > > Path = create3Darray(vD) ;  
   queue<index::index> q;
-  index::index V(0,0,0);
-  q.push(V); 
+  q.push(index::index(0,0,0)); 
   dist[0][0][0] = 0; 
   while(!q.empty()) {
     index::index c = q.front(); 
@@ -128,7 +127,7 @@ int main() {
   array3D maze = create3Darray('0'); 
   
   maze = readmaze("maze.txt"); 
-
+  cout << "Map: \n################# " << endl; 
   for(int i=0; i<3; ++i) {
     for(int j=0; j<3; ++j) {
       for(int k=0; k<3; ++k) {
@@ -136,13 +135,9 @@ int main() {
       }
       cout<< endl; 
     }
-    cout << endl; 
+  cout << "#################" << endl;
   }
-  
-
-
-
-
+  cout << "Solution is:" << endl;  
   solveMaze(maze); 
   return 0; 
 }
