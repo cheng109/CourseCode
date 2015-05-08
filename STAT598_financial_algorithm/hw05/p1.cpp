@@ -64,7 +64,7 @@ int main() {
   double d=0.5;
   double p=0.5;
   double S0 = 1;
-  int steps = 20; 
+  int steps = 19; 
 
   vector<double> buyholdValue;
   vector<double> rebalanceValue; 
