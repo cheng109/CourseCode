@@ -66,8 +66,6 @@ int main() {
   double S0 = 1;
   int steps = 20; 
 
-  double Buyhold;
- 
   vector<double> buyholdValue;
   vector<double> rebalanceValue; 
   double C0 = 0.5;
@@ -77,28 +75,27 @@ int main() {
     Rebalance R(x0, S0, C0); 
     double Buyhold = binaryStock(S0, u, d, p, steps, &R ); 
     buyholdValue.push_back(Buyhold); 
-    cout << Buyhold << endl; 
   }
 
   double mean;
   double var; 
   meanVar(buyholdValue, &mean, &var); 
-
   cout << "E(U) = " << mean << endl;
-  cout << "var(U) = " << var << endl; 
+  cout << "var(U) = " << var << endl;
+  cout << "95% confidence interval: [" << mean-1.96*sqrt(var/NUM) << ", " << mean+1.96*sqrt(var/NUM)<< "]" << endl;  
+  cout << "===========================" << endl ; 
+
 
   for(int i=0; i<NUM; ++i) {
     Rebalance R(x0, S0, C0); 
-    double Buyhold = binaryStock(S0, u, d, p, steps, &R ); 
+    binaryStock(S0, u, d, p, steps, &R ); 
     rebalanceValue.push_back(R.value); 
 
   }
-
   meanVar(rebalanceValue, &mean, &var); 
-
   cout << "E(V) = " << mean << endl;
   cout << "var(V) = " << var << endl; 
-
+  cout << "95% confidence interval: [" << mean-1.96*sqrt(var/NUM) << ", " << mean+1.96*sqrt(var/NUM)<< "]" << endl;  
   return 0; 
 
 }
