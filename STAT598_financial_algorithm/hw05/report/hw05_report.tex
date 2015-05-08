@@ -37,8 +37,8 @@ E(V)=   & var(V)=\\
 To get $95\% $ confidence interval, we should $\delta = 0.05$, $z_{1-\delta/2}=1.96$, then the confidence interval
 \begin{align*}
 \begin{array}{ll}
-\left[E(U)-1.96\frac{\sigma_u}{\sqrt{n}}, E(U)+1.96\frac{\sigma_u}{\sqrt{n}}\right]   \\ %&  [   ,  ]\\
-\left[E(V)-1.96\frac{\sigma_v}{\sqrt{n}},  E(V)+1.96\frac{\sigma_v}{\sqrt{n}}\right] \\ %&  [   ,  ]\\
+\left[E(U)-1.96\frac{\sigma_u}{\sqrt{n}}, E(U)+1.96\frac{\sigma_u}{\sqrt{n}}\right]  :   [   ,  ]\\
+\left[E(V)-1.96\frac{\sigma_v}{\sqrt{n}},  E(V)+1.96\frac{\sigma_v}{\sqrt{n}}\right]  :   [   ,  ]\\
 \end{array}
 \end{align*}
 
@@ -49,12 +49,28 @@ Now we have new random variable $ T=V-U $.  Since $V$ and $U$ are independent, t
 & var(T) = var(T)+var(E) = \\
 \end{align*}
 then the confidence interval  
+$$\left[E(T)-1.96\frac{\sigma_u}{\sqrt{n}}, E(T)+1.96\frac{\sigma_u}{\sqrt{n}}\right]  :   [   ,  ]\\ $$
+ 
+\subsection*{Part(c)} 
+If we use the same stream of random numbers then the confidence interval is
 \begin{align*}
-[\hat{Y}-1.96\frac{\sigma}{\sqrt{n}}, \hat{Y}+1.96\frac{\sigma}{\sqrt{n}}]\\
-[   ,  ]\\
+& E(V-U) = \\
+& var(V-U) = \\
+& Confidence interval :  [ , ] \\
 \end{align*}
+This confidence is wider than that of Part(b). 
+
+\subsection*{Part(d)} 
+If we use the same stream of random numbers then the confidence interval is
+\begin{align*}
+& E(log_{10}V-log_{10}U) = \\
+& var(log_{10}V-log_{10}U) = \\
+& Confidence interval :  [ , ] \\
+\end{align*}
+Compare with Part(c) using utility functions gives a better comparison of investment alternatives.
  
 \section*{Problem 2}
+
 
 \section*{Problem 3}
 

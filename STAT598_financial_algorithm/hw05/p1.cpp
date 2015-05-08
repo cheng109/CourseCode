@@ -80,6 +80,7 @@ int main() {
   double mean;
   double var; 
   meanVar(buyholdValue, &mean, &var); 
+  cout << "Part(a)" << endl; 
   cout << "E(U) = " << mean << endl;
   cout << "var(U) = " << var << endl;
   cout << "95% confidence interval: [" << mean-1.96*sqrt(var/NUM) << ", " << mean+1.96*sqrt(var/NUM)<< "]" << endl;  
@@ -126,6 +127,26 @@ int main() {
   cout << "95% confidence interval: [" << newMean-1.96*sqrt(newVar/NUM) << ", " << newMean+1.96*sqrt(newVar/NUM)<< "]" << endl;
   cout << "==========================="<< endl ;   
 
+
+  // Part (d)
+
+
+  vector<double> logFunc; 
+  double logMean;
+  double logVar;
+  for(int i=0; i<NUM; ++i) {
+    Rebalance R(x0, S0, C0); 
+    double buyhold = binaryStock(S0, u, d, p, steps, &R ); 
+    logFunc.push_back(log10(R.value)-log10(buyhold)); 
+  }
+  meanVar(logFunc, &logMean, &logVar); 
+  cout <<"Part(d)"<< endl; 
+
+  cout << "E(logV-logU) = " << logMean << endl;
+  cout << "var(logV-logU) = " << logVar << endl;
+  cout << "95% confidence interval: [" << logMean-1.96*sqrt(logVar/NUM) << ", " << logMean+1.96*sqrt(logVar/NUM)<< "]" << endl;
+  cout << "==========================="<< endl ;   
+  
 
   return 0;
 }
