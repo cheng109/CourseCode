@@ -1,0 +1,39 @@
+\documentclass{report} 
+\usepackage{amsmath} 
+
+\begin{document}
+\title{Homework 5 report}
+\author{Jun Cheng}
+\maketitle
+
+\section*{Problem 1} 
+\subsection*{a} 
+Buy-and-hold strategy: 
+
+Rebalancing strategy: 
+Parameters: 
+\begin{itemize}
+\item $S_0$: initial stock price.
+\item $S_t$: stock price at time $t$.
+\item $x_t$: number of stock shares at time $t$.
+\item $C_t$: cash held at time $t$ in dollar. 
+\end{itemize}
+Use the Monte Carlo to simulate the stock price to get all $S_t$,  and then update all all $C_i $ and $x_i$: 
+\begin{align*}
+&C_{t+1}=\frac{x_tS_{t+1}}{2} \\
+&x_{t+1}=\frac{C_1}{S_1}\\
+\end{align*}
+Monte Carlo simulations: 
+\begin{itemize}
+\item $ u=2$
+\item $ d=0.5$
+\item $p_u = p_d = 0.5$
+\end{itemize} 
+\section*{Problem 2}
+
+\section*{Problem 3}
+
+\section*{Problem 4} 
+
+
+\end{document}
