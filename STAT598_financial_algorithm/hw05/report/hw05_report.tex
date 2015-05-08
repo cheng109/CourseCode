@@ -7,7 +7,7 @@
 \maketitle
 
 \section*{Problem 1} 
-\subsection*{a} 
+\subsection*{Part (a)} 
 Buy-and-hold strategy: 
 
 Rebalancing strategy: 
@@ -34,11 +34,24 @@ Running the attached code, we can get,
 E(U)=  & var(U) =\\
 E(V)=   & var(V)=\\
 \end{array} \end{align*}
-To get $95\% $ confidence interval, we should $\delta = 0.05$, $z_{1-\delta/2}=1.96$, then the confidence interval become 
+To get $95\% $ confidence interval, we should $\delta = 0.05$, $z_{1-\delta/2}=1.96$, then the confidence interval  
+\begin{align*} \begin{array}{ll}
+[E(U)-1.96\frac{\sigma_u}{\sqrt{n}}, E(U)+1.96\frac{\sigma_u}{\sqrt{n}}]  &  [   ,  ]\\
+[E(V)-1.96\frac{\sigma_v}{\sqrt{n}},  E(V)+1.96\frac{\sigma_v}{\sqrt{n}}]  &  [   ,  ]\\
+\end{array}\end{align*}
+
+\subsection*{Part (b)}
+Now we have new random variable $ T=V-U $.  Since $V$ and $U$ are independent, then we can have
 \begin{align*}
-[\hat{Y}-1.96\frac{\sigma}{\sqrt{n}}, \hat{Y}+1.96\frac{\sigma}{\sqrt{n}}]
+& E(T) = E(V)-E(U) =  \\
+& var(T) = var(T)+var(E) = \\
+\end{align*}
+then the confidence interval  
+\begin{align*}
+[\hat{Y}-1.96\frac{\sigma}{\sqrt{n}}, \hat{Y}+1.96\frac{\sigma}{\sqrt{n}}]\\
 [   ,  ]\\
 \end{align*}
+ 
 \section*{Problem 2}
 
 \section*{Problem 3}

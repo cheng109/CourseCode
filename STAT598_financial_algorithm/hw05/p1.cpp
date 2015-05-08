@@ -71,12 +71,12 @@ int main() {
   double C0 = 0.5;
   double x0 =0.5;
 
+  // Part (a)
   for(int i=0; i<NUM; ++i) {
     Rebalance R(x0, S0, C0); 
     double Buyhold = binaryStock(S0, u, d, p, steps, &R ); 
     buyholdValue.push_back(Buyhold); 
   }
-
   double mean;
   double var; 
   meanVar(buyholdValue, &mean, &var); 
@@ -85,17 +85,47 @@ int main() {
   cout << "95% confidence interval: [" << mean-1.96*sqrt(var/NUM) << ", " << mean+1.96*sqrt(var/NUM)<< "]" << endl;  
   cout << "===========================" << endl ; 
 
-
+  double mean1;
+  double var1;
   for(int i=0; i<NUM; ++i) {
     Rebalance R(x0, S0, C0); 
     binaryStock(S0, u, d, p, steps, &R ); 
     rebalanceValue.push_back(R.value); 
 
   }
-  meanVar(rebalanceValue, &mean, &var); 
-  cout << "E(V) = " << mean << endl;
-  cout << "var(V) = " << var << endl; 
-  cout << "95% confidence interval: [" << mean-1.96*sqrt(var/NUM) << ", " << mean+1.96*sqrt(var/NUM)<< "]" << endl;  
-  return 0; 
+  meanVar(rebalanceValue, &mean1, &var1); 
+  cout << "E(V) = " << mean1 << endl;
+  cout << "var(V) = " << var1 << endl; 
+  cout << "95% confidence interval: [" << mean1-1.96*sqrt(var1/NUM) << ", " << mean1+1.96*sqrt(var1/NUM)<< "]" << endl;  
+  cout << "==========================="<< endl ; 
 
+  // Part(b)
+  cout <<"Part(b)"<< endl; 
+  double meanT=mean1-mean;
+  double varT= var1+var; 
+  cout << "E(T) = " << meanT << endl;
+  cout << "var(T) = " << varT << endl;
+  cout << "95% confidence interval: [" << meanT-1.96*sqrt(varT/NUM) << ", " << meanT+1.96*sqrt(varT/NUM)<< "]" << endl;
+    cout << "==========================="<< endl ; 
+
+  // Part(c)
+
+  vector<double> diff; 
+  double newMean;
+  double newVar;
+  for(int i=0; i<NUM; ++i) {
+    Rebalance R(x0, S0, C0); 
+    double buyhold = binaryStock(S0, u, d, p, steps, &R ); 
+    diff.push_back(R.value-buyhold); 
+  }
+  meanVar(diff, &newMean, &newVar); 
+  cout <<"Part(c)"<< endl; 
+
+  cout << "E(V-U) = " << newMean << endl;
+  cout << "var(V-U) = " << newVar << endl;
+  cout << "95% confidence interval: [" << newMean-1.96*sqrt(newVar/NUM) << ", " << newMean+1.96*sqrt(newVar/NUM)<< "]" << endl;
+  cout << "==========================="<< endl ;   
+
+
+  return 0;
 }
