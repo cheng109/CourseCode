@@ -2,7 +2,7 @@
 #include <vector>
 #include <random>
 #include <chrono>
-#define NUM 30000
+#define NUM 3000
 #include <ctime>
 using namespace std; 
 
@@ -31,10 +31,9 @@ matrix Cholesky(matrix cov, int d) {
 	A[i][j]=(cov[i][j]-sum)/A[j][j]; 
 	temp1 += A[i][j]*A[i][j]; 	
       }
-      if(i==j) {
-
+      if(i==j) 
 	A[i][i]= sqrt(cov[i][j]-temp1); 
-      }
+
     }
   }
   return A; 
@@ -42,34 +41,33 @@ matrix Cholesky(matrix cov, int d) {
 
 void printMatrix(matrix m, int d) {
   for(int i=0; i<d; ++i) {
-    for(int j=0; j<d; ++j) {
+    for(int j=0; j<d; ++j)
       cout << m[i][j] << "\t" ; 
-    }
     cout << endl; 
   }
 
 }
 
-vector<double> correlatedGDB(int d, matrix A) {
+vector<double> correlatedGDB(int d, matrix A, vector<double> v) {
   // Generate d independent gaussian;
   // srand(time(NULL));
-  unsigned seed = chrono::system_clock::now().time_since_epoch().count();
-  default_random_engine generator(seed);
-  normal_distribution<double> distribution(0,1);
-  vector<double> v; 
+  //  unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+  //default_random_engine generator(seed);
+  //  normal_distribution<double> distribution(0,1);
+  /*vector<double> v; 
   for(int i=0; i<d; i++) {
     double Z = distribution(generator);
     v.push_back(Z);
   }
-   
+  */
   // Matrix Multply
-  vector<double> output(d, 0); 
+  vector<double> corrZ(d, 0); 
   for(int i=0; i<d; ++i) {
     for(int j=0; j<d; ++j) {
-      output[i]+=A[i][j]*v[j];
+      corrZ[i]+=A[i][j]*v[j];
     }
   }
-  return output; 
+  return corrZ; 
 }
 
 int main() {
@@ -91,9 +89,9 @@ int main() {
   printMatrix(A, d); 
 
   unsigned seed = chrono::system_clock::now().time_since_epoch().count();
-  default_random_engine generator;
+  default_random_engine generator(seed);
   normal_distribution<double> distribution(0,1);
-      
+
 
   
   double T =1; 
@@ -108,13 +106,15 @@ int main() {
     double temp5 = 0; 
     vector<double> stock(d, S0);
     for (int step=0; step<steps; ++step) { 
-
-      vector<double> v;
+      vector<double> v; 
       for(int i=0; i<d; i++) {
 	double Z = distribution(generator);
 	v.push_back(Z);
       }
-
+      
+      
+      /*vector<double> v;
+      
       // Matrix Multply
       vector<double> corrZ(d, 0);
       for(int i=0; i<d; ++i) {
@@ -123,11 +123,11 @@ int main() {
 	}
 	//cout << corrZ[i] << endl; 
       }
-      
-      //vector<double> corrZ =  correlatedGDB(d, A);
+      */
+      vector<double> corrZ =  correlatedGDB(d, A, v );
        
       for(int i=0; i<d; ++i)  {
-	corrZ[i]=sigma*v[i]; 
+	//	corrZ[i]=sigma*v[i]; 
 	//stock[i]= stock[i] + stock[i]*r*dt+stock[i]*sqrt(dt)*corrZ[i] + 0.5*(corrZ[i]*corrZ[i]-sigma*sigma)*dt;
 	stock[i]= stock[i] + stock[i]*r*dt+stock[i]*sqrt(dt)*corrZ[i] + 0.5*(corrZ[i]*corrZ[i]-sigma*sigma)*dt;
       }
