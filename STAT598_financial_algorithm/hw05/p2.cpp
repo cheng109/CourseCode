@@ -62,7 +62,6 @@ void meanVar(vector<double> v, double * mean, double *var) {
     //cout << sum << endl;
   }
   *var = sum/num;
-
 }
 
 
@@ -118,22 +117,20 @@ int main() {
   double K = 50;
   double S0= 50; 
 
-  int n=90000; 
-  double dt=1.0/365000; 
 
+
+  for (int mm=0; mm<7; ++mm) {
+  double dt= pow(10, mm-7)  ; 
+
+  int n = floor(0.25/dt); 
+  vector<double> error; 
   //  double T = 0.25; 
   double T = n*dt; 
   Option option(mu, sigma, K, r, S0, T);
   double price = option.getPrice(0,S0); 
   cout << price << endl; 
-
-
   //Part(a)
   // Daily case
-  
-  vector<double> error; 
-
-
   for (int j=0; j<NUM; ++j) {
     double numShare=0; 
     double account = 0;
@@ -145,16 +142,19 @@ int main() {
       //  cout << delta << endl; 
       //account += delta*v[i]; 
     }
-    double netCash = account+numShare*v[n-1]; 
+    double finalpayoff=0;
+    if (v[n-1]>option.K) finalpayoff = v[n-1]-option.K ; 
+    double netCash = account+numShare*v[n-1] - finalpayoff+price*exp(option.r*option.T); 
     error.push_back(netCash); 
-    cout << netCash << endl; 
+    // cout << netCash << endl; 
   }
   double mean;
   double var; 
   meanVar(error, &mean, &var);
-  cout << "E(error)= " << mean << endl;
-  cout << "var(error)= " << var << endl; 
-
+  //  cout << "E(error)= " << mean << endl;
+  //cout << "var(error)= " << var << endl; 
+  cout << dt << "\t" << mean <<  endl;
+  }
   return 0;
 }
 
