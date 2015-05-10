@@ -17,7 +17,6 @@ matrix iniMatrix(int d) {
   return m; 
 }
 
-
 matrix Cholesky(matrix cov, int d) {
   matrix A = iniMatrix(d); 
   for(int i=0; i<d; ++i) {
@@ -137,9 +136,9 @@ int main() {
     sumPayoff_Y+= payoffFunc_Y(stock, d, K);
     sumPayoff_VarCtrl += payoff_VarCtrl[t]; 
   }
-  // Part(a)
-  //cout << "Part(a) " << endl;
-  //cout << "Price is : " << sumPayoff_X/NUM*exp(-r*T) << endl; 
+  Part(a)
+  cout << "Part(a) " << endl;
+  cout << "Price is : " << sumPayoff_X/NUM*exp(-r*T) << endl; 
 
 
   // Part(d)

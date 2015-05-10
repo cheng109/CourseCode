@@ -12,6 +12,6 @@ p4:
 	g++ -Wall p4.cpp
 	./a.out
 
-p5: 
-	g++ -Wall p5.cpp
+p2_b: 
+	g++ -Wall p2_b.cpp
 	./a.out

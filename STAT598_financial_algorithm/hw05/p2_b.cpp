@@ -2,7 +2,7 @@
 #include <cmath> 
 #include <random> 
 #include <chrono>
-#define NUM 10000
+#define NUM 100000
 using namespace std;
 
 
@@ -100,8 +100,10 @@ vector<double> simStockPrice(Option option, double dt, int num) {
   default_random_engine generator(seed); 
   normal_distribution<double> distribution(0,1);
   double S = option.S0;
+  
   //int num = floor(option.T/dt); 
-  for(int i=0; i<num; ++i) {
+  v.push_back(option.S0); 
+  for(int i=1; i<num; ++i) {
     double Z = distribution(generator); 
     S = S*exp((option.r-0.5*option.sigma*option.sigma)*dt+option.sigma*sqrt(dt)*Z); 
     v.push_back(S); 
@@ -116,42 +118,42 @@ int main() {
   double r = 0.05;
   double K = 50;
   double S0= 50; 
-  for (int mm=0; mm<5; ++mm) {
-  double dt= pow(10, mm-6)  ; 
 
+  double dt= 1.0/365 *7; 
   int n = floor(0.25/dt); 
   vector<double> error; 
-  //  double T = 0.25; 
   double T = n*dt; 
   Option option(mu, sigma, K, r, S0, T);
   double price = option.getPrice(0,S0); 
-  //  cout << price << endl; 
-  //Part(a)
-  // Daily case
+
   for (int j=0; j<NUM; ++j) {
-    double numShare=0; 
-    double account = 0;
+    
     vector<double> v = simStockPrice(option, dt, n);
+    double account = 0;
+    int numShares = 0; 
+    if(S0>K*exp(-r*T)) 
+      account = S0-K*exp(-r*T);
     for(int i=0; i<n; ++i) {
-      double delta= option.getDelta(i*dt, v[i]); 
-      account += (numShare-delta)*v[i]*exp(option.r*(option.T-i*dt)); 
-      numShare = delta; 
-      //  cout << delta << endl; 
-      //account += delta*v[i]; 
+      double discount = exp(-r*(T-i*dt));  
+      if(v[i]>K*discount) {
+	if(numShares==0)
+	  account = account* exp(r*dt) - v[i]; 
+	numShares = 1; 
+      }
+      if(v[i]<=K*discount){
+	if(numShares==1)
+	  account = account* exp(r*dt) + v[i];
+	numShares = 0; 
+      }
     }
-    double finalpayoff=0;
-    if (v[n-1]>option.K) finalpayoff = v[n-1]-option.K ; 
-    double netCash = account+numShare*v[n-1] - finalpayoff+price*exp(option.r*option.T); 
-    error.push_back(netCash); 
-    // cout << netCash << endl; 
+    error.push_back(account+numShares*v[n-1]); 
+    cout << account+numShares*v[n-1] << endl; 
   }
   double mean;
   double var; 
   meanVar(error, &mean, &var);
-  //  cout << "E(error)= " << mean << endl;
-  //cout << "var(error)= " << var << endl; 
-  cout << dt << "\t" << mean <<  endl;
-  }
+  cout<< "E(error)= " << mean << endl; 
+  cout<< "var(error)= " << var << endl; 
   return 0;
 }
 

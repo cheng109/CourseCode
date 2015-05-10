@@ -2,7 +2,7 @@
 #include <cmath> 
 #include <random> 
 #include <chrono>
-#define NUM 10000
+#define NUM 1000000
 using namespace std;
 
 
@@ -57,16 +57,13 @@ void meanVar(vector<double> v, double * mean, double *var) {
   }
   *mean = sum/num;
   sum = 0;
-  for(int i=0; i<num; ++i) {
+  for(int i=0; i<num; ++i)
     sum += (v[i]-(*mean))*(v[i]-(*mean));
-    //cout << sum << endl;
-  }
   *var = sum/num;
 }
 
 
 class Option{
-  // Aussume European option under black scholes model; 
 public:
   double mu;
   double sigma;
@@ -100,7 +97,6 @@ vector<double> simStockPrice(Option option, double dt, int num) {
   default_random_engine generator(seed); 
   normal_distribution<double> distribution(0,1);
   double S = option.S0;
-  //int num = floor(option.T/dt); 
   for(int i=0; i<num; ++i) {
     double Z = distribution(generator); 
     S = S*exp((option.r-0.5*option.sigma*option.sigma)*dt+option.sigma*sqrt(dt)*Z); 
@@ -109,49 +105,69 @@ vector<double> simStockPrice(Option option, double dt, int num) {
   return v ; 
 }
 
+double payoff_Func(vector<double> stock, int steps, double K, double H) {
+  for(int i=0; i<steps; ++i) {
+    if(stock[i]> H)
+      return 0;
+  }
+  if (stock[steps-1]>K)
+    return 0; 
+  return K-stock[steps-1]; 
+
+}
+
+
+double new_payoff_Func(vector<double> stock, int steps, double K, double H, double dt, Option option) {
+  double q=0; 
+  if(stock[steps-1]<H && option.S0<H)
+    q= exp(2/(option.sigma*option.sigma)/option.T*log(H/option.S0)*log(stock[steps-1]/H)); 
+  //cout << q << endl; 
+  if (stock[steps-1]>K)
+    return 0; 
+  return (K-stock[steps-1])*(1-q); 
+
+}
 
 int main() {
-  double mu = 0.1;
   double sigma = 0.3;
   double r = 0.05;
-  double K = 50;
+  double K = 60;
   double S0= 50; 
-  for (int mm=0; mm<5; ++mm) {
-  double dt= pow(10, mm-6)  ; 
+  double H = 55;
 
+  double mu = 0.1; 
+  double dt = 1.0/365; 
+  
   int n = floor(0.25/dt); 
   vector<double> error; 
-  //  double T = 0.25; 
   double T = n*dt; 
   Option option(mu, sigma, K, r, S0, T);
   double price = option.getPrice(0,S0); 
-  //  cout << price << endl; 
-  //Part(a)
-  // Daily case
+
+  vector<double> payoff(NUM, 0); 
+  vector<double> new_payoff(NUM, 0); 
   for (int j=0; j<NUM; ++j) {
     double numShare=0; 
     double account = 0;
     vector<double> v = simStockPrice(option, dt, n);
-    for(int i=0; i<n; ++i) {
-      double delta= option.getDelta(i*dt, v[i]); 
-      account += (numShare-delta)*v[i]*exp(option.r*(option.T-i*dt)); 
-      numShare = delta; 
-      //  cout << delta << endl; 
-      //account += delta*v[i]; 
-    }
-    double finalpayoff=0;
-    if (v[n-1]>option.K) finalpayoff = v[n-1]-option.K ; 
-    double netCash = account+numShare*v[n-1] - finalpayoff+price*exp(option.r*option.T); 
-    error.push_back(netCash); 
-    // cout << netCash << endl; 
+    payoff[j] = payoff_Func(v, n, K, H);
+    new_payoff[j]=new_payoff_Func(v, n, K, H, dt, option) ; 
   }
+  
   double mean;
   double var; 
-  meanVar(error, &mean, &var);
-  //  cout << "E(error)= " << mean << endl;
-  //cout << "var(error)= " << var << endl; 
-  cout << dt << "\t" << mean <<  endl;
-  }
+  cout << "Part (a)" << endl; 
+  meanVar(payoff, &mean, &var);
+  cout << "E(X)= " << mean*exp(-r*T) << endl;
+  cout << "std(X)= " << sqrt(var) << endl;
+  cout << "95% confidence interval: " << 2*1.96*sqrt(var)/sqrt(NUM) << endl; 
+
+  cout << "Part(b)" << endl; 
+  meanVar(new_payoff, &mean, &var);
+  cout << "E(X)= " << mean*exp(-r*T) << endl;
+  cout << "std(X)= " << sqrt(var) << endl;
+  cout << "95% confidence interval: " << 2*1.96*sqrt(var)/sqrt(NUM) << endl; 
+
   return 0;
 }
 
