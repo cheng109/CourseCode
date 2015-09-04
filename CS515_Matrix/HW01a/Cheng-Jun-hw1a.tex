@@ -6,12 +6,15 @@
 \usepackage{graphicx} 
 % Packages required by code
 
-
 % Packages always used
+\usepackage{listings}
 \usepackage{hyperref}
 \usepackage{xspace}
 \usepackage[usenames,dvipsnames]{color}
 \hypersetup{colorlinks=true,urlcolor=blue}
+
+
+\usepackage[framed,numbered,autolinebreaks,useliterate] {mcode}
 
 \input{homework.tex}
 
@@ -28,21 +31,139 @@
 
 \hypertarget{problem_1_operations_3}{}\subsection*{{Problem 1: Operations}}\label{problem_1_operations_3}
 
+\begin{enumerate}
+
+\item $\bmat{ 1 & 1 & 2 \\ 3 & 5 & 8 \\ 13 & 21 & 34 } \bmat{ 1 & -2 & 3 \\ -4 & 5 & -6 \\ 7 & -8 & 9} =\bmat{11 & -13 & 15 \\ 39 & -45 & 51 \\ 167 & -193 & 219}$ \newline
+
+\item $\vx =$ {\colorbox[rgb]{1.00,0.93,1.00}{\tt ones\char40\char49\char48\char48\char48\char44\char49\char41}} $\vy =$ {\colorbox[rgb]{1.00,0.93,1.00}{\tt \char91\char49\char58\char49\char48\char48\char48\char93\char39}} $\vx^T \vy =$ 500500.0 \newline
+
+\item Assume $\ve = \bmat{1\\0\\0} $
+
+$\vx = \bmat{ 2 & 4 & -1}^T$. \newline 
+$\ve \vx^T =\bmat{1\\0\\0}\bmat{ 2 & 4 & -1} = \bmat{2 & 4 & -1 \\ 0 & 0 & 0 \\ 0 & 0 & 0}$ \newline  
+$\vx \ve^T =\bmat{2 \\ 4\\-1} \bmat{1 &0 &0} =  \bmat{2 & 0 & 0 \\ 4 & 0 & 0 \\ -1 & 0 & 0}$ \newline
 
 
-1. $\bmat{ 1 & 1 & 2 \\ 3 & 5 & 8 \\ 13 & 21 & 34 } \bmat{ 1 & -2 & 3 \\ -4 & 5 & -6 \\ 7 & -8 & 9} =\bmat{11 & -13 & 15 \\ 39 & -45 & 51 \\ 167 & -193 & 219}$ \newline
+\item 
+$\vx = \bmat{1 & -18 & 3}^T$. \newline  
+Assume $\ve_1 = \bmat{1\\0\\0} $ \newline
+$\ve_1 \vx^T =\bmat{1\\0\\0}\bmat{1 & -18 & 3} =  \bmat{1 & -18 & 3 \\ 0 & 0 & 0 \\ 0 & 0 & 0}$ \newline 
+Assume $\ve_3 = \bmat{0\\0\\1} $ \newline
+$\vx \ve_3^T =\bmat{1 \\ -18 \\ 3} \bmat{0&0&1}=  \bmat{0 & 0 & 0 \\ 0 & 0 & 0\\1 & -18 & 3 }$ \newline
 
-2. $\vx =$ {\colorbox[rgb]{1.00,0.93,1.00}{\tt ones\char40\char49\char48\char48\char48\char44\char49\char41}} $\vy =$ {\colorbox[rgb]{1.00,0.93,1.00}{\tt \char91\char49\char58\char49\char48\char48\char48\char93\char39}} $\vx^T \vy =$ 500500.0 \newline
+\begin{lstlisting} 
+% Problem 1
+% Part 1
+A = [1,1,2;  3,5,8; 13,21,34]
+B = [1,-2,3; -4,5,-6;7,-8,9]
+C= A*B
 
-3. 
+% Part 2 
+x = ones(1000,1)
+y = [1:1000]'
+z = x'*y
 
-4. 
+% Part 3 
+x= [2, 4, -1]'
+e = [1;0;0]
+y = e*x'
+y2 = x*e'
+
+% Part4 
+x= [1, -18, 3]'
+e1 = [1; 0;  0]
+y1= e1*x'
+e3 = [0;0;1]
+y2 = x*e3'
+ \end{lstlisting} 
+
+
+\end{enumerate} 
+
+
+
+\hypertarget{problem_2_a_proof_4}{}\subsection*{{Problem 2: A proof}}\label{problem_2_a_proof_4}
+
+\begin{enumerate}
+\item Proof: \newline
+\begin{displaymath}
+\bmat{ 1 & a \\ 0 & 1 }
+\bmat{ 1 & -a \\ 0 & 1 } =\bmat{ 1 & 0 \\ 0 & 1 } .
+\end{displaymath}
+Therefore the inverse of  $\bmat{ 1 & a \\ 0 & 1 }$ is $\bmat{ 1 & -a \\ 0 & 1 }$
+
+\item Proof: \newline
+\begin{displaymath}
+\bmat{ \mI & \mA \\ 0 & \mI }
+\bmat{ \mI  & -\mA  \\ 0 & \mI  } = \bmat{ \mI  & 0  \\ 0 & \mI  }.
+\end{displaymath}
+Therefore the inverse of  $\bmat{ \mI & \mA \\ 0 & \mI }$ is $\bmat{ \mI  & -\mA  \\ 0 & \mI  } $
+
+\item 
+Let's start from a matrix 
+\begin{displaymath} 
+\bmat{\mI & \mA^{-1}\mB \\0 & \mI} 
+\end{displaymath}
+
+$\bmat{\mI & \mA^{-1}\mB \\0 & \mI}^{-1} =  \bmat{\bmat{\mA^{-1} & 0 \\ 0 & \mC^{-1}}\bmat{\mA & \mB \\ 0 & \mC}}^{-1}= \bmat{\mA & \mB \\ 0 & \mC}^{-1}\bmat{\mA^{-1} & 0 \\ 0 & \mC^{-1}}^{-1} $ \newline 
+$=\bmat{\mA & \mB \\ 0 & \mC}^{-1}\bmat{\mA & 0 \\ 0 & \mC}$  \newline
+
+Also from conclusion of part2 we know \newline 
+$\bmat{\mI & \mA^{-1}\mB \\0 & \mI}^{-1} = \bmat{\mI & -\mA^{-1}\mB \\0 & \mI}$ \newline 
+Therefore, \newline 
+$\bmat{\mA & \mB \\ 0 & \mC}^{-1} = \bmat{\mI & -\mA^{-1}\mB \\0 & \mI}\bmat{\mA^{-1} & 0 \\ 0 & \mC^{-1}} = \bmat{\mA^{-1} & -\mA^{-1}\mB\mC^{-1} \\ 0 & \mC^{-1}}$
+\end{enumerate}
+
+
+\hypertarget{problem_3_a_statistical_test_5}{}\subsection*{{Problem 3: A statistical test}}\label{problem_3_a_statistical_test_5}
+
+\begin{enumerate}
+\item My initial guess is that the rank of C is also 1. 
+\item Output of my Matlab code shows matrix C and rank: 
+\begin{verbatim}
+C =
+
+  183.9073 -164.5903   43.4759   -6.3856  -15.1367   28.9753
+  -39.0918  -44.8619 -106.7406  -67.2886  -65.7232  -92.5014
+   26.0308   39.4461   -3.3600   34.7701  108.6805  -30.6203
+  129.2102   95.8134  -55.5014 -120.9416  -64.0614 -129.8827
+  101.5532   43.5142 -211.3501  -39.0490   66.1217   33.0372
+   47.6437  168.3017  -72.2175 -261.1961  -63.8599 -104.6600
+  
+ r =
+
+     6
+\end{verbatim} 
+Therefore it is a full rank matrix. 
+
+\item The result is different from my initial guess, and I think the result from my code should be correct. The reason is that we you have two rank-1 matrix, the sum matrix is not necessary to be a rank-1 matrix. For example, \newline 
+$ \mA = \bmat{2& 3\\ 4 &6} $ 
+and $ \mB = \bmat{1 & 5 \\ 2 & 10} $ are two rank-1 matrix.  \newline 
+But the sum $\mA+\mB = \bmat{3 & 8\\ 6 & 16}$  is a full rank matrix. 
+Code for Problem 3: 
+\begin{lstlisting}
+% Part 2 
+
+N = 10000			% sampling numbers of Monte Carlo simulation
+n = 6 			% dimension of vector 
+C = zeros(n, n)   % initial an n by n matrix C 
+for i=[1:N] 
+    x = randn(n,1)
+    y = randn(n,1)
+    B = x*y'
+    C= C+ B
+end 
+
+r = rank(C)
+\end{lstlisting} 
+
+\end{enumerate} 
 
 
 \hypertarget{problem_4_image_downsampling_6}{}\subsection*{{Problem 4: Image downsampling}}\label{problem_4_image_downsampling_6}
 
-1.%$\vy \in \RR^{4}$   
-$\vy = \mA\vx $
+\begin{enumerate} 
+\item $\vy = \mA\vx $
 so A must be a $4\times 16$ matrix.  $ y_i= \sum_{j=1}^{16}A_{ij}x_j  $ \\
 $ y_1 = (x_1 + x_2 + x_5 + x_6)/4 $ \newline
 $ y_2 = (x_3 + x_4 + x_7 + x_8)/4   $ \newline
@@ -64,34 +185,71 @@ $ \mA_{4,11}= \mA_{4,12}= \mA_{4,15}= \mA_{4,16} = 0.25 $\\
 \end{array}
 \right]
 \end{equation*}
-2. The sum of diagonal elements of $X$ is 24.2686  \\
+\item The sum of diagonal elements of $X$ is 24.2686  \\
 
-3.  Color image:  
-Grey image: 
+\item  Color image and grey image: 
 \begin{figure} [h]
 \includegraphics[width=8cm]{color}
 \includegraphics[width=8cm]{gray}
 \end{figure}
 
-4.  Resahpe command will reshape the input array into a $m\times n$ matrix, and return the new matrix. 
+\item Resahpe command will reshape the input array into a $m\times n$ matrix, and return the new matrix. 
 
 
-5. 
+\item Please see the attached code 
 
-6.  The image looks like this: 
+\item  This image looks correct, shown as below.  
 \begin{figure} [h]
 \includegraphics[width=8cm]{reduced}
 
 \end{figure}
 It looks correct. 
 
-7. After applying 'interp2' function.  The image would be like this: 
+\item After applying 'interp2' function.  The image would be like this which is very similar with what we got from 
 \begin{figure} [h]
 \includegraphics[width=8cm]{interp2}
 
 \end{figure}
 
-8.  Here are all the code for Problem 7. 
+\item Here are all the code for Problem 7. 
+\begin{lstlisting}
+%% Part 2
+load smallicon.txt
+t = trace(smallicon)
+%% Part 3 
+imagesc(smallicon)
+colormap(gray)
+%% Part 4 
+%% Part 5
+load smallicon.txt
+A = zeros(16*16,32*32);    % initialize A matrix
+x = zeros(32*32,1);		% initialize B matrix
+
+NX = [32, 1]; % the map between pixel indices and linear indices for X
+NY = [16,1]; % the map between pixel indices and linear indices for Y
+ for i=1:32
+     for j=1:32    
+         xi = dot(NX,[i-1,j]); % the index of the pixel i,j in the vector x
+         yij = [floor(0.5*i+0.6)-1, floor(0.5*j+0.6)] ; % the resulting location of pixel in the matrix Y
+         yi = dot( NY, yij); % the index of the linear pixel in the vector y
+         x(xi) = smallicon(i,j);   % fill in the linear vector x
+         A(yi,xi) = 1/4; % place the entry of the matrix
+     end
+   end
+
+  y = A*x;    % Apply matrix on vector x
+  Y = reshape(y,16,16)';   % Reshape the linear indexed vector to be an 16 by 16 matrix. 
+imagesc(Y)   % Show the downsampled image.  
+
+%% Part 7 
+
+load smallicon.txt
+X = smallicon
+Ym = interp2(X,-1)
+imagesc(Ym) 
+\end{lstlisting}
+
+\end{enumerate} 
 
 \end{document} 
 
