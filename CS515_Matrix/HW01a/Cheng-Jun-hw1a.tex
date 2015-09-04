@@ -3,7 +3,7 @@
 % Packages required to support encoding
 \usepackage{ucs}
 \usepackage[utf8x]{inputenc}
-
+\usepackage{graphicx} 
 % Packages required by code
 
 
@@ -17,10 +17,65 @@
 
 
 \begin{document} 
-\hypertarget{homework_1a_1}{}\section*{{Homework 1a}}\label{homework_1a_1}
+
+
+
+\hypertarget{problem_0_homework_checklist_2}{}\subsection*{{Problem 0: Homework checklist}}\label{problem_0_homework_checklist_2}
+
+\checkmark	I didn't talk with any one about this homework. \newline
+\checkmark 	Source-code are included at the end of this document. 
+
+
+\hypertarget{problem_1_operations_3}{}\subsection*{{Problem 1: Operations}}\label{problem_1_operations_3}
+
+
+
+1. $\bmat{ 1 & 1 & 2 \\ 3 & 5 & 8 \\ 13 & 21 & 34 } \bmat{ 1 & -2 & 3 \\ -4 & 5 & -6 \\ 7 & -8 & 9} =\bmat{11 & -13 & 15 \\ 39 & -45 & 51 \\ 167 & -193 & 219}$ \newline
+
+2. $\vx =$ {\colorbox[rgb]{1.00,0.93,1.00}{\tt ones\char40\char49\char48\char48\char48\char44\char49\char41}} $\vy =$ {\colorbox[rgb]{1.00,0.93,1.00}{\tt \char91\char49\char58\char49\char48\char48\char48\char93\char39}} $\vx^T \vy =$ 500500.0 \newline
+
+
+\hypertarget{problem_4_image_downsampling_6}{}\subsection*{{Problem 4: Image downsampling}}\label{problem_4_image_downsampling_6}
+
+1.%$\vy \in \RR^{4}$   
+$\vy = \mA\vx $
+so A must be a $4\times 16$ matrix.  $ y_i= \sum_{j=1}^{16}A_{ij}x_j  $ \\
+$ y_1 = (x_1 + x_2 + x_5 + x_6)/4 $ \newline
+$ y_2 = (x_3 + x_4 + x_7 + x_8)/4   $ \newline
+$ y_3 = (x_9 + x_{10} + x_{13} + x_{14})/4 $ \newline
+$ y_4 = (x_{11} + x_{12} + x_{15} + x_{16})/4.$ \newline
+
+Then\\ $ \mA_{11}= \mA_{12}= \mA_{15}= \mA_{16} = 0.25 $\\
+$ \mA_{23}= \mA_{24}= \mA_{27}= \mA_{28} = 0.25 $\\
+$ \mA_{39}= \mA_{3,10}= \mA_{3,13}= \mA_{3,14} = 0.25 $\\
+$ \mA_{4,11}= \mA_{4,12}= \mA_{4,15}= \mA_{4,16} = 0.25 $\\
+
+\begin{equation*}\mA=
+\left[
+\begin{array}{cccccccccccccccc}
+0.25 & 0.25 & 0 & 0 & 0.25 & 0.25 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0  \\
+0 & 0 & 0.25 & 0.25 & 0 & 0 & 0.25 & 0.25 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0  \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0.25 & 0.25 & 0 & 0 & 0.25 & 0.25 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0.25 & 0.25 & 0 & 0 & 0.25 & 0.25 \\
+\end{array}
+\right]
+\end{equation*}
+2. The sum of diagonal elements of $X$ is 24.2686  \\
+
+3.  Color image:  
+Grey image: 
+\begin{figure} [h]
+\includegraphics[width=8cm]{color}
+\includegraphics[width=8cm]{gray}
+\end{figure}
+
+4.  Resahpe command will reshape the input array into a $m\times n$ matrix, and return the new matrix. 
+
+
 
 
 
 \end{document} 
+
 
 
