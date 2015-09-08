@@ -1,0 +1,132 @@
+\documentclass{article}
+
+% Packages required to support encoding
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+
+% Packages required by code
+
+
+% Packages always used
+\usepackage{hyperref}
+\usepackage{xspace}
+\usepackage[usenames,dvipsnames]{color}
+\hypersetup{colorlinks=true,urlcolor=blue}
+
+\input{homework.tex}
+
+
+\begin{document} 
+\hypertarget{homework_1b_1}{}\section*{{Homework 1b}}\label{homework_1b_1}
+
+Please answer the following questions in complete sentences in a clearly, typed prepared manuscript and submit the solution by the due date on Blackboard (Friday, September 11th, 2015, 5pm)
+
+\hypertarget{problem_0_homework_checklist_2}{}\subsection*{{Problem 0: Homework checklist}}\label{problem_0_homework_checklist_2}
+
+\begin{itemize}%
+\item Please identify anyone, whether or not they are in the class, with whom you discussed your homework. This problem is worth 1 point, but on a multiplicative scale.
+
+
+\item Make sure you have included your source-code and prepared your solution according to the most recent Piazza note on homework submissions.
+
+
+
+\end{itemize}
+\hypertarget{problem_1_prove_or_disprove_3}{}\subsection*{{Problem 1: Prove or disprove}}\label{problem_1_prove_or_disprove_3}
+
+For the following questions, either prove that the statement is correct, or show a counter-example.
+
+\begin{enumerate}%
+\item The product of two diagonal matrices is diagonal.
+
+
+\item The product of two upper triangular matrices is upper triangular
+
+
+\item The product of two symmetric matrices is symmetric.
+
+
+\item The product of two orthogonal matrices is orthogonal.
+
+
+\item The product of two square, full rank matrices is full rank
+
+
+
+\end{enumerate}
+\hypertarget{problem_2_4}{}\subsection*{{Problem 2}}\label{problem_2_4}
+
+There are a tremendous number of matrix norms that arise. An interesting class are called the \emph{orthgonally invariant norms}. Norms in this class satisfy:
+
+\begin{displaymath}
+\normof{\mA} = \normof{\mU \mA \mV}
+\end{displaymath}
+for \emph{square orthogonal matrices} $\mU$ and $\mV$. Recall that a square matrix is orthogonal when $\mU^T \mU = \mI$, i.e. $\mU^{-1} = \mU^T$.
+
+Show that $\normof{ \mA }_2$ is orthogonally invariant.
+
+\hypertarget{problem_3_5}{}\subsection*{{Problem 3}}\label{problem_3_5}
+
+Consider the following function:
+
+\begin{displaymath}
+f(\mA) = \max_{i,j} |A_{i,j}|.
+\end{displaymath}
+\begin{enumerate}%
+\item Show that $f$ is a matrix norm. (Very easy!)
+
+
+\item Show that $f$ does not satisfy the sub-multiplicative property.
+
+
+\item Show that there exists $\sigma > 0$ such that:
+
+\begin{displaymath}
+g(\mA) = \sigma f(\mA)
+\end{displaymath}
+is a sub-multiplicative matrix-norm.
+
+
+\item \textbf{Extra tough problem for the adventurous! Not graded.} This problem has a relatively easy proof related to something we saw in class. But making it fully formal requires a few technicalities that are easy to get tripped up on. Now let $\normof{\mA}$ be an arbitrary matrix norm. Show that there exists $\sigma > 0$ such that $h(\mA) = \sigma \normof{\mA}$ is a sub-multiplicative matrix-norm.
+
+
+
+\end{enumerate}
+\hypertarget{problem_4_6}{}\subsection*{{Problem 4}}\label{problem_4_6}
+
+Let $\normof{\mA}$ be a matrix norm and let $\vk \not= 0$ be a real-valued vector. Consider the function:
+
+\begin{displaymath}
+f(\vx) = \normof{ \vx \vk^T }.
+\end{displaymath}
+\begin{enumerate}%
+\item Show that $f$ is a vector norm.
+
+
+\item Show that if $\normof{\mA}$ is a sub-multiplicative matrix norm, then the vector norm $f$ is \emph{consistent} with the matrix norm. That is:
+
+\begin{displaymath}
+f(\mA \vx) \le \normof{\mA} f(\vx).
+\end{displaymath}
+
+
+\end{enumerate}
+\hypertarget{problem_5_choice_1_7}{}\subsection*{{Problem 5 (Choice 1)}}\label{problem_5_choice_1_7}
+
+Note that you only have to do one of the two choices for problem 5.
+
+In class we mentioned that the function
+
+\begin{displaymath}
+f(\vx) = \text{ sum of two largest entries in $\vx$ by absolute value }
+\end{displaymath}
+is a vector norm. Use a computer to prepare a 3d plot of the unit-ball for this norm where $\vx \in \RR^{3}$. We may award up to 5 bonus points for an excellent graphic.
+
+\hypertarget{problem_5_choice_2_8}{}\subsection*{{Problem 5 (Choice 2)}}\label{problem_5_choice_2_8}
+
+Note that you only have to do one of the two choices for problem 5.
+
+Let $f(\vx)$ be a vector norm. If $\vx \in \RR^{1}$ (that is, $x$ is a scalar), show that $f(x) = \alpha |x|$, where $|x|$ is the absolute value function.
+
+
+\end{document}

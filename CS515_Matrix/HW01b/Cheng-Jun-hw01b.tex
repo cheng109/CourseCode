@@ -1,0 +1,107 @@
+\documentclass{article}
+
+% Packages required to support encoding
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage{graphicx} 
+% Packages required by code
+
+% Packages always used
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{xspace}
+\usepackage[usenames,dvipsnames]{color}
+\hypersetup{colorlinks=true,urlcolor=blue}
+
+
+\usepackage[framed,numbered,autolinebreaks,useliterate] {mcode}
+
+\input{homework.tex}
+
+
+\begin{document} 
+
+
+
+\hypertarget{problem_0_homework_checklist_2}{}
+\subsection*{{Problem 0: Homework checklist}}
+\label{problem_0_homework_checklist_2}
+
+\checkmark	I didn't talk with any one about this homework. \newline
+\checkmark 	Source-code are included at the end of this document. 
+
+
+\hypertarget{problem_1_prove_or_disprove_3}{}
+\subsection*{{Problem 1: Prove or disprove}}
+\label{problem_1_prove_or_disprove_3}
+
+For the proof below, I will assume all the matrices are $n\times n$ square matrices.                                                                
+
+\begin{enumerate}%        
+
+\item The product of two diagonal matrices is diagonal. \newline
+$\mA $  and  $\mB $ are diagonal matrices, so \newline 
+$\mA_{ij}= 0, if \ i\neq j $  \newline
+$\mB_{ij}= 0, if \ i\neq j $  \newline
+$\mC = \mA\times\mB$ \newline
+$\mC_{ij}=\sum_{k=1}^{n}{\mA_{ik}\mB_{kj}} $\newline
+Only if $i=j=k$, $\mC_{ij} $ will not be zero, which mean $\mC$ is also a diagonal matrix. 
+
+\item The product of two upper triangular matrices is upper triangular
+$\mA $  and  $\mB $ are two upper triangular matrices, so \newline 
+
+$\mA_{ij}= 0, if  \ i \geqslant j $  \newline
+$\mB_{ij}= 0, if \ i\geqslant j $  \newline
+$\mC = \mA\times\mB$ \newline
+$\mC_{ij}=\sum_{k=1}^{n}{\mA_{ik}\mB_{kj}} $\newline
+When $i\geqslant j $, $\mC_{ij}=0 $ because one of $\mA_{ik} $ and $\mB_{kj} $ must be zero. 
+
+
+
+\item The product of two symmetric matrices is symmetric.
+$\mA $  and  $\mB $ are two symmetric matrices, so \newline 
+
+$\mA_{ij}= \mA_{ji} , if \  i = j $  \newline
+$\mB_{ij}= \mB_{ji} , if\  i = j $  \newline
+$\mC = \mA\times\mB$ \newline
+$\mC_{ij}=\sum_{k=1}^{n}{\mA_{ik}\mB_{kj}} $\newline
+Then $\mC_{ij} $ is not necessary to be equal to $\mC_{ji} $\newline
+Counter-example: \newline
+$\mA=\bmat{1&1\\1&2}$ is a symmetric matrix; \newline
+$\mB=\bmat{1&1\\1&1}$ is also a symmetric matrix.\newline
+$\mC = \mA\times\mB = \bmat{2&2\\3&3} $ which is not a symmetric matrices.  \newline
+
+
+\item The product of two orthogonal matrices is orthogonal.
+
+\item The product of two square, full rank matrices is full rank
+This statement is incorrect. \\
+Counter-example:
+$\mA=\bmat{1&1\\1&2}$ is a full rank matrix; \newline
+$\mB=\bmat{3&5\\1&1}$ is also a full rank matrix.\newline
+$\mC = \mA\times\mB = \bmat{4&6\\2&3} $ which is not a full matrices.  \newline
+
+
+
+\end{enumerate}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
