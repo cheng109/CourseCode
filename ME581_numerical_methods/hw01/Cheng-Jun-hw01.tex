@@ -24,13 +24,128 @@
 
 
 \hypertarget{problem_0_homework_checklist_2}{}
-\subsection*{{Problem 0: Homework checklist}}
+\subsection*{{Problem 1}}
 \label{problem_0_homework_checklist_2}
 
 For equation $f(x) = e^{-x}-x=0 $  \newline
-$f(0)=1$ and $f(1)=e^{-1}-1<0$.  Also function $f(x)$ is continuous monotonic decreasing function.Therefore there must be a root on the interval $(0,1) $ \newline
+$f(0)=1>0$ and $f(1)=e^{-1}-1<0$.  Also function $f(x)$ is continuous monotonic decreasing function.Therefore there must be a root on the interval $(0,1) $ \newline
+For the first 4 iterations.  interval [a, b] becomes: \\
+\begin{itemize}
+\item iter0: [0,		1	 ]\\
+\item iter1: [0.5,	1	 ]\\
+\item iter2: [0.5,		0.75	 ]\\
+\item iter3: [0.5,		0.625]\\
+\item iter4: [0.5625,	0.625]\\
+\end{itemize}
+Therefore $p_3=0.625$ and $(a_4, b_4)=(0.5625, 0.625) $
 
 
 
+\hypertarget{problem_0_homework_checklist_2}{}
+\subsection*{{Problem 2}}
+\label{problem_0_homework_checklist_2}
+
+For equation $f(x) = x_6-3=0 $  \newline
+$f(1)=-2<0$ and $f(2)=61>0$.  Also function $f(x)$ is continuous monotonic increasing function.Therefore there must be a root on the interval $(1,2) $ \newline
+
+Output from bisection code: \\
+\begin{itemize}
+\item iter0 [1,	2] \\
+\item iter1 [1,	1.5]   		:actual error $ |1.5-\sqrt[6]{3}|=0.299< 0.5$ \\
+\item iter2 [1,	1.25]			:actual error $ |1.25-\sqrt[6]{3}|=0.049< 0.25$ \\
+\item iter3 [1.125,	1.25]		:actual error $ |1.125-\sqrt[6]{3}|=0.0759< 0.125$ \\
+\item iter4 [1.1875,	1.25]		:actual error $ |1.1875-\sqrt[6]{3}|=0.0134< 0.0625$ \\
+\item iter5 [1.1875,	1.21875]	:actual error $ |1.21875-\sqrt[6]{3}|=0.0178< 0..03125$ \\
+\end{itemize}
+We can see that each approximation satisfies the theoretical error, but the actual error does not steadily decrease. Sometimes it is large and sometimes it is small. \\
+
+\hypertarget{problem_3_homework_checklist_2}{}
+\subsection*{{Problem 3}}
+\label{problem_0_homework_checklist_2}
+For each step the error would become half of the interval. So 
+\begin{align} 
+error_n = \frac{(b-a)}{2^n}\\
+\epsilon > error_n\\
+\epsilon >  \frac{(b-a)}{2^n}\\
+n>\log_2 \frac{(b-a)}{\epsilon}\\
+\end{align}
+Therefore $n$ should be the integer bigger than $\log_2 \frac{(b-a)}{\epsilon}$
+
+\hypertarget{problem_4_homework_checklist_2}{}
+\subsection*{{Problem 4}}
+\label{}
+\begin{enumerate}
+\item 
+See output of attached code.  The result is 1.73205. 
+\item 
+For the first 5 iterations: \\
+\begin{array}{ccc}
+ |p_n-p_{n-1}|  &    |p_{n-1}-p|  & |p_n-p| \\
+0.277778 &     0.232051,	&  0.045727\\
+0.0444171, &	0.045727,  &	0.00130986\\
+0.00130874, &	0.00130986, &	1.12184e-06\\
+1.12184e-06, &	1.12184e-06, &	8.24008e-13\\
+8.23785e-13, &	& 8.24008e-13,  &	2.22045e-16
+\end{array}
+\item 
+The ratios of $|p_n-p|/|p_{n-1}-p|^2$: \\
+0.849193\\
+0.62644\\
+0.653856\\
+0.65474\\
+Which is approaches to $|f''(p)/2f'(p)|=0.654701 $
+\end{enumerate}
+
+
+\hypertarget{problem_5_homework_checklist_2}{}
+\subsection*{{Problem 5}}
+\label{}
+The true value is : 2.35134
+The estimated value is 2.351
+ \begin{figure}
+ \centering 
+ \includegraphics[width=0.5\textwidth]{root}
+ \caption{Problem 5. Root vs interation number} 
+ \end{figure} 
+  \begin{figure}
+  \centering 
+ \includegraphics[width=0.5\textwidth]{error}
+  \caption{Problem 5. Error vs interation number} 
+ \end{figure} 
+
+
+\hypertarget{problem_6_homework_checklist_2}{}
+\subsection*{{Problem 6}}
+\label{}
+The true value (from Wolfram Alpha)  is : 1.45757030926521
+The estimated value is 1.45757
+ \begin{figure}
+ \centering 
+ \includegraphics[width=0.5\textwidth]{root_6}
+ \caption{Problem 6. Root vs interation number} 
+ \end{figure} 
+  \begin{figure}
+ \centering 
+ \includegraphics[width=0.5\textwidth]{error_6}
+  \caption{Problem 6. Error vs interation number} 
+ \end{figure} 
+
+\hypertarget{problem_6_homework_checklist_2}{}
+\subsection*{{Problem 7}}
+\label{}
+\begin{enumerate}
+\item 
+$f(x)=e^x+x^2-x-4 $  \\
+$x=1.28868 $ \\
+\item 
+$f(x) =x^3-x^2-10x+7 $ \\
+$x=0.68522 $\\
+\item 
+$f(x) = 1.05-1.04x+ln(x) $\\
+$x= 1.10971$ \\
+
+\end{enumerate}
 
 \end{document}
+
+
