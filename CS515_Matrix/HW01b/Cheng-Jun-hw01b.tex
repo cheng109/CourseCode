@@ -37,7 +37,7 @@
 
 For the proof below, I will assume all the matrices are $n\times n$ square matrices.                                                                
 
-\begin{enumerate}%        
+\begin{enumerate}%       
 
 \item The product of two diagonal matrices is diagonal. \newline
 $\mA $  and  $\mB $ are diagonal matrices, so \newline 
@@ -76,14 +76,50 @@ $\mC = \mA\times\mB = \bmat{2&2\\3&3} $ which is not a symmetric matrices.  \new
 
 \item The product of two square, full rank matrices is full rank
 This statement is incorrect. \\
-Counter-example:
+Counter-example:\\
 $\mA=\bmat{1&1\\1&2}$ is a full rank matrix; \newline
 $\mB=\bmat{3&5\\1&1}$ is also a full rank matrix.\newline
 $\mC = \mA\times\mB = \bmat{4&6\\2&3} $ which is not a full matrices.  \newline
 
 
+\end{enumerate} 
 
-\end{enumerate}
+\hypertarget{problem_2_prove_or_disprove_3}{}
+\subsection*{{Problem 2}}
+\label{problem_1_prove_or_disprove_3}
+
+
+
+
+\hypertarget{problem_3_prove_or_disprove_3}{}
+\subsection*{{Problem 3}}
+\label{problem_1_prove_or_disprove_3}
+
+\begin{align} 
+f(\mA) = \max_{i,j}|A_{ij}| 
+\end{align} 
+
+\begin{enumerate} 
+
+\item 
+\begin{itemize}
+\item  $f(A)>0, when \mA\neq0, \\ f(A)=0\ iff \mA=0 $
+\item For and scalar $k$, \\  $ f(k\mA) \\=k \max_{i,j}|A_{ij}| \\= \|k\|\| \max_{i,j}|A_{ij}|\| \\=\|k\|\| f(\mA)\|$
+\item
+$\|f(\mA)+f(\mB)\| \\
+=\|\max_{i,j}|A_{ij}| +\max_{i,j}|B_{ij}|\|\\ 
+\leq \|\max_{i,j}|A_{ij}| \|+\| \max_{i,j}|B_{ij}|\| \\
+=\|f(\mA)\| + \|f(\mB)\|$
+\end{itemize}
+
+\item 
+$\|f(\mA)f(\mB)\| \\
+=\|\max_{i,j}|A_{ij}| \max_{i,j}|B_{ij}|\|\\ 
+\leq \|\max_{i,j}|A_{ij}| \|\| \max_{i,j}|B_{ij}|\| \\
+=\|f(\mA)\|  \|f(\mB)\|$
+\end{enumerate} 
+
+
 
 \end{document}
 
