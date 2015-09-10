@@ -86,10 +86,18 @@ $\mC = \mA\times\mB = \bmat{4&6\\2&3} $ which is not a full matrices.  \newline
 
 \hypertarget{problem_2_prove_or_disprove_3}{}
 \subsection*{{Problem 2}}
-\label{problem_1_prove_or_disprove_3}
-
-
-
+\label{problem_2_prove_or_disprove_3}
+We know $\mU$ and $\mV$ are square orthogonal matrices, then
+\begin{align}
+\mU^T\mU=\mI,  \mV^T\mV=\mI 
+\end{align}
+$\|\mU\mA\mV\|_2^2
+=\mV^T\mA^T\mU^T\mU\mA\mV \\
+= \mV^T\mA^T\mA\mV \\
+= \mV^T\|\mA\|_2^2\mV \\
+=\mV^T\mV\|\mA\|_2^2 \\
+=\|\mA\|_2^2 \\$
+Therefore $\|\mA\|_2 $ is orthogonally invariant. \\
 
 \hypertarget{problem_3_prove_or_disprove_3}{}
 \subsection*{{Problem 3}}
@@ -171,7 +179,7 @@ f(\mA x)=\|\mA x\vk^T\| \leq \|\mA\| \|x\vk^T\| = \|\mA\| f(x)
 \label{problem_5_prove_or_disprove_3}
  f(x) is a vector norm, it satisfies those conditions: \\
  \begin{itemize}
-	\item $f(x)>0, when \mA\neq0, \\ f(x)=0\ iff \mA=0 $ 
+	\item $f(x)>0, \ when \mA\neq0, \\ f(x)=0,\ iff \mA=0 $ 
 	\item  $f(mx) = mf(x) $ 
 	\item $f(x+y)  \leq  f(x)+f(y)$
  \end{itemize}
