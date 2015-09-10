@@ -104,20 +104,78 @@ f(\mA) = \max_{i,j}|A_{ij}|
 \item 
 \begin{itemize}
 \item  $f(A)>0, when \mA\neq0, \\ f(A)=0\ iff \mA=0 $
-\item For and scalar $k$, \\  $ f(k\mA) \\=k \max_{i,j}|A_{ij}| \\= \|k\|\| \max_{i,j}|A_{ij}|\| \\=\|k\|\| f(\mA)\|$
+\item For and scalar $k$, \\  $ f(k\mA) \\= \max_{i,j}|kA_{ij}| \\= k\max_{i,j}|A_{ij}| \\=kf(\mA)$
 \item
-$\|f(\mA)+f(\mB)\| \\
-=\|\max_{i,j}|A_{ij}| +\max_{i,j}|B_{ij}|\|\\ 
-\leq \|\max_{i,j}|A_{ij}| \|+\| \max_{i,j}|B_{ij}|\| \\
-=\|f(\mA)\| + \|f(\mB)\|$
+$f(\mA+\mB) \\
+=\max_{i,j}|A_{ij}+B_{ij}| \\ 
+\leq \max_{i,j}|A_{ij}| + \max_{i,j}|B_{ij}| \\
+=f(\mA) + f(\mB)$
 \end{itemize}
+Therefore $f(\mA)$is a matrix norm. 
+\item 
+$f(\mA\mB) \\
+=\max_{i,j}|A_{ij}B_{ij}|\\ 
+\leq \max_{i,j}|A_{ij}|  \max_{i,j}|B_{ij}| \\
+=f(\mA)f(\mB)$
+
+The $\leq$ is not necessary to be.  A counter example: \\
+$\mA= \bmat{3 &3\\3&3} \\
+\mB= \bmat{3&3\\3&3} \\ 
+\mA\mB= \bmat{18&18\\18&18} $\\
+$f(\mA) = 3 \\ 
+f(\mB) = 3 $\\
+f(\mA\mB) = 18 \\
+Then $ f(\mA\mB) > f(\mA)f(\mB)  $\\
+So $f$ does not satisfy the sub-multiplicative property. 
 
 \item 
-$\|f(\mA)f(\mB)\| \\
-=\|\max_{i,j}|A_{ij}| \max_{i,j}|B_{ij}|\|\\ 
-\leq \|\max_{i,j}|A_{ij}| \|\| \max_{i,j}|B_{ij}|\| \\
-=\|f(\mA)\|  \|f(\mB)\|$
+\begin{align} 
+g(\mA) = \sigma f(\mA) 
+\end{align}
+$g(\mA\mB) =\sigma \max_{i,j}|A_{ij}B_{ij}|\\ 
+g(\mA)g(\mB) =\sigma^2\max_{i,j}|A_{ij}|  \max_{i,j}|B_{ij}|\\$\\
+To make 
+\begin{align} 
+g(\mA\mB) \leq g(\mA)g(\mB) \\
+\sigma \max_{i,j}|A_{ij}B_{ij}| \leq \sigma^2\max_{i,j}|A_{ij}|  \max_{i,j}|B_{ij}| \\
+\sigma \geq\frac{\max_{i,j}|A_{ij}B_{ij}|}{\max_{i,j}|A_{ij}|  \max_{i,j}|B_{ij}|} \\
+\end{align}
+
 \end{enumerate} 
+
+
+\hypertarget{problem_4_prove_or_disprove_3}{}
+\subsection*{{Problem 4}}
+\label{problem_4_prove_or_disprove_3}
+\begin{align}
+f(x)=\|x\vk^T\|
+\end{align}
+
+\begin{enumerate}
+\item 
+\begin{itemize} 
+	\item  $f(x)>0, when \mA\neq0, \\ f(x)=0\ iff \mA=0 $ because $\|\mA\| $is a matrix norm. 
+	\item  $f(mx) = \|mx\vk^T\| =m\|x\vk^T\| = mf(x) $ 
+	\item $f(x+y) = \|(x+y)\vk^T\| = \|x\vk^T+y\vk^T\| \leq \|x\vk^T\|+\|y\vk^T\| = f(x)+f(y)$
+\end{itemize}
+Therefore $f$ is a vector norm. 
+
+\item If $\|\mA\|$ is a sub-multiplicative matrix norm, 
+\begin{align}
+f(\mA x)=\|\mA x\vk^T\| \leq \|\mA\| \|x\vk^T\| = \|\mA\| f(x) 
+\end{align}
+\end{enumerate}
+
+\hypertarget{problem_5_prove_or_disprove_3}{}
+\subsection*{{Problem 5  (Choice 2) }}
+\label{problem_5_prove_or_disprove_3}
+ f(x) is a vector norm, it satisfies those conditions: \\
+ \begin{itemize}
+	\item $f(x)>0, when \mA\neq0, \\ f(x)=0\ iff \mA=0 $ 
+	\item  $f(mx) = mf(x) $ 
+	\item $f(x+y)  \leq  f(x)+f(y)$
+ \end{itemize}
+
 
 
 
