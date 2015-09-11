@@ -146,9 +146,10 @@ To make
 \begin{align} 
 g(\mA\mB) \leq g(\mA)g(\mB) \\
 \sigma \max_{i,j}|A_{ij}B_{ij}| \leq \sigma^2\max_{i,j}|A_{ij}|  \max_{i,j}|B_{ij}| \\
-\sigma \geq\frac{\max_{i,j}|A_{ij}B_{ij}|}{\max_{i,j}|A_{ij}|  \max_{i,j}|B_{ij}|} \\
+\sigma \geq\frac{\max_{i,j}|A_{ij}B_{ij}|}{\max_{i,j}|A_{ij}|  \max_{i,j}|B_{ij}|} 
 \end{align}
 
+Therefore there exists $\sigma>0$ such that: $g(\mA)=\sigma f(\mA) $
 \end{enumerate} 
 
 
@@ -180,18 +181,38 @@ f(\mA x)=\|\mA x\vk^T\| \leq \|\mA\| \|x\vk^T\| = \|\mA\| f(x)
 \label{problem_5_prove_or_disprove_3}
 
 
-\hypertarget{problem_5_prove_or_disprove_3}{}
-\subsection*{{Problem 5  (Choice 2) }}
-\label{problem_5_prove_or_disprove_3}
- f(x) is a vector norm, it satisfies those conditions: \\
- \begin{itemize}
-	\item $f(x)>0, \ when \mA\neq0, \\ f(x)=0,\ iff \mA=0 $ 
-	\item  $f(mx) = mf(x) $ 
-	\item $f(x+y)  \leq  f(x)+f(y)$
- \end{itemize}
+$f(\vx)$ = sum of two largest entries in $\vx$ by absolute value is a vector form. \\
+Suppose
+\begin {gather*}
+\vx=\bmat{x_1\\ x_2\\ x_3}  
+\end{gather*}  
+Then the unit-ball should include all points which satisfy conditions:  
+\begin {gather*}
+|x_1|+|x_2|= 1, |x_3|\leq |x_1| , \  |x_3|\leq|x_2|\\
+|x_2|+|x_3|= 1, |x_1|\leq |x_2| , \  |x_3|\leq|x_3|\\
+|x_3|+|x_1|= 1, |x_2|\leq |x_3| , \  |x_3|\leq|x_1|
+\end{gather*}  
+I used Monte Carlo method to generate $N=300000 $ points which satisfy those conditions, as shown ind Figure 1. 
+\begin{figure}
+\includegraphics[width=0.6\textwidth]{figure1}
+\centering
+\end{figure} 
 
+\begin{figure}
+\includegraphics[width=0.6\textwidth]{figure2}
+\centering
+\end{figure} 
 
+\begin{figure}
+\includegraphics[width=0.6\textwidth]{figure3}
+\centering
+\end{figure} 
 
+\begin{figure}
+\includegraphics[width=0.6\textwidth]{figure4}
+\centering
+\caption{The unit-ball surface from different views. Color images are in electronic version.}
+\end{figure} 
 
 \end{document}
 

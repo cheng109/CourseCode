@@ -7,7 +7,7 @@ def plotProblem5():
     y = []
     z = []
     f=[]
-    for i in range(500000): 
+    for i in range(300000): 
         x1 = random.uniform(-1,1)
         t1 = (2*np.random.binomial(1, 0.5)-1) # t1 is randomly assigned as -1 or 1
         t2 = (2*np.random.binomial(1, 0.5)-1) # t1 is randomly assigned as -1 or 1
@@ -23,16 +23,12 @@ def plotProblem5():
         f.append(2.0)
     
     mlab.points3d(x,y,z, scale_factor=0.01, color=colors.colorConverter.to_rgb('r'))
-    mlab.points3d(z,x,y, color=colors.colorConverter.to_rgb('g'))
-    mlab.points3d(y,z,x, color=colors.colorConverter.to_rgb('b'))
+    mlab.points3d(z,x,y, scale_factor=0.01, color=colors.colorConverter.to_rgb('g'))
+    mlab.points3d(y,z,x, scale_factor=0.01, color=colors.colorConverter.to_rgb('b'))
 
         
     
     mlab.show()
     
-        
-            
-    
-
-
+   
 plotProblem5()
