@@ -73,6 +73,11 @@ $\mC = \mA\times\mB = \bmat{2&2\\3&3} $ which is not a symmetric matrices.  \new
 
 
 \item The product of two orthogonal matrices is orthogonal.
+$\mA $  and  $\mB $ are two orthogonal matrices, so \newline 
+$\mA^T\mA=\mA\mA^T=\mI $\\
+$\mB^T\mB=\mB\mB^T=\mI $\\
+Then $(\mA\mB)(\mA\mB)^T=\mA\mB\mB^T\mA^T=\mA\mA^T=\mI $ \\
+So $\mA\mB $ is also an orthogonal matrix. \\
 
 \item The product of two square, full rank matrices is full rank
 This statement is incorrect. \\
@@ -189,8 +194,8 @@ Suppose
 Then the unit-ball should include all points which satisfy conditions:  
 \begin {gather*}
 |x_1|+|x_2|= 1, |x_3|\leq |x_1| , \  |x_3|\leq|x_2|\\
-|x_2|+|x_3|= 1, |x_1|\leq |x_2| , \  |x_3|\leq|x_3|\\
-|x_3|+|x_1|= 1, |x_2|\leq |x_3| , \  |x_3|\leq|x_1|
+or \ |x_2|+|x_3|= 1, |x_1|\leq |x_2| , \  |x_3|\leq|x_3|\\
+or \ |x_3|+|x_1|= 1, |x_2|\leq |x_3| , \  |x_3|\leq|x_1|
 \end{gather*}  
 I used Monte Carlo method to generate $N=300000 $ points which satisfy those conditions, as shown ind Figure 1. 
 \begin{figure}
