@@ -30,5 +30,67 @@
 \checkmark	I didn't talk with any one about this homework. \newline
 \checkmark 	Source-code are included at the end of this document. 
 
+\hypertarget{problem_0_homework_checklist_2}{}
+\subsection*{{Problem 1}}
+\label{problem_0_homework_checklist_2}
+
+\begin{enumerate}
+\item $\bmat{0 & 5 \\ 0 & 0}$
+
+
+\item $\bmat{5 & 0 \\ 2 & 0}$
+
+
+\item $\bmat{5 & -5 \\ 2 & -2 \\ 0 & 0}$
+
+
+\item $\bmat{2 & 0 \\ 0 & -1}$
+
+\end{enumerate}
+
+
+
+\hypertarget{problem_0_homework_checklist_2}{}
+\subsection*{{Problem 2: }}
+\label{problem_0_homework_checklist_2}
+
+\begin{enumerate}
+
+\item 
+For example, The matrix \\
+\begin{align} 
+\mA = \bmat{1 &1\\ 2& 2} 
+\end{align}
+has two different  decomposition.  
+But in both cases they have the same singular value. \\
+\item 
+
+\item 
+Suppose $\mA$ is a matrix with eigenvalues $\{\sigma_i\}$\\
+The SVD of $\mA$ is $\mA=\mU \Sigma\mV^T $ where $\mU$ and $\mV$ are both orthogonal matrix. 
+
+\begin{flalign} 
+\mA^{-1} &= (\mU \Sigma\mV^T)^{-1}\\
+&=(\mV^T)^{-1}\Sigma^{-1}\mU^{-1}\\
+&=(\mV^T)^T\Sigma^{-1}\mU^T\\
+&=\mV\Sigma^{-1}\mU^T &&
+\end{flalign}
+Then  $\mA^{-1}$ is a matrix with eigenvalues $\{\frac{1}{\sigma_i}\}$
+\begin{flalign} 
+\|\mA^{-1}\| &= max\{\frac{1}{\sigma_i}\} \\
+& = \frac{1}{\sigma_{min}} \\
+\end{flalign}
+
+\item 
+The SVD of $\mQ$ is $\mQ=\mU \Sigma\mV^T=\mQ \mI\mI^T $ where $\mI$ is an identity matrix and it is also an orthogonal matrix. \\
+In particular, the singular value are all $1$. 
+
+\end{enumerate}
+
+
+
+
+
 
 \end{document}
+
