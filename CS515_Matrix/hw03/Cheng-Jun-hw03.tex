@@ -35,16 +35,17 @@
 \label{problem_0_homework_checklist_2}
 
 \begin{enumerate}
-\item $\bmat{0 & 5 \\ 0 & 0}  = \bmat{1&0\\0&1} \bmat{5&0\\0 &0} \bmat{0&1\\-1 &0}$
+\item $\bmat{0 & 5 \\ 0 & 0}  = \bmat{1 & 0 \\ 0 & 1} \bmat{5 & 0 \\ 0 & 0 } \bmat{ 0 & 1 \\ -1 & 0 }$
 
 
-\item $\bmat{5 & 0 \\ 2 & 0}$
+\item $\bmat{5 & 0 \\ 2 & 0} = \bmat{0.92 & -0.37\\ 0.37& 0.92}\bmat{5.4& 0\\ 0& 0} \bmat{1 & 0 \\0 & 1} $
 
 
-\item $\bmat{5 & -5 \\ 2 & -2 \\ 0 & 0}$
+\item $\bmat{5 & -5 \\ 2 & -2 \\ 0 & 0}= \bmat{0.93 & -0.37 & 0 \\ 0.37 & 0.93 & 0 \\ 0 & 0 & 0 }\bmat{7.6 & 0 \\ 0 & 0 \\ 0 & 0 }
+\bmat{0.707 & -0.707 \\ 0.707 & 0.707 } $
 
 
-\item $\bmat{2 & 0 \\ 0 & -1}$
+\item $\bmat{2 & 0 \\ 0 & -1} = \bmat{1 & 0 \\ 0 & 1} \bmat{2 & 0 \\ 0 & -1 } \bmat{1 & 0 \\ 0 & 1 }$
 
 \end{enumerate}
 
@@ -59,10 +60,19 @@
 \item 
 For example, The matrix \\
 \begin{align} 
-\mA = \bmat{1 &1\\ 2& 2} 
+\mA = \bmat{5 &-5 \\ 2 & -2} 
 \end{align}
-has two different  decomposition.  
-But in both cases they have the same singular value. \\
+From Matlab SVD we can get: 
+\begin{align} 
+\mA =\bmat{5 & -5 \\ 2 & -2}= \bmat{-0.93 & -0.37  \\ -0.37 & 0.93   }\bmat{7.6 & 0 \\ 0 & 0 }
+\bmat{-0.707 & -0.707 \\ 0.707 & -0.707 } 
+\end{align}
+But I got:
+\begin{align} 
+\mA = \bmat{5 & -5 \\ 2 & -2}= \bmat{0.93 & -0.37  \\ 0.37 & 0.93   }\bmat{7.6 & 0 \\ 0 & 0  }
+\bmat{0.707 & -0.707 \\ 0.707 & 0.707 } 
+\end{align}
+That means matrix A has two different  decomposition, but in both cases they have the same singular value. \\
 \item 
 
 \item 
@@ -87,7 +97,7 @@ In particular, the singular value are all $1$.
 
 \end{enumerate}
 
-\hypertarget{problem_0_homework_checklist_2}{}
+\hypertarget{}{}
 \subsection*{{Problem 3: }}
 \label{}
 
@@ -134,6 +144,41 @@ When they have the same set of singular values, Then
 & = \sigma_{k+1}
 \end{flalign}
 $\sigma_{k+1}$ is the largest singular value of $\mA-\mA_k$ \\
+
+
+\item 
+Based on the definition of 2-norm, for any vectors: \\ 
+\begin{flalign}
+ \|\mA\|=\sup_{x\neq0}\frac{\|\mA x\|}{\|x\|}
+ \end{flalign} 
+We know 
+\begin{align} 
+\|(\mA-\mB)x\|<\sigma_{k+1} 
+\end{align}
+Then \begin{align}  \sigma_{k+1} > \sup_{x\neq0}\frac{\|(\mA-\mB) x\|}{\|x\|}\end{align} 
+for any vector $x$. \\
+Therefore \begin{align}  \|(\mA-\mB)x\|<\sigma_{k+1}\|x\| \end{align}  
+
+\item 
+For a vector $\vw$ in the null-space of \mB\ 
+\begin{align}    \mB\vw=0 \end{align} 
+Therefore \begin{align}  \|(\mA-\mB)\vw\|=  \|\mA\vw\| <\sigma_{k+1}\|\vw\|\end{align} 
+
+\item 
+For a vector $\vx \in span(\vv_1, ...., \vv_{k+1}) , $\\
+\begin{flalign} \|\mA\| &=\sup_{x\neq0}\frac{\|\mA \vz\|}{\|\vz\|}\\
+&= max\{\sigma_1, \sigma_2, ..., \sigma_k\} \\
+&\leq\sigma_{k+1} \\
+\end{flalign} 
+Then \begin{align} \|\mA\vz\|\leq\sigma_{k+1}\|\vz\| \end{align} 
+
+
+\item 
+The dimension of the space where $\mA\vw $ is bounded above is $(n-k) $, and 
+the dimension of the space where $\mA\vz $ is bounded above is $(k+1) $.  Because the sum of the dimensions of those two spaces is more than $n$, there must be a non-zero vector which belongs to two of the subspaces. And this is a contradiction.  \\
+
+\item
+Yes, I did. \\
 \end{enumerate} 
 
 \hypertarget{problem_0_homework_checklist_2}{}
@@ -156,12 +201,27 @@ The data is stored as a 3 dimension array $256\times 1100 \times 10$. \\
 \caption{Sample plots for each individual digits from 0 to 9. }
  \end{figure}
  \item 
+To make sum of $x$ to be zero, then 
+ \begin{align} 
+\sum_{i=0}^{256}x_i &= \sum_{i=0}^{256}f_i + 256\gamma\\
+&=0
+ \end{align}
+ Then \begin{align}  \gamma = -\frac{ \sum_{i=0}^{256}f_i}{256} 
+ \end{align} 
+ That means we just need to get summation of all values of all $1100$ pictures for each digit, and then divided by $256$.  \\
  
  
  \item 
+ Totally there are $1100\times10$ images. For each image we can get the average of those $256$ pixels, and then subtract this average from the data image. 
+ \begin{lstlisting}
+ 
+ \end{lstlisting} 
  
  \item 
+ For each image matrix, we can get the singular values from Matlab SVD. The largest singular value is $ 23234 $. \\ 
+  \begin{lstlisting}
  
+ \end{lstlisting} 
  
 \end{enumerate} 
 \end{document}
