@@ -214,15 +214,60 @@ To make sum of $x$ to be zero, then
  \item 
  Totally there are $1100\times10$ images. For each image we can get the average of those $256$ pixels, and then subtract this average from the data image. 
  \begin{lstlisting}
- 
+%% Subtract the mean from each image 
+residual =double(data) - repmat(mean(data),256, 1,1)
  \end{lstlisting} 
  
  \item 
- For each image matrix, we can get the singular values from Matlab SVD. The largest singular value is $ 23234 $. \\ 
-  \begin{lstlisting}
- 
+ For each image matrix, we can get the singular values from Matlab SVD. The largest singular value is $  58194.51$. This is the global maximum singular value. \\ 
+ \begin{lstlisting}
+%% Reshape the matrix
+m1 = reshape(residual, [256,11000])
+[u,s, v] = svd(m1) 
+
  \end{lstlisting} 
  
+\item 
+The leading singular vector $\vu_1$ is shown as in Figure 2. \\
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{prob4_4}
+\centering
+\caption{Plot of the leading singular vector $\vu_1$ for problem4.4 }
+
+\end{figure}
+\item 
+The dominant eigenvalues for 10 matrices are: \\
+$36414.5244628648	\\24385.2163297518	\\27837.9507648218	\\23367.3792733199	
+\\25695.6406646778	\\ 27847.3481015609	\\26588.9227446172	\\26005.8518124203	\\26587.9255579203	\\33791.0691296690\\$
+
+All the leading singular vectors are shown as in Figure 3. 
+ \begin{figure}
+ \includegraphics[width=0.25\textwidth, height=0.25\textwidth]{newpic0}
+\includegraphics[width=0.25\textwidth, height=0.25\textwidth]{newpic1}   \includegraphics[width=0.25\textwidth, height=0.25\textwidth]{newpic2}
+\includegraphics[width=0.25\textwidth, height=0.25\textwidth]{newpic3}
+\includegraphics[width=0.25\textwidth, height=0.25\textwidth]{newpic4}
+\includegraphics[width=0.25\textwidth, height=0.25\textwidth]{newpic5}
+\includegraphics[width=0.25\textwidth, height=0.25\textwidth]{newpic6}
+\includegraphics[width=0.25\textwidth, height=0.25\textwidth]{newpic7}
+\includegraphics[width=0.25\textwidth, height=0.25\textwidth]{newpic8}
+\includegraphics[width=0.25\textwidth, height=0.25\textwidth]{newpic9}
+\caption{Plot of leading singular vectors for those 10 matrices }
+ \end{figure}
+ 
+ \begin{lstlisting}
+mm = zeros(1,10); 
+leadingV = zeros(256,10); 
+
+for i=1:10
+    [u,s,~] = svd(residual(:,:,i)); 
+    mm(i)=s(1,1); 
+    leadingV(:,i)=u(:,1); 
+end
+%% For example, plot the leading singular vector for digit 2. 
+imagesc(reshape(leadingV(:, 2), [16,16]))
+ \end{lstlisting}
+
+The key difference is that the picture in number 5 include all features of digit 0 to 9.  But in this problem we can see that all the images contain its own digit features. 
 \end{enumerate} 
 \end{document}
 
