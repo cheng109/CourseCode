@@ -89,19 +89,80 @@ In particular, the singular value are all $1$.
 
 \hypertarget{problem_0_homework_checklist_2}{}
 \subsection*{{Problem 3: }}
-\label{problem_0_homework_checklist_2}
+\label{}
 
 \begin{enumerate} 
 \item 
 If $m<n$, we can use $\mA^{T}= (\mU\Sigma\mV^T)^{T} = \mV\Sigma\mU^T$ is still SVD. 
 
 \item 
+$\mA = diag(\sigma_1, \sigma_2, ...\sigma_n, 0, ...) $\\
+Then the best diagonal rank $k$ approximation to $\mA$ is \\
+ $\mA_k =diag(\sigma_1, \sigma_2, ...\sigma_k, 0, ...)$ \\
+ We aussume $k<n$ since we want to do the lower rank approximation. \\
+ Then  
+ \begin{flalign}
+ \|\mA-\mA_k\|_2  &= \|diag(\sigma_1, \sigma_2, ...\sigma_n, 0, ...) - diag(\sigma_1, \sigma_2, ...\sigma_k, 0, ...) \|_2\\
+&= \| diag(0 , .., \sigma_{k+1}, ...\sigma_n, 0, ...) \|_2 \\
+&= max\{\sigma_{k+1}, ...\sigma_n \}
+\end{flalign}
+The small least answer could be $\sigma_n$ which is the smallest singular value of $\mA$. \\
+\item 
+
+\begin{flalign} 
+\|\mA-\mA_n\| &= \|\sum_{i=1}^{n}\sigma_i\vu_i\vv_i^T-\sum_{i=1}^{n}\sigma_i\vu_i\vv_i^T\|\\
+& = 0\\
+\end{flalign}
 
 
+
+\item 
+\begin{flalign} 
+\|\mA-\mA_R\| &= \|\sum_{i=1}^{n}\sigma_i\vu_i\vv_i^T-\sum_{i=1}^{R}\sigma_i\vu_i\vv_i^T\|\\
+& = \|\sum_{i=R+1}^{n}\sigma_i\vu_i\vv_i^T\|\\
+& = max\{\sigma_i\}\\
+\end{flalign}
+When they have the same set of singular values, Then 
+\begin{align} \|\mA-\mA_R\| = 0\\ 
+\end{align}
+
+\item 
+\begin{flalign} 
+\|\mA-\mA_k\| &= \|\sum_{i=1}^{n}\sigma_i\vu_i\vv_i^T-\sum_{i=1}^{k}\sigma_i\vu_i\vv_i^T\|\\
+& = \|\sum_{i=k+1}^{n}\sigma_i\vu_i\vv_i^T\|\\
+& = max\{\sigma_{k+1}, ..., \sigma_{n}\}\\
+& = \sigma_{k+1}
+\end{flalign}
+$\sigma_{k+1}$ is the largest singular value of $\mA-\mA_k$ \\
 \end{enumerate} 
 
-
-
-
+\hypertarget{problem_0_homework_checklist_2}{}
+\subsection*{{Problem 4: }}
+\label{}
+\begin{enumerate} 
+\item 
+The data is stored as a 3 dimension array $256\times 1100 \times 10$. \\
+ For each digit, there are 1100 images.  Those images include 256 pixels with shape $16 by 16 $ \\ And the sample images are shown as below. \\
+ \begin{figure}
+ \includegraphics[width=0.25\textwidth, height=0.25\textwidth]{pic0}
+\includegraphics[width=0.25\textwidth, height=0.25\textwidth]{pic1}   \includegraphics[width=0.25\textwidth, height=0.25\textwidth]{pic2}
+\includegraphics[width=0.25\textwidth, height=0.25\textwidth]{pic3}
+\includegraphics[width=0.25\textwidth, height=0.25\textwidth]{pic4}
+\includegraphics[width=0.25\textwidth, height=0.25\textwidth]{pic5}
+\includegraphics[width=0.25\textwidth, height=0.25\textwidth]{pic6}
+\includegraphics[width=0.25\textwidth, height=0.25\textwidth]{pic7}
+\includegraphics[width=0.25\textwidth, height=0.25\textwidth]{pic8}
+\includegraphics[width=0.25\textwidth, height=0.25\textwidth]{pic9}
+\caption{Sample plots for each individual digits from 0 to 9. }
+ \end{figure}
+ \item 
+ 
+ 
+ \item 
+ 
+ \item 
+ 
+ 
+\end{enumerate} 
 \end{document}
 
