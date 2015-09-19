@@ -51,7 +51,7 @@
 
 
 
-\hypertarget{problem_0_homework_checklist_2}{}
+\hypertarget{}{}
 \subsection*{{Problem 2: }}
 \label{problem_0_homework_checklist_2}
 
@@ -67,13 +67,23 @@ From Matlab SVD we can get:
 \mA =\bmat{5 & -5 \\ 2 & -2}= \bmat{-0.93 & -0.37  \\ -0.37 & 0.93   }\bmat{7.6 & 0 \\ 0 & 0 }
 \bmat{-0.707 & -0.707 \\ 0.707 & -0.707 } 
 \end{align}
-But I got:
+But I got: 
 \begin{align} 
 \mA = \bmat{5 & -5 \\ 2 & -2}= \bmat{0.93 & -0.37  \\ 0.37 & 0.93   }\bmat{7.6 & 0 \\ 0 & 0  }
 \bmat{0.707 & -0.707 \\ 0.707 & 0.707 } 
 \end{align}
-That means matrix A has two different  decomposition, but in both cases they have the same singular value. \\
+That means matrix A has two different  decompositions, but in both cases they have the same singular value. \\
 \item 
+Suppose $\vf$ and $\vg$ are two vectors:  \\
+\begin{align}
+\mA = \mU \Sigma \mV ^T = \vf' \Sigma \vg'
+\end{align}
+ where $\vf'$ and $\vg'$ are two orthogonal vectors. 
+ \begin{align}    
+\vf' = \frac{\vf}{\|\vf\|}\\
+\vg' = \frac{\vg^T}{\|\vg\|}\\  
+\Sigma = \mI \|\vf\|\|\vg\|
+ \end{align}  
 
 \item 
 Suppose $\mA$ is a matrix with eigenvalues $\{\sigma_i\}$\\
