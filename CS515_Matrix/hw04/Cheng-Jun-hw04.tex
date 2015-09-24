@@ -1,0 +1,93 @@
+\documentclass{article}
+
+% Packages required to support encoding
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage{graphicx} 
+% Packages required by code
+
+% Packages always used
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{xspace}
+\usepackage[usenames,dvipsnames]{color}
+\hypersetup{colorlinks=true,urlcolor=blue}
+
+
+\usepackage[framed,numbered,autolinebreaks,useliterate] {mcode}
+
+\input{homework.tex}
+
+
+\begin{document} 
+
+
+
+\hypertarget{problem_0_homework_checklist_2}{}
+\subsection*{{Problem 0: Homework checklist}}
+\label{problem_0_homework_checklist_2}
+
+\checkmark	I didn't talk with any one about this homework. \newline
+\checkmark 	Source-code are included at the end of this document. 
+
+\hypertarget{}{}
+\subsection*{{Problem 1:}}
+\label{}
+\begin{enumerate}
+
+\item 
+Function backsolve.m
+\begin{lstlisting} 
+function x = backsolve(A, b) 
+    % Assume matrix A is n by n upper triangular matrix; 
+    % Vector b is n by 1. 
+    n = length(b) ;         %% Get the length of the vector b
+    x = zeros(n,1);         %% initiate solution Xl 
+    x(n) = b(n)/A(n,n);     %% For the base case, x(n) = b(n)/A(n,n); 
+    for i=n-1:-1:1
+        temp = 0;           
+        for j = i:n 
+            temp = temp + A(i, j)*x(j);    %% Accumulate all the other terms
+        end 
+        x(i) = (b(i)-temp)/A(i,i);    %%  solve X(i)
+    end 
+end
+\end{lstlisting} 
+
+Function forwardsolve.m: 
+\begin{lstlisting} 
+function x = forwardsolve(A, b) 
+    % Assume matrix A is n by n upper triangular matrix; 
+    % Vector b is n by 1. 
+    n = length(b) ;         %% Get the length of the vector b
+    x = zeros(n,1);         %% Initiate solution Xl 
+    x(1) = b(1)/A(1,1);     %% For the base case, x(1) = b(1)/A(1,1); 
+    for i=2:n
+        temp = 0; 
+        for j = 1:i 
+            temp = temp + A(i, j)*x(j); %% Accumulate all the other terms
+        end 
+        x(i) = (b(i)-temp)/A(i,i);  %%  solve X(i)
+    end 
+end
+
+\end{lstlisting} 
+
+\item 
+ 
+ I set $n=1000$ and repeat the procedure for 100 times. The time elapses for  Matlab backslash method is around $3.210974$ seconds.  My backsolve method will spend around $4.733596 $ seconds.  Matlab backslash has better performance than mine. 
+ 
+ For the accuaracy: 
+ \begin{align} 
+\frac{ \|X_{matlab} - X_{mine} \| }{\|X_{matlab} \| }=  7.2165e-16
+ \end{align} 
+ 
+\item 
+
+
+
+\end{enumerate}
+
+
+
+\end{document}
