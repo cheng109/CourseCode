@@ -82,11 +82,161 @@ end
 \frac{ \|X_{matlab} - X_{mine} \| }{\|X_{matlab} \| }=  7.2165e-16
  \end{align} 
  
-\item 
+\item My linear solver function: \\
+\begin{lstlisting} 
+function x = linearSolver(A, b)     
+    [L, U, P] = lu(A);
+    x1 = forwardsolve(L, P*b); 
+    x = backsolve(U, x1); 
+end 
+\end{lstlisting} 
 
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{time}
+\caption{Time consumption for different size of matrix.}
+\end{figure}
 
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{error}
+\caption{Error plot between Matlab backslash solver and my linear solver.}
+\end{figure}
 
 \end{enumerate}
+
+
+
+\hypertarget{}{}
+\subsection*{{Problem 2:}}
+\label{}
+\begin{enumerate}
+\item 
+Base on \begin{align*}  \frac{1}{h^2}(u(x_{i-1}, y_j) + u(x_i,y_{j-1})-4u(x_i,y_j)+u(x_{i+1},y_j)+u(x_i,y_{j+1}))=f(x_i,y_j)    \end{align*}
+
+Then all the linear equations: 
+\begin{align*}
+(i=0, j=0): & f_{0,0} =0\\
+(i=0, j=1): & f_{0,1} =0\\
+(i=0, j=2): & f_{0,2} =0\\
+(i=0, j=3): & f_{0,3} =0\\
+(i=1, j=0): & f_{1,0} =0\\
+(i=1, j=1): & f_{1,1} =0\\
+(i=1, j=2): & f_{1,2} =0\\
+(i=1, j=3): & f_{1,3} =0\\
+(i=2, j=0): & f_{2,0} =0\\
+(i=2, j=1): & f_{2,1} =0\\
+(i=3, j=0): & f_{3,0} =0\\
+(i=3, j=1): & f_{3,1} =0\\
+\end{align*} 
+All the others:  \begin{align*}
+(i=2, j=2): & f_{2,2} =\frac{1}{h^2}(u(x_{1}, y_2) + u(x_2,y_{1})-4u(x_2,y_2)+u(x_{3},y_2)+u(x_2,y_{3}))\\
+(i=2, j=3): & f_{2,3} =\frac{1}{h^2}(u(x_{1}, y_3) + u(x_2,y_{2})-4u(x_2,y_3)+u(x_{3},y_3)+u(x_2,y_{3}))\\
+(i=3, j=2): & f_{3,2} =\frac{1}{h^2}(u(x_{2}, y_2) + u(x_3,y_{2})-4u(x_3,y_2)+u(x_{4},y_2)+u(x_3,y_{3})) \\
+(i=3, j=3): & f_{3,3} =\frac{1}{h^2}(u(x_{2}, y_3) + u(x_2,y_{2})-4u(x_3,y_3)+u(x_{4},y_3)+u(x_3,y_{4})) \\
+\end{align*} 
+\item 
+The code is filled as below: 
+\begin{lstlisting}
+n = 10;
+A = zeros((n+1)^2,(n+1)^2);
+newA = zeros((n+1)^2-2, (n+1)^2-2); 
+f = zeros((n+1)^2,1);
+G = reshape(1:((n+1)^2), n+1, n+1)'; 
+for i=0:n
+ for j=0:n
+     row = G(i+1,j+1);
+     if i==0 || j == 0 || i==n || j==n
+         % we are on a boundary
+         f(row) = 0;
+         A(row, row) = 1;     % For boundary points, we set the diagonal term to be 1. 
+        
+     else
+         % we are NOT on a boundary
+         f(row) = 1/n^2;
+            A(row, G(i,j+1  )) = 1;             % Put the coefficients to the corresponding entry of matrix A. 
+            A(row, G(i+1,  j)) = 1; 
+            A(row, G(i+1,  j+1  )) = -4; 
+            A(row, G(i+2,j+1  )) = 1 ; 
+            A(row, G(i+1,  j+2)) = 1; 
+        % end
+            
+     end
+ end
+end
+u = A\f;
+\end{lstlisting}
+
+
+\item 
+Using Matlab's backslash solver, I can get the result for $u$ : \\
+\begingroup
+\fontsize{8pt}{12pt}\selectfont
+\begin{verbatim}
+0         0         0         0         0         0         0         0         0         0         0
+0   -0.0128   -0.0206   -0.0254   -0.0280   -0.0288   -0.0280   -0.0254   -0.0206   -0.0128         0
+0   -0.0206   -0.0343   -0.0430   -0.0478   -0.0493   -0.0478   -0.0430   -0.0343   -0.0206         0
+0   -0.0254   -0.0430   -0.0544   -0.0608   -0.0629   -0.0608   -0.0544   -0.0430   -0.0254         0
+0   -0.0280   -0.0478   -0.0608   -0.0682   -0.0706   -0.0682   -0.0608   -0.0478   -0.0280         0
+0   -0.0288   -0.0493   -0.0629   -0.0706   -0.0731   -0.0706   -0.0629   -0.0493   -0.0288         0
+0   -0.0280   -0.0478   -0.0608   -0.0682   -0.0706   -0.0682   -0.0608   -0.0478   -0.0280         0
+0   -0.0254   -0.0430   -0.0544   -0.0608   -0.0629   -0.0608   -0.0544   -0.0430   -0.0254         0
+0   -0.0206   -0.0343   -0.0430   -0.0478   -0.0493   -0.0478   -0.0430   -0.0343   -0.0206         0
+0   -0.0128   -0.0206   -0.0254   -0.0280   -0.0288   -0.0280   -0.0254   -0.0206   -0.0128         0
+0         0         0         0         0         0         0         0         0         0         0
+\end{verbatim}
+\endgroup
+
+
+
+\end{enumerate} 
+
+
+\hypertarget{}{}
+\subsection*{{Problem 3: The Schur Complement}}
+\label{}
+
+\begin{enumerate} 
+\item 
+\begin{align*} 
+\mC \vx_1+\mD \vx_2 & = \vb_2\\
+\mD \vx_2 & = \vb_2-\mC \vx_1 \\
+\vx_2 & = \mD^{-1}(\vb_2- \mC \vx_1) \\
+\end{align*}
+It is possible when the block matrix $\mD$ is invertible because we need the inverse of matrix $\mD$. \\
+
+\item 
+\begin{align*}
+\mA\vx_1+\mB\vx_2=\vb_1\\
+\mC\vx_1+\mD\vx_2=\vb_2 \\
+\end{align*}
+Now we know that $\mD$ is invertible. So multiply $\mB\mD^{-1}$ on the second equation: 
+\begin{align*}
+\mA\vx_1+\mB\vx_2 &=\vb_1\\
+\mB\mD^{-1}\mC\vx_1+\mB\vx_2 &=\mB\mD^{-1}\vb_2 \\
+(\mB\mD^{-1}\mC -\mA )\vx_1&= (\mB\mD^{-1}\vb_2- \vb_1)
+\end{align*}
+So if we can get inverse of $ \mB\mD^{-1}\mC -\mA $, then we can solve $\vx_1$.
+\item 
+Then we can solve \begin{align*}
+\vx_1 = (\mB\mD^{-1}\mC -\mA )^{-1}(\mB\mD^{-1}\vb_2- \vb_1)\\
+\end{align*}
+\end{enumerate} 
+
+
+\begin{figure}
+\includegraphics[width=0.7\textwidth]{meshplot} 
+\centering
+\caption{Surface plot of $\mu$. } 
+\end{figure}
+
+\hypertarget{}{}
+\subsection*{{Problem 4:Ranking with Linear Systems}}
+\label{}
+Questions: \\
+I am a little confuse why we need ${r_1, r_2, ..., r_n} $ to be the indicate the performance of each team, instead of  ${S_1, S_2, ..., S_n} $? \\
+
+
 
 
 
