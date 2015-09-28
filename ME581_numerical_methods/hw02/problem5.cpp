@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cmath> 
 
-#define COL 5
+#define COL 6
 using namespace std; 
 
 void printMatrix(double A[][COL], int row, int col) ; 
@@ -114,22 +114,15 @@ void printVector(double* x, int length) {
 
 
 int main() {
-  double A[4][5] = {{0, 1, 1, 1, 0}, {3, 0, 3, -4, 7}, {1, 1,1, 2, 6}, {2, 3, 1, 3, 6}};
-  int row = 4; 
-  int col = 5; 
+  double B[5][6] = {{-9 , 11 , -21,      63 , -252 ,-356},
+		    {70 , -69 , 141 , - 421 , 1684,2385},  
+		    {-575 , 575 , -1149 , 3451 , -13801, -19551}, 
+		    {3891 , -3891 , 7782 , -23345 , 93365, 132274}, 
+		    {1024 , -1024 , 2048 , -6144 , 24572, 34812}}; 
+  int row = 5; 
+  int col = 6; 
 
-  printMatrix(A, row, col) ; 
-
-  partialPivot(A, row,col); 
-  cout << "After partial pivoting : " << endl ;
-  printMatrix(A, row, col) ; 
   
-  double* x1 =  backsolve( A, row, col); 
-  cout << "The result X:   " << endl; 
-  printVector(x1, row) ; 
-
-  delete[] x1; 
-  double B[4][5] = {{0, 1, 1, 1, 0}, {3, 0, 3, -4, 7}, {1, 1,1, 2, 6}, {2, 3, 1, 3, 6}};
   scalePivot(B, row, col); 
   cout << "After scale partial pivoting : " << endl ;
   printMatrix(B, row, col); 
@@ -140,41 +133,6 @@ int main() {
   printVector(x2, row) ; 
   
   delete[] x2; 
-  // Part (b)
-
-  double C[4][5] = {{0.2115 ,  2.296 ,  2.715 ,  3.215, 8.438}, 
-		    {0.4371  ,  3.916 , 1.683 , 2.852, 8.888}, 
-		    {6.099 , 4.324 , 23.20 , 1.578,  35.20 },
-		    { 4.623 , 0.8926 , 15.32 , 5.305, 26.14}};  
-
-  partialPivot(C, row,col);
-  cout << "After partial pivoting : " << endl ;
-  printMatrix(C, row, col) ;
-
-  double* x3 =  backsolve( C, row, col);
-  cout << "The result X:   " << endl;
-  printVector(x3, row) ;
-
-
-
-  delete[] x3; 
-  
-
-  double D[4][5] = {{0.2115 ,  2.296 ,  2.715 ,  3.215, 8.438},
-		    {0.4371  ,  3.916 , 1.683 , 2.852, 8.888},
-		    {6.099 , 4.324 , 23.20 , 1.578,  35.20 },
-		    { 4.623 , 0.8926 , 15.32 , 5.305, 26.14}};
-  scalePivot(D, row, col);
-  cout << "After scale partial pivoting : " << endl ;
-  printMatrix(C, row, col);
-
-
-  double* x4 = backsolve(D, row, col);
-  cout << "The scaled pivoting result X:   " << endl;
-  printVector(x4, row) ;
-  delete[] x4;
-  
-  
 
   return 0;
 }

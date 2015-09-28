@@ -1,0 +1,80 @@
+\documentclass{article}
+
+% Packages required to support encoding
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage{graphicx} 
+\usepackage{enumitem}
+% Packages required by code
+
+% Packages always used
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{xspace}
+\usepackage[usenames,dvipsnames]{color}
+\hypersetup{colorlinks=true,urlcolor=blue}
+
+
+\usepackage[framed,numbered,autolinebreaks,useliterate] {mcode}
+
+\input{homework.tex}
+
+
+\begin{document} 
+
+
+
+\hypertarget{problem_0_homework_checklist_2}{}
+\subsection*{{Problem 4: }}
+\label{}
+
+\begin{enumerate}[label=(\alph*)]
+\item 
+\begin{align*} 
+\mA &= \bmat{0 & 1 & 1 & 1\\ 3 & 0 & 3 & -4\\ 1 & 1 & 1 & 2\\ 2 & 3 & 1 & 3}\\
+\vb &= \bmat{0 \\ 7 \\ 6 \\ 6 } 
+\end{align*} 
+
+\begin{enumerate}[label=(\roman*)] 
+\item Partial pivoting 
+The output from my code is \begin{align*} \vx = \bmat{4 \\ -3 \\ 1 \\ 2 } \end{align*} 
+\item Scaled pivoting 
+The output from my code is \begin{align*} \vx = \bmat{4 \\ -3 \\ 1 \\ 2 } \end{align*} 
+\end{enumerate} 
+
+
+\item 
+\begin{align*} 
+\mA &= \bmat{	0.2115 & 2.296 & 2.715 & 3.215 \\ 
+			0.4371 & 3.916 & 1.683 & 2.852 \\ 
+			6.099 & 4.324 & 23.20 & 1.578 \\
+			4.623 & 0.8926 & 15.32 & 5.305 
+			}\\
+\vb &= \bmat{8.438 \\ 8.8888 \\ 35.20 \\ 26.14} 
+\end{align*} 
+
+
+
+\begin{enumerate}[label=(\roman*)] 
+\item Partial pivoting 
+The output from my code is \begin{align*} \vx = \bmat{0.999081 \\ 0.999913 \\ 1.00021 \\ 1.0001 } \end{align*} 
+\item Scaled pivoting 
+The output from my code is \begin{align*} \vx = \bmat{0.999081 \\ 0.999913 \\ 1.00021 \\ 1.0001 } \end{align*} 
+\end{enumerate} 
+\end{enumerate} 
+
+\hypertarget{problem_0_homework_checklist_2}{}
+\subsection*{{Problem 5: }}
+\label{}
+\begin{align*}
+\mA &= \bmat{-9 & 11 & -21 & 63 & -252 \\ 
+			70 & -69 & 141 & - 421 & 1684 \\
+			-575 & 575 & -1149 & 3451 & -13801 \\
+			3891 & -3891 & 7782 & -23345 & 93365 \\
+			1024 & -1024 & 2048 & -6144 & 24572 }\\
+\vb & = \bmat{-356 \\ 2385 \\ -19551 \\ 132274 \\ 34812 }
+\end{align*} 
+The output of scaled pivoting result is \begin{align*} \vx = \bmat{1 \\ -0.864667 \\ 0.0848896 \\ 5.27044 \\ 2.64978} \end{align*} 
+
+
+\end{document}
