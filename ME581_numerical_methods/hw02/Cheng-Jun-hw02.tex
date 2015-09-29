@@ -77,4 +77,90 @@ The output from my code is \begin{align*} \vx = \bmat{0.999081 \\ 0.999913 \\ 1.
 The output of scaled pivoting result is \begin{align*} \vx = \bmat{1 \\ -0.864667 \\ 0.0848896 \\ 5.27044 \\ 2.64978} \end{align*} 
 
 
+\hypertarget{problem_0_homework_checklist_2}{}
+\subsection*{{Problem 6: }}
+\label{}
+
+We can construct 12 equation if there are no external forces, 2 for each node: 
+\begin{align*}
+\sum F_{1x} &=F_1\cos\alpha + F_3\cos\gamma+F_H &= 0 \\
+\sum F_{1y} &=F_v + F_3\cos\gamma + F_1\sin\alpha &= 0 \\
+\sum F_{2x} &=F_8\cos\beta + F_9 \cos\alpha-F_2\cos\beta-F_1\cos\alpha &= 0 \\
+\sum F_{2y} &=F_5+F_2\sin\beta+F_8\sin\beta-F_1\sin\alpha-F_9\sin\alpha &= 0 \\
+\sum F_{3x} &=F_4\cos\beta+F_2\cos\beta-F_3\cos\gamma &= 0 \\
+\sum F_{3y} &=F_4\sin\beta-F_2\sin\beta-F_3\sin\gamma &= 0 \\
+\sum F_{4x} &=F_6\cos\beta - F_4\cos\beta &= 0 \\
+\sum F_{4y} &=-F_4\sin\beta - F_6\sin\beta-F_5 &=0 \\
+\sum F_{5x} &=F_7\cos\gamma - F_6\cos\beta -F_8\cos\beta &= 0 \\
+\sum F_{5y} &=F_6\sin\beta-F_8\sin\beta-F_7\sin\gamma &= 0 \\
+\sum F_{6x} &=-F_7\cos\gamma-F_9\cos\alpha &= 0 \\
+\sum F_{6y} &=F_R+F_7\sin\gamma+F_9\sin\alpha &= 0 \\
+\end{align*} 
+Then the linear equation $\mA\vx=\vb$ becomes: \\
+\begin{align*}
+\left[\begin{array}{cccccccccccc}
+\cos\alpha & 0 & \cos\gamma & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\ 
+\sin\alpha & 0 & \cos\gamma & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\ 
+-\cos\alpha & -\cos\beta & 0 & 0 & 0 & 0 & 0 & \cos\beta & \cos\alpha & 0 & 0 & 0 \\ 
+-\sin\alpha & \sin\beta & 0 & 0 & 1 & 0 & 0 & \sin\beta & -\sin\alpha & 0 & 0 & 0 \\ 
+0 & \cos\beta & -\cos\gamma & \cos\beta & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+0 & -\sin\beta & -\sin\gamma & \sin\beta & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+0 & 0 & 0 & -\cos\beta & 0 & \cos\beta & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+0 & 0 & 0 & -\sin\beta & -1 & -\sin\beta & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+0 & 0 & 0 & 0 & 0 & -\cos\beta & \cos\gamma & -\cos\beta & 0 & 0 & 0 & 0 \\ 
+0 & 0 & 0 & 0 & 0 & \sin\beta & -\sin\gamma & -\sin\beta & 0 & 0 & 0 & 0 \\ 
+0 & 0 & 0 & 0 & 0 & 0 & -\cos\gamma & 0 & \cos\alpha & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & \sin\gamma & 0 & \sin\alpha & 1 & 0 & 0 \\  
+\end{array}\right]
+\bmat{F_1 \\ F_2 \\ F_3 \\ F_4 \\ F_5 \\ F_6 \\ F_7 \\ F_8 \\ F_9 \\ F_R \\ F_V \\ F_H }=\vb
+\end{align*} 
+We know: \\
+\begin{align*}
+\sin\alpha = 0.447 \\
+\cos\alpha = 0.894 \\
+\sin\beta = 0.316\\
+\cos\beta =  0.949\\
+\sin\gamma = 0.707 \\ 
+\cos\gamma =0.707 \\ 
+\end{align*} 
+Then matrix A becomes: \\ 
+\begin{align*}
+\mA = \left[\begin{array}{cccccccccccc}
+0.894 & 0 & 0.707 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\ 
+0.447 & 0 & 0.707 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\ 
+-0.894 & -0.949 & 0 & 0 & 0 & 0 & 0 & 0.949 & 0.894 & 0 & 0 & 0 \\ 
+-0.447 & 0.316 & 0 & 0 & 1 & 0 & 0 & 0.316 & -0.316 & 0 & 0 & 0 \\ 
+0 & 0.949 & -0.707 & 0.949 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+0 & -0.316 & -0.707 & 0.316 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+0 & 0 & 0 & -0.949 & 0 & 0.949 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+0 & 0 & 0 & -0.316 & -1 & -0.316 & 0 & 0 & 0 & 0 & 0 & 0 \\ 
+0 & 0 & 0 & 0 & 0 & -0.949 & 0.707 & -0.949 & 0 & 0 & 0 & 0 \\ 
+0 & 0 & 0 & 0 & 0 & 0.316 & -0.707 & -0.316 & 0 & 0 & 0 & 0 \\ 
+0 & 0 & 0 & 0 & 0 & 0 & -0.707 & 0 & 0.894 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & 0.707 & 0 & 0.447 & 1 & 0 & 0 \\  
+\end{array}\right]
+\end{align*} 
+
+For different configurations: \\
+\begin{align*}
+\vb_a = \bmat{0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 500 \\  0 \\ 1000 \\ 0 \\ 500 \\ 0 \\ 0}\ \ \ \ \ 
+\vb_b = \bmat{0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 500 \\  0 \\ 1000 \\ 0 \\ 1500 \\ 0 \\ 0}\ \ \ \ \ 
+\vb_c = \bmat{0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 1500 \\  0 \\ 1000 \\ 0 \\ 500 \\ 0 \\ 0}\ \ \ \ \ 
+\vb_d = \bmat{0 \\ 0 \\ 0 \\ 0 \\ -1000 \\ 0 \\  -500 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0}\ \ \ \ \ 
+\vb_e = \bmat{0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\  500 \\ 0 \\ 1000 \\ 0 \\ 0 \\ 0}\ \ \ \ \ 
+\end{align*}
+The results are shown: \\
+\begin{align*}
+F_a= \bmat{	-784.006 \\ -51.402 \\ -991.374 \\ -687.167 \\ -565.711 \\ -687.167 \\
+			-991.374 \\ -51.402 \\ -784.006 \\ 1051.35 \\ 1051.35 \\1401.8 \\ }
+F_b= \bmat{	-2162.2 \\ -334.561 \\ -611.893 \\ -121.296 \\ -923.341 \\ -121.296 \\ 
+			-1672.99 \\ -1125.07 \\ -1323.05 \\ 1774.21 \\ 1399.11 \\ 2365.61 \\}
+F_c=\bmat{	-189.822 \\ -610.785 \\ -2362.23 \\ -1149.06 \\ -273.791 \\ -1149.06 \\
+			 -1301.13 \\ 179.729 \\ -1028.97 \\ 1379.85 \\ 1754.95 \\ 1839.8 \\}
+F_d=\bmat{	727.085 \\ -684.362 \\ 211.065 \\ -212.136 \\ 300.561 \\ -739.007 \\ 
+			-495.589 \\ 369.796 \\ -391.926 \\ 525.572 \\ -474.23 \\ -799.237 \\}
+F_e=\bmat{	-727.085 \\ 157.491 \\ -211.065 \\ -314.734 \\ 32.4208 \\ 212.136 \\ 
+			495.589 \\ -896.666 \\ 391.926 \\ -525.572 \\ 474.23 \\ 799.237 \\ }
+\end{align*} 
+For the direction of the forces:  negative values indicate forces point outward. Positive direction of $F_V, F_H, F_R $ are as shown in the figure. 
 \end{document}
