@@ -74,7 +74,17 @@ The output from my code is \begin{align*} \vx = \bmat{0.999081 \\ 0.999913 \\ 1.
 			1024 & -1024 & 2048 & -6144 & 24572 }\\
 \vb & = \bmat{-356 \\ 2385 \\ -19551 \\ 132274 \\ 34812 }
 \end{align*} 
-The output of scaled pivoting result is \begin{align*} \vx = \bmat{1 \\ -0.864667 \\ 0.0848896 \\ 5.27044 \\ 2.64978} \end{align*} 
+The output of scaled pivoting result is 
+\begin{align*}
+ \widetilde\vx &= \bmat{1 \\ -0.864667 \\ 0.0848896 \\ 5.27044 \\ 2.64978} \\
+ \ve &= \widetilde\vx - \vx  = \bmat{0  \\  0.1353  \\ -0.9151 \\   6.2704    \\1.6498 } \\
+\frac{ \|\ve\|}{\|\vx\|} &= 2.929\\
+\mA\widetilde\vx-\vb &= \bmat{-0.0009\\   0.0057\\   -0.0470\\    0.3181\\    0.0837}\\
+\frac{ \|\vr\|}{\|\vb\|} & = \frac{ \|\mA\widetilde\vx-\vb\|}{\|\vb\|}= \frac{0.3323}{1.3819e+05}=2.4046e-06\\
+ \end{align*} 
+
+Therefore, the estimated condition number is $\frac{2.929}{2.4046e-06} = 1.2181e+06$
+
 
 
 \hypertarget{problem_0_homework_checklist_2}{}
