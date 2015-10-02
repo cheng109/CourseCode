@@ -1,0 +1,218 @@
+\documentclass{article}
+
+% Packages required to support encoding
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage{graphicx} 
+% Packages required by code
+
+% Packages always used
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{xspace}
+\usepackage[usenames,dvipsnames]{color}
+\hypersetup{colorlinks=true,urlcolor=blue}
+
+
+\usepackage[framed,numbered,autolinebreaks,useliterate] {mcode}
+\newcommand{\BigO}[1]{\ensuremath{\operatorname{O}\bigl(#1\bigr)}}
+\input{homework.tex}
+
+
+\begin{document} 
+
+
+
+\hypertarget{problem_0_homework_checklist_2}{}
+\subsection*{{Problem 0: Homework checklist}}
+\label{problem_0_homework_checklist_2}
+
+\checkmark	I didn't talk with any one about this homework. \newline
+\checkmark 	Source-code are included at the end of this document. 
+
+
+\hypertarget{problem_0_homework_checklist_2}{}
+\subsection*{{Problem 1: The Cholesky Factorization}}
+\label{}
+\begin{enumerate} 
+\item 
+Here is my implementation of Cholesky decomposition in Matlab: 
+\begin{lstlisting}
+function L = cholesky(A)
+n = size(A); 
+n = n(1); 
+L = zeros(n,n);
+%L(1,1) = sqrt(A(1,1)); 
+for i=(1:n)
+    sum1 =0;     
+    for j=(1:i) 
+
+        if i==j
+            L(j,j) = sqrt(A(j,j)-sum1); 
+        else 
+            sum2 = 0; 
+            for k = (1:j-1) 
+                sum2 = sum2 + L(i,k)*L(j,k); 
+            end 
+            
+            L(i,j) = 1/L(j,j)*(A(i,j)-sum2); 
+        end 
+        sum1= sum1 + L(i,j)^2;   
+    end 
+end 
+end 
+\end{lstlisting} 
+\item 
+Cholesky factorization is unique if $\mA$ is positive definite and the decomposition need not be unique when $\mA$ is positive semidefinite.  \\
+Proof: \\
+Get the LU decomposition of $\mA=\mL\mU$,  and $u_{11}>0, u_{22}>0, ..., u_{mm}>0 $ 
+\begin{align*} 
+\mU &=\bmat{u_{11} & u_{12} & ... & u_{1m} \\ 0 & u_{22} & ... & u_{2m} \\ 0 & 0 & ... & ... \\ 0 & 0 & ... & u_{mm} }\\
+& = \bmat{u_{11} & 0 & ... & 0 \\ 0 & u_{22} & ... & 0 \\ 0 & 0 & ... & ... \\ 0 & 0 & ... & u_{mm}} \bmat{1 & v_{12} & ... & v_{1m} \\ 0 & 1 & ... & v_{2m} \\ 0 & 0 & ... & ... \\ 0 & 0 & ... & 1}=\mT\mW
+\end{align*} 
+Since $u_{11} >0, ..., u_{mm}>0 $,  we can get $\mT=\mD^2$, where \begin{align*} \mD = \bmat{\sqrt{u_{11}} & 0 & ... & 0 \\ 0 & \sqrt{u_{22}} & ... & 0 \\ 0 & 0 & ... & ... \\ 0 & 0 & ... & \sqrt{u_{mm}}} \\
+\mA = \mL\mU = \mL\mD_2\mW \end{align*}
+
+Because $\mA_*=\mA$ and the LU factorization is unique, then $\mL=\mW^*$. Therefore the Cholesky factorization is unique if $\mA$ is positive definite.  \\
+Reference: http://math.utoledo.edu/~mtsui/4350sp08/homework/Lec23.pdf \\
+
+
+\item 
+I computed the norm of difference of my Cholesky result and Matlab $chlo$: \\
+\begin{align*}   1.9110e-13   \end{align*} 
+
+
+\item 
+For each size of the matrices I repeated 10 times. The comparison result is shown.   Obviously the the Cholesky factorization has better performance as the growth of matrix size. 
+\begin{figure} 
+\centering 
+\includegraphics[width=0.8\textwidth]{luVScholesky}
+\caption{Performance comparison between LU decomposition and Cholesky factorization}
+\end{figure}
+
+\item 
+Since $\mA$ is positive definite, and assume an vector $\vv = \bmat{x_0\\ \vx}, \\ $then \\
+\begin{align*} 
+\vv_T\mA\vv>0 \\
+\bmat{x_0 & \vx}\bmat{\alpha & \vb_T\\ \vb & \mC} \bmat{x_0\\ \vx} = \alpha x_0^2 + x_0(\vx^T\vb+\vb^T\vx) + \vx^T\mC\vx >0  
+\end{align*}
+Then 
+\begin{align*}
+\vx^T(\mC-\frac{\vb\vb^T}{\alpha})\vx &= \vx^T\mC\vx - \frac{\vx_T\vb\vb^T\vx}{\alpha} \\
+& > -\alpha x_0^2 - x_0(\vx^T\vb+\vb^T\vx) - \frac{\vx^T\vb\vb^T\vx}{\alpha} \\
+& = -\frac{1}{\alpha} \left[x_0^2 + \frac{\vx^T\vb+\vb^T\vx)x_0}{\alpha}+\frac{\vx^T\vb\vb^T\vx}{\alpha^2}\right]\\
+& = -\frac{1}{\alpha}\left(x_0+\frac{\vx^T\vb}{\alpha}\right)\left(x_0+\frac{\vb^T\vx}{\alpha}\right) \\
+& =  -\frac{1}{\alpha}\left\|x_0+\frac{\vb^T\vx}{\alpha}\right\|^2 
+\end{align*} 
+Because $\vx^T(\mC-\frac{\vb\vb^T}{\alpha})\vx > -\frac{1}{\alpha}\left\|x_0+\frac{\vb^T\vx}{\alpha}\right\|^2$ holds for any vector $\vx$. Therefore \begin{align} 
+\vx^T(\mC-\frac{\vb\vb^T}{\alpha})\vx > 0 
+\end{align} 
+So $\mC-\frac{\vb\vb^T}{\alpha}$ is positive definite. 
+
+\item  
+The base case is that $C$ is a $1\times1$. 
+
+\item 
+In the Matlab code, we need check positiveness before take square root.  The modified code is here:  
+\begin{lstlisting} 
+function L = cholesky(A)
+n = size(A); 
+n = n(1); 
+L = zeros(n,n);
+%L(1,1) = sqrt(A(1,1)); 
+for i=(1:n)
+    sum1 =0;     
+    for j=(1:i) 
+
+        if i==j
+            if A(j,j)-sum1<=0
+                return       % check whether A is positive definite. 
+            else
+                L(j,j) = sqrt(A(j,j)-sum1); 
+            end 
+        else 
+            sum2 = 0; 
+            for k = (1:j-1) 
+                sum2 = sum2 + L(i,k)*L(j,k); 
+            end 
+            
+            L(i,j) = 1/L(j,j)*(A(i,j)-sum2); 
+        end 
+        sum1= sum1 + L(i,j)^2;   
+    end 
+end 
+end 
+\end{lstlisting} 
+After testing, the matrix for Poisson's equation is not positive definite or negative definite.  \\ 
+
+\end{enumerate}
+
+\hypertarget{}{}
+\subsection*{{Problem 2: Stability analysis}}
+\label{}
+\begin{enumerate} 
+\item 
+\begin{align*} 
+V &= \frac{1}{n-1}\sum_{i=1}^n(x_i-\frac{1}{n}x_i)^2 \\
+& = \frac{1}{n-1}\left[\sum_{i=1}^nx_i^2 - \frac{1}{n}\left(\sum_{i=1}^nx_i\right)^2\right]
+\end{align*}
+The condition number is defined as : \\ 
+\begin{align*} 
+\kappa = lim_{\epsilon \to 0}sup\left[\frac{|V(x)-V(x+\Delta x)|}{\epsilon V(x)}: \|\Delta x\|_2 \leq \epsilon\|x\|_2\right]
+\end{align*}  
+Then \\ 
+\begin{align*} 
+\kappa = 2\frac{\|x\|_2}{\sqrt{(n-1)V(x)}}
+\end{align*} 
+\item 
+This is not appropriate.  I will use $ q=100 and s =2 $ to do a test. 
+\begin{lstlisting} 
+q = 500; 
+s = 7; 
+z = zeta(s); 
+h = z-sum((1:(q-1)).^(-s)) 
+\end{lstlisting} 
+Hurwitz zeta function: 
+\begin{align*} H(s,q) &= \sum_{n=0}^\infty\frac{1}{(q+n)^s} \\
+& = \frac{1}{q^s}+ \frac{1}{(q+1)^s} + ... +  \frac{1}{n^s}\\
+\end{align*} 
+Riemann zeta function: 
+\begin{align*}
+R(s) &= \sum_{n=1}^\infty\frac{1}{n^s}\\
+& = \frac{1}{1^s} + \frac{1}{2^s} + ... + \frac{1}{n^s}\\
+& = \frac{1}{1^s} + \frac{1}{2^s} + ... +\frac{1}{(q-1)^2} + \frac{1}{q^s}+ \frac{1}{(q+1)^s} + ... +  \frac{1}{n^s} \\
+& = \frac{1}{1^s} + \frac{1}{2^s} + ... +\frac{1}{(q-1)^2} + H(s,q) \\
+\end{align*} 
+Output from Matlab is:  \begin{align*} 2.2204e-15 \end{align*} \\
+But the true answer from Wolfram Alpha is \\\begin{align*} 1.073081599928320 \times 10^{-17} \end{align*}
+Here is the explanation:  when you calculate the Riemann zeta function,  the terms with larger $n$ will round off because they are relative smaller than terms with smaller $n$.  The leading terms
+\begin{align*} 
+\frac{1}{1^s} + \frac{1}{2^s} + ... +\frac{1}{(q-1)^2} 
+\end{align*} 
+is dominant in $R(s)$. But those are the terms we need for Hurwitz zeta with large $q$.  Once you round off them, there would be large errors. \\
+\end{enumerate} 
+
+\hypertarget{}{}
+\subsection*{{Problem 3: Backwards stability}}
+\label{}
+
+\begin{align*}
+fl(x_i) = x_i(1+\epsilon_{ix}) \\
+fl(y_i) = y_i(1+\epsilon_{iy}) \\
+\end{align*} 
+where $|\epsilon_{ix}|, |\epsilon_{iy}|\leq\epsilon_{machine} $ \\
+\begin{align*}
+\alpha &=\vx^T\vy \\
+& = \bmat{x_1 & x_2 & .. & x_n}\bmat{y_1 \\ y_2 \\ .. \\ y_n} \\
+& = \sum_{i=1}^nx_i y_i \\ 
+\end{align*} 
+Then \begin{align*} 
+fl(\vx^T\vy) & = \sum_{i=1}^nfl(x_i)\times fl( y_i) \\
+& = \left[fl(x_1)\times fl(y_1)+ fl(x_2)\times fl(y_2) + ... + fl(x_n)\times fl(y_n)\right] (1+\epsilon_{addition})\\
+& = \left[x_1y_1(1+\epsilon_{1x})(1+\epsilon_{1y}) + ... + x_ny_n(1+\epsilon_{nx})(1+\epsilon_{ny})\right](1+\epsilon_{addition}) \\ 
+& = \left[x_1y_1 + x_2y_2 + ... +x_ny_n\right](1+\epsilon_1)(1+\epsilon_2)(1+\epsilon_3)\\
+& = \left[x_1y_1 + x_2y_2 + ... +x_ny_n\right](1+\BigO{\epsilon_{machine}})
+\end{align*}
+Therefore the inner product is backwards stable. \\
+
+\end{document}

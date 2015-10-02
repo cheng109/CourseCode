@@ -4,6 +4,15 @@ n=10;
 Q = qr(randn(n)); 
 D = abs(randn(n,1)); 
 A = Q*diag(D)*Q'; 
+
+L = cholesky(A) ; 
+matlabL = chol(A, 'lower') ; 
+
+d = norm(matlabL -L) 
+
+
+
+%%
 tic; 
 L = cholesky(A)
 myTime = toc
@@ -39,6 +48,17 @@ plot(size,myT, '*-', size, matlabT, 'o-')
 legend('Cholesky Time', 'LU Time') ; 
 xlabel('Matrix size'); 
 ylabel('Time'); 
+
+
+%%  Problem # 2 
+q = 500; 
+s = 7; 
+z = zeta(s); 
+h = z-sum((1:(q-1)).^(-s)) 
+
+
+
+
 
 
 

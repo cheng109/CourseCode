@@ -9,7 +9,11 @@ for i=(1:n)
     for j=(1:i) 
 
         if i==j
-            L(j,j) = sqrt(A(j,j)-sum1); 
+            if A(j,j)-sum1<=0
+                return 
+            else
+                L(j,j) = sqrt(A(j,j)-sum1); 
+            end 
         else 
             sum2 = 0; 
             for k = (1:j-1) 
