@@ -1,0 +1,4 @@
+#!/bin/bash
+rm a.out 
+g++ Cheng-hw03-gs.cpp -Wall
+./a.out

@@ -1,0 +1,65 @@
+\documentclass{article}
+
+% Packages required to support encoding
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage{graphicx} 
+% Packages required by code
+
+% Packages always used
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{xspace}
+\usepackage[usenames,dvipsnames]{color}
+\hypersetup{colorlinks=true,urlcolor=blue}
+
+
+\usepackage[framed,numbered,autolinebreaks,useliterate] {mcode}
+
+\input{homework.tex}
+
+
+\begin{document} 
+
+
+
+\hypertarget{problem_0_homework_checklist_2}{}
+\subsection*{{Problem 1: Gauss Seidel Method}}
+\label{}
+\begin{align} 
+\mA &= \bmat{5 & -1 & 0 & -1 & 0 & 0  \\ 
+-1 & 5 & -1 & 0 & -1 & 0  \\ 
+0 & -1 & 5 & 0 & 0 & -1  \\ 
+-1 & 0 & 0 & 5 & -1 & 0  \\ 
+0 & -1 & 0 & -1 & 5 & -1  \\ 
+0 & 0 & -1 & 0 & -1 & 5  \\ }\\
+\vb &=\bmat{-5 \\ 1\\ 1\\ -2 \\ 1 \\ 2 } \\
+\vx_0 &=\bmat{0 \\ 0 \\ 0 \\ 0 \\ 0 }
+\end{align} 
+For the first 10 iterations:  \\
+residual: 1.27057 \\
+residual: 0.189021 \\
+residual: 0.0518507 \\
+residual: 0.0175355 \\
+residual: 0.00437263 \\
+residual: 0.00103081 \\
+residual: 0.000240774 \\
+residual: 5.61515e-05 \\
+residual: 1.30917e-05 \\
+residual: 3.0522e-06 \\
+
+The residual is defined as   $\|x_{n+1}-x_{n}\|_2$ 
+
+\begin{align}
+\vx =\bmat{-1.09909\\
+0.0840332\\
+0.317577\\
+-0.579482\\
+0.20168\\
+0.503851}
+\end{align} 
+
+
+
+
+\end{document}
