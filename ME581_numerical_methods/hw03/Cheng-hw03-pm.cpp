@@ -8,9 +8,9 @@ using namespace std;
 void printMatrix(vector<vector<double> > A, int dim) {
 	for(int i=0; i<dim; ++i) {
 		for(int j=0; j<dim; ++j) {
-			cout<< A[i][j] << " & " ; 
+			cout<< A[i][j] << "  & " ; 
 		}
-		cout << " \\\\  "<< endl; 
+		cout << " \\\\   "<< endl; 
 	}
 }
 
@@ -79,7 +79,7 @@ vector<double> PowMethod(vector<vector<double> > A, vector<double> x0, double* l
 	vector<double> pre = normVector(x0); 
 	double res = 10; 
 	int counter = 0; 
-
+	double temp1 = 0; 
 	while(counter <21) { 
 		
 		cur = normVector(multiply(A, pre)); 
@@ -88,15 +88,14 @@ vector<double> PowMethod(vector<vector<double> > A, vector<double> x0, double* l
 		res = abs(*lambda-temp); 
 		cout << setprecision(15)<< counter  << "\t" ; 
 		printVec(cur); 
-		cout << setprecision(15) << "\t Eigenvalue: " << *lambda << endl; 
+		cout << setprecision(15) << "\t Eigenvalue: " << *lambda << "\t " << "Convergence: " << abs(*lambda-temp1) << endl; 
 		counter +=1;
+		temp1 = *lambda ; 
 		pre = cur; 
 	}
 	// Get the eigen value: 
 
 	//*lambda = (innerProd(multiply(A, cur), cur)/innerProd(cur,cur)); 
-
-
 	return cur;
 
 
@@ -105,33 +104,45 @@ vector<double> PowMethod(vector<vector<double> > A, vector<double> x0, double* l
 
 int main() {
 
-	//double data[] = {4, 0, 0, 0, 4, 0, 1, -1, 2}; 
+	/*double data[] = {4, 0, 0, 
+					 0, 4, 0, 
+					 1, -1, 2};  */
 	/*double data[] = {25, -5, 15, -5, 
 						-5, 25, -15, 5, 
 						-5, 5, 5, 5, 
-						 5, -5, 15, 15}; */
+						 5, -5, 15, 15};  */
 
 	/*double data[] = { 0, 0, 0, 0.5, 
 						1, 0, 0, 0.5, 
 						0, 1, 0, -1.5, 
-						0, 0, 1, 2.5 };  */
+						0, 0, 1, 2.5 };   */
 
-	double data[] = {1, 1, 1, 0, 
+	/*double data[] = {1, 1, 1, 0, 
 					0, 1, 1, 0 , 
 					0, 0, 1, 0, 
-					0, 0, 0, 0.5}; 
+					0, 0, 0, 0.5};   */
+
+	/*double data[] = {   0, 3, 0, 3, 0, 
+						3, 0, 3, 0, 3, 
+						0, 3, 0, 3, 0, 
+						3, 0, 3, 0, 3,
+						0, 3, 0, 3, 0};   */
+	double data[] = { 	0, 0, 10 , 
+						1, 0, -14, 
+						0, 1, 5};  
 
 	vector<double> t;
-	t.push_back(6); 
-	t.push_back(9); 
+	t.push_back(3); 
+	t.push_back(2); 
 	t.push_back(1); 
-	t.push_back(4); 
+	//t.push_back(9); 
+	//t.push_back(6); 
 
 
 
 
 	vector<vector<double> > A; 
-	int dim = 4; 
+	int dim = 3; 
 	for (int i=0; i<dim; ++i) {
 		vector<double>  temp; 
 		for (int j=0; j<dim; ++j) {
