@@ -1,3 +1,3 @@
 all:
-	g++ plotLagrange.cpp
+	g++ neville.cpp #plotLagrange.cpp
 	./a.out
