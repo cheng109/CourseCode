@@ -30,15 +30,81 @@
 \checkmark	I didn't talk with any one about this homework. \newline
 \checkmark 	Source-code are included at the end of this document. 
 
-
-
-\hypertarget{problem_0_homework_checklist_2}{}
+\hypertarget{}{}
 \subsection*{{Problem 1: Direct Methods for Tridiagnonal Systems }}
 \label{}
 
 
+\begin{enumerate}
+\item 
+\begin{displaymath}
+\mA = \bmat{\alpha_1 & \beta_1 \\               \beta_1 & \alpha_2 & \ddots \\
+                       & \ddots & \ddots & \ddots \\
+                       &          & \beta_{n-2} & \alpha_{n-1} & \beta_{n-1} \\
+                       &          &              & \beta_{n-1} & \alpha_n }
+\end{displaymath}
+\begin{align*} 
+\mA_{n-1}=\mL_{n-1}\mL_{n-1}^T
+\end{align*}
+Then matrix $\mL_{n-1}$ must have the shape like \\
+\begin{displaymath}
+\mL_{n-1} = \bmat{X_{11} & 0 \\               
+			X_{12} & X_{22} & \ddots \\
+                       & \ddots & \ddots & \ddots \\
+                       &          & \ddots& X_{n-2,n-2} & 0\\
+                       &          &              & X_{n-1,n-2}  & X_{n-1,n-1} }
+\end{displaymath}
 
-\hypertarget{problem_0_homework_checklist_2}{}
+
+\item 
+
+\begin{align*} 
+\mA & = \mL_n\mL_n^T \\
+& = \bmat{\mL_{n-1}\mL_{n-1}  & \beta_{n-1} \\
+		\beta_{n-1}  & \alpha_{n} } \\
+& = \mL_n\mL_n^T\\
+\mL_n &= \bmat{\mL_{n-1} & 0 \\ b & l } \\
+\mL_n^T & =  \bmat{\mL_{n-1}^T & b^T \\ 0 & l } \\
+\end{align*} 
+Then we need to figure out  $b$ and $l$ 
+\begin{align} 
+b\mL_{n-1}^T &=\beta_{n-1}\\
+\|b\|^2+l^2 &=\alpha_n^2
+\end{align} 
+Because $b$ is a vector with only one non zero entry and $\mL_{n-1}$ is a lower triangle matrix with one diagonal elements and one below diagonal. So both equation 1 and 2 can be solved in constant number of operations. \\
+
+\item
+From part(1) and part(2), we can get, \\
+\begin{displaymath}
+\mL_{n} = \bmat{\sqrt{\delta_1} & 0 \\               
+			\frac{\beta_1}{\sqrt{\delta_1}} & \sqrt{\delta_2} & \ddots \\
+                       & \ddots & \ddots & \ddots \\
+                       &          & \frac{\beta_{n-2}}{\sqrt{\delta_{n-2}}} & \sqrt{\delta_{n-1}} & 0\\
+                       &          &              & \frac{\beta_{n-1}}{\sqrt{\delta_{n-1}}}  & \sqrt{\delta_{n}} }
+\end{displaymath}
+
+where 
+\begin{align*}
+\delta_1=\alpha_1\\
+\delta_j=\alpha_j-\frac{\beta_{j-1}}{\delta_{j-1}},  j =2, .....k, 
+\end{align*}
+
+
+Pseudocode: \\
+1: $\delta_1=\alpha_1$\\
+2: for i=2:n\\
+  $\qquad \qquad \delta_j=\alpha_j-\frac{\beta_{j-1}}{\delta_{j-1}}$\\
+
+
+There is only one loop with size $n$, so the complexity is $0(n)$. 
+
+
+
+\end{enumerate} 
+
+
+
+\hypertarget{}{}
 \subsection*{{Problem 1:  Sparse Matrices in Matlab}}
 \label{}
 \begin{enumerate} 
@@ -132,11 +198,12 @@ A = sparse(I,J,V,(N-1)*(N-1),(N-1)*(N-1));
 \caption{My caption}
 \label{my-label}
 \begin{tabular}{lll}
-N   & Method\_1 & Method2 \\
-10  & 0.0086    & 0.0004  \\
-50  & 0.0438    & 0.0022  \\
-100 & 0.3845    & 0.0060  \\
-500 & 513.0644  & 0.1364 
+\hline
+N   & Method\_1 & Method2 \\  \hline
+10  & 0.0086    & 0.0004  \\ \hline
+50  & 0.0438    & 0.0022  \\ \hline
+100 & 0.3845    & 0.0060  \\ \hline
+500 & 513.0644  & 0.1364  \\ \hline
 \end{tabular}
 \end{table}
 
@@ -178,28 +245,80 @@ end
 end
 \end{lstlisting} 
 
-\begin{table}[]
+\begin{table}[!htbp]
 \centering
-\caption{My caption}
+\caption{Problem2.5}
 \label{my-label}
 \begin{tabular}{|l|l|}
 \hline
 N   & Iteration \\ \hline
-10  & 258       \\ \hline
-50  &           \\ \hline
+10  & 182       \\ \hline
+50  &   4567        \\ \hline
 100 &           \\ \hline
 500 &           \\ \hline
 \end{tabular}
 \end{table}
 
 \item 
-For $ f(x,y) = 1 $ : \\
+The results are shown in the following tables for different right side vectors. \\
+\begin{table}[!htbp]
+\centering
+\caption{$f(x, y)=1$ }
+\label{my-label}
+\begin{tabular}{|l|l|}
+\hline
+N   & Iteration \\ \hline
+10  &        \\ \hline
+50  &           \\ \hline
+100 &           \\ \hline
+500 &           \\ \hline
+\end{tabular}
+\end{table}
 
-For $f(x,y) =-1 $ :  \\ 
+\begin{table}[!htbp]
+\centering
+\caption{$f(x, y)=-1$ }
+\label{my-label}
+\begin{tabular}{|l|l|}
+\hline
+N   & Iteration \\ \hline
+10  &        \\ \hline
+50  &           \\ \hline
+100 &           \\ \hline
+500 &           \\ \hline
+\end{tabular}
+\end{table}
 
-For $f(x,y) = -(x-0.5)^2-(y-0.5)^2 $ : \\
+\begin{table}[!htbp]
+\centering
+\caption{$f(x, y)=-(x-0.5)^2-(y-0.5)^2$ }
+\label{my-label}
+\begin{tabular}{|l|l|}
+\hline
+N   & Iteration \\ \hline
+10  &        \\ \hline
+50  &           \\ \hline
+100 &           \\ \hline
+500 &           \\ \hline
+\end{tabular}
+\end{table}
 
-For $f(x,y) = sin(100x)cos(100y) $ : \\
+\begin{table}[!htbp]
+\centering
+\caption{$f(x, y)=sin(100x)cos(100y)$ }
+\label{my-label}
+\begin{tabular}{|l|l|}
+\hline
+N   & Iteration \\ \hline
+10  &        \\ \hline
+50  &           \\ \hline
+100 &           \\ \hline
+500 &           \\ \hline
+\end{tabular}
+\end{table}
+
+
+
 
 \end{enumerate}
 
