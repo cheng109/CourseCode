@@ -1,0 +1,209 @@
+\documentclass{article}
+
+% Packages required to support encoding
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage{graphicx} 
+% Packages required by code
+
+% Packages always used
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{xspace}
+\usepackage[usenames,dvipsnames]{color}
+\hypersetup{colorlinks=true,urlcolor=blue}
+
+
+\usepackage[framed,numbered,autolinebreaks,useliterate] {mcode}
+
+\input{homework.tex}
+
+
+\begin{document} 
+
+
+
+\hypertarget{problem_0_homework_checklist_2}{}
+\subsection*{{Problem 0: Homework checklist}}
+\label{problem_0_homework_checklist_2}
+
+\checkmark	I didn't talk with any one about this homework. \newline
+\checkmark 	Source-code are included at the end of this document. 
+
+
+
+\hypertarget{problem_0_homework_checklist_2}{}
+\subsection*{{Problem 1: Direct Methods for Tridiagnonal Systems }}
+\label{}
+
+
+
+\hypertarget{problem_0_homework_checklist_2}{}
+\subsection*{{Problem 1:  Sparse Matrices in Matlab}}
+\label{}
+\begin{enumerate} 
+\item 
+Code: \\
+\begin{lstlisting} 
+N=4; 
+A = sparse((N-1)*(N-1),(N-1)*(N-1));
+
+for i=1:(N-1)*(N-1)
+        A(i,i) = -4; 
+       
+        col = mod(i,N-1)
+        if col==0
+            col = N-1; 
+        end
+        row = ceil(i/(N-1))
+        if row-1>=1
+            A(i, (row-2)*(N-1) + col) = 1; % UP
+        end
+        if row+1 <=N-1
+            A(i, (row)*(N-1) + col) = 1; % DOWN
+        end
+        if col-1>=1
+            A(i, (row-1)*(N-1) + col-1) =1 ; % LEFT
+        end
+        if col+1<=N-1
+            A(i, (row-1)*(N-1) + col+1) = 1; % RIGHT
+        end
+end
+
+\end{lstlisting} 
+
+\item 
+Code: \\
+\begin{lstlisting}
+N=4; 
+nz = (N-1)^2 + 4*(N-1)*(N-2);
+I = zeros(nz,1);
+J = zeros(nz,1);
+V = zeros(nz,1);
+
+index = 1; 
+for i=1:(N-1)*(N-1)
+         I(index) = i;
+         J(index) = i; 
+         V(index) = -4; 
+         index = index+1; 
+         
+        col = mod(i,N-1); 
+        if col==0
+            col = N-1; 
+        end
+        row = ceil(i/(N-1)); 
+        if row-1>=1
+            % UP
+            I(index) = i;
+            J(index) = (row-2)*(N-1) + col; 
+            V(index) = 1; 
+            index = index+1; 
+        end
+        if row+1 <=N-1
+             % DOWN
+            I(index) = i;
+            J(index) = (row)*(N-1) + col;  
+            V(index) = 1;
+             index = index+1; 
+        end
+        if col-1>=1
+             % LEFT
+            I(index) = i;
+            J(index) = (row-1)*(N-1) + col-1;  
+            V(index) = 1;
+             index = index+1; 
+        end
+        if col+1<=N-1
+            % RIGHT
+            I(index) = i;
+            J(index) = (row-1)*(N-1) + col+1;  
+            V(index) = 1;
+            index = index+1; 
+        end
+end
+
+A = sparse(I,J,V,(N-1)*(N-1),(N-1)*(N-1));
+\end{lstlisting} 
+
+\item 
+\begin{table}[]
+\centering
+\caption{My caption}
+\label{my-label}
+\begin{tabular}{lll}
+N   & Method\_1 & Method2 \\
+10  & 0.0086    & 0.0004  \\
+50  & 0.0438    & 0.0022  \\
+100 & 0.3845    & 0.0060  \\
+500 & 513.0644  & 0.1364 
+\end{tabular}
+\end{table}
+
+\includegraphics[width=0.7\textwidth]{method1} 
+\includegraphics[width=0.7\textwidth]{method2} 
+
+
+
+\item
+
+
+\item 
+
+Code: \\
+\begin{lstlisting} 
+function U= jacobian(A, b)
+[N,t] = size(b); 
+U = zeros(N,1) ; 
+size(A) 
+size(b) 
+true = A\b; 
+diff = 100; 
+iter = 0 ; 
+while diff > 1.0e-4 
+    temp = U; 
+    for i=1:N
+        sum = 0; 
+        for j=1:N
+            if i~=j
+                sum = sum + A(i,j)*temp(j); 
+            end
+        end
+        U(i) = 1/A(i,i)*(b(i)-sum); 
+    end
+    diff  =  norm(U- true) ; 
+    iter = iter + 1 ; 
+end 
+
+end
+\end{lstlisting} 
+
+\begin{table}[]
+\centering
+\caption{My caption}
+\label{my-label}
+\begin{tabular}{|l|l|}
+\hline
+N   & Iteration \\ \hline
+10  & 258       \\ \hline
+50  &           \\ \hline
+100 &           \\ \hline
+500 &           \\ \hline
+\end{tabular}
+\end{table}
+
+\item 
+For $ f(x,y) = 1 $ : \\
+
+For $f(x,y) =-1 $ :  \\ 
+
+For $f(x,y) = -(x-0.5)^2-(y-0.5)^2 $ : \\
+
+For $f(x,y) = sin(100x)cos(100y) $ : \\
+
+\end{enumerate}
+
+
+
+
+\end{document}
