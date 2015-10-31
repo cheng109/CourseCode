@@ -92,7 +92,8 @@ end
 
 A = sparse(I,J,V,(N-1)*(N-1),(N-1)*(N-1));
 tt(t) = toc ; 
-b = ones((N-1)*(N-1), 1) ; 
+b = ones((N-1)*(N-1), 1) ;
+b= b-2; 
 [U,iter]  = jacobian(A, b); 
 iter
 end 

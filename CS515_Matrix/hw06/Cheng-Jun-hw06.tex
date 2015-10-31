@@ -193,7 +193,7 @@ A = sparse(I,J,V,(N-1)*(N-1),(N-1)*(N-1));
 \end{lstlisting} 
 
 \item 
-\begin{table}[]
+\begin{table}[!htbp]
 \centering
 \caption{My caption}
 \label{my-label}
@@ -206,42 +206,47 @@ N   & Method\_1 & Method2 \\  \hline
 500 & 513.0644  & 0.1364  \\ \hline
 \end{tabular}
 \end{table}
-
+\begin{figure}
 \includegraphics[width=0.7\textwidth]{method1} 
 \includegraphics[width=0.7\textwidth]{method2} 
-
+\end{figure} 
+The method in part 2 is faster. Figures are shown below. \\
 
 
 \item
-
+When using the backslash in Matlab, sparse matrix representation would be faster.  The results are shown. 
+\begin{figure}
+\includegraphics[width=0.7\textwidth]{full_vs_sparse}
+\end{figure}  
 
 \item 
 
 Code: \\
 \begin{lstlisting} 
-function U= jacobian(A, b)
+function [U, iter] = jacobian(A, b)
+% Assume A is a sparse matrix
 [N,t] = size(b); 
-U = zeros(N,1) ; 
-size(A) 
-size(b) 
-true = A\b; 
-diff = 100; 
+U = zeros(N,1) ;
+%diff = zeros(20, 1) ; 
+[J,I,V] = find(A); 
+res = 100; 
 iter = 0 ; 
-while diff > 1.0e-4 
+nb = norm(b); 
+[len,t]= size(I);  
+while res > 1.0e-4 
     temp = U; 
-    for i=1:N
-        sum = 0; 
-        for j=1:N
-            if i~=j
-                sum = sum + A(i,j)*temp(j); 
-            end
-        end
-        U(i) = 1/A(i,i)*(b(i)-sum); 
+    ss = 4*temp; 
+    for index=1:len
+        i = I(index); 
+        j = J(index); 
+        ss(i) = ss(i) + A(i,j)* temp(j); 
     end
-    diff  =  norm(U- true) ; 
-    iter = iter + 1 ; 
-end 
-
+    for i=1:N
+        U(i) = 1.0/A(i,i)*(b(i)-ss(i)); 
+    end
+    res  =  norm(b-A*U)/nb      
+    iter = iter + 1; 
+end
 end
 \end{lstlisting} 
 
@@ -253,14 +258,14 @@ end
 \hline
 N   & Iteration \\ \hline
 10  & 182       \\ \hline
-50  &   4567        \\ \hline
-100 &           \\ \hline
-500 &           \\ \hline
+50  &  4567         \\ \hline
+100 &  18256         \\ \hline
+500 &    **       \\ \hline
 \end{tabular}
 \end{table}
 
 \item 
-The results are shown in the following tables for different right side vectors. \\
+The results are shown in the following tables for different right side vectors. $**$ means it took significant long time without results. \\
 \begin{table}[!htbp]
 \centering
 \caption{$f(x, y)=1$ }
@@ -268,10 +273,10 @@ The results are shown in the following tables for different right side vectors. 
 \begin{tabular}{|l|l|}
 \hline
 N   & Iteration \\ \hline
-10  &        \\ \hline
-50  &           \\ \hline
-100 &           \\ \hline
-500 &           \\ \hline
+10  &  182      \\ \hline
+50  &   4567        \\ \hline
+100 &    18256       \\ \hline
+500 &    **       \\ \hline
 \end{tabular}
 \end{table}
 
@@ -282,10 +287,10 @@ N   & Iteration \\ \hline
 \begin{tabular}{|l|l|}
 \hline
 N   & Iteration \\ \hline
-10  &        \\ \hline
-50  &           \\ \hline
-100 &           \\ \hline
-500 &           \\ \hline
+10  & 182       \\ \hline
+50  &   4567        \\ \hline
+100 &    18256       \\ \hline
+500 &    **       \\ \hline
 \end{tabular}
 \end{table}
 
@@ -296,10 +301,10 @@ N   & Iteration \\ \hline
 \begin{tabular}{|l|l|}
 \hline
 N   & Iteration \\ \hline
-10  &        \\ \hline
-50  &           \\ \hline
-100 &           \\ \hline
-500 &           \\ \hline
+10  &  177      \\ \hline
+50  &    4427       \\ \hline
+100 &    **       \\ \hline
+500 &    **      \\ \hline
 \end{tabular}
 \end{table}
 
@@ -310,16 +315,12 @@ N   & Iteration \\ \hline
 \begin{tabular}{|l|l|}
 \hline
 N   & Iteration \\ \hline
-10  &        \\ \hline
-50  &           \\ \hline
-100 &           \\ \hline
-500 &           \\ \hline
+10  & 182       \\ \hline
+50  &  4567         \\ \hline
+100 &   18256        \\ \hline
+500 &    **       \\ \hline
 \end{tabular}
 \end{table}
-
-
-
-
 \end{enumerate}
 
 

@@ -15,12 +15,11 @@ while res > 1.0e-4
     temp = U; 
     ss = 4*temp; 
     for index=1:len
-        i = I(index); 
-        j = J(index); 
-        ss(i) = ss(i) + A(i,j)* temp(j); 
+        ss(I(index)) = ss(I(index)) + A(I(index),J(index))* temp(J(index)); 
     end
+    diff = b-ss; 
     for i=1:N
-        U(i) = 1.0/A(i,i)*(b(i)-ss(i)); 
+        U(i) = 1.0/A(i,i)*diff(i); 
     end
     res  =  norm(b-A*U)/nb      
     iter = iter + 1; 
