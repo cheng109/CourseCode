@@ -34,10 +34,18 @@ end
 
 %tt = [ 0.0086 ,   0.0438  ,  0.3845 , 513.0644]
 %%  %% problem2 (b) 
-num = [10, 50, 100, 500]; 
+%num = [10, 50, 100, 500]; 
+num = [10, 20, 30, 50]; 
+
 tt = zeros(1,4); 
+full_time = zeros(1,4); 
+sparse_time = zeros(1,4); 
+
+
 %function A = generateSparse(N)
-for t=3:3
+
+
+for t=1:4
     N = num(t); 
     tic; 
 
@@ -92,12 +100,35 @@ end
 
 A = sparse(I,J,V,(N-1)*(N-1),(N-1)*(N-1));
 tt(t) = toc ; 
-b = ones((N-1)*(N-1), 1) ; 
-[U,iter]  = jacobian(A, b); 
-iter
+len = (N-1)*(N-1); 
+b = zeros(len, 1);
+for i=1:N-1
+    for j=1:N-1
+       ind = (i-1)*(N-1)+j; 
+       %b(ind) = 0; 
+       b(ind) = 1; 
+       %b(ind) = -1; 
+       %b(ind) = -(i-0.5)^2-(j-0.5)^2; 
+       %b(ind) = sin(100)*cos(100); 
+    end
+end
+A_full = full(A) ; 
+tic;
+x = A_full\b; 
+full_time(t)  = toc; 
+tic;
+x = A\b; 
+sparse_time(t)  = toc; 
+
+
+
+%[U,iter]  = jacobian(A, b); 
+%iter
 end 
-
-
+plot(num, full_time,'-o', num, sparse_time,'-*'); 
+xlabel('N');
+ylabel('Time(seconds)'); 
+legend('Full Matrix', 'Sparse Matrix'); 
 
 %%
 tt1 = [ 0.0086 ,   0.0438  ,  0.3845 , 513.0644]
