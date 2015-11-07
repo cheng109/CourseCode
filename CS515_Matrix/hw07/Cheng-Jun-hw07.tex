@@ -167,7 +167,7 @@ Because the $\mP$ is a column-stochastic matrix, and then $\mP$ is a row-stochas
 \begin{align*}
 %\alpha<0 
 1 &= \sum |\mP^T_{ij}| &   \\
-\mP_{ii}  & = \sum_{i\neq} |\mP^T_{ij}| \\
+\mP_{ii}  & = \sum_{i\neq j} |\mP^T_{ij}| \\
 \mM_{ii} & =  1-\alpha\mP_{ii}  \\
 & = 1- \alpha\sum_{i\neq j} |\mP^T_{ij}| \\
 \end{align*}
@@ -187,8 +187,9 @@ Because $\vv$ is a non-negative vector whose elements sum to 1. \\
 &= \alpha\mP\vv + (1-\alpha)\vv\ve^T\vv \\
 & =  \alpha\mP\vv + (1-\alpha)\vv \\
 & = \alpha\bmat{\sum P_{1j} v_j\\ \sum P_{2j}v_j \\ ... \\ ... \\ \sum P_{nj} v_j} + (1-\alpha)\vv \\
-\vx^1 &=\mM\vv  \\
-\|\vv\|_1 &= \|\mM\vv\|_1 = \alpha\sum_{i}v_i[\sum_{j}P_{ji}] + (	1-\alpha) \\
+\vx^{(1)} &=\mM\vv  \\
+\|\vv\|_1 &= \|\mM\vv\|_1 \\
+&= \alpha\sum_{i}v_i[\sum_{j}P_{ji}] + (	1-\alpha) \\
 & = 1
 \end{align*}
 For $ \vx^{(k+1)} = \mM\vx^{(k)} $, we always have $\|x^{(k+1)}\|_1 = 1$ \\
@@ -197,9 +198,8 @@ For $ \vx^{(k+1)} = \mM\vx^{(k)} $, we always have $\|x^{(k+1)}\|_1 = 1$ \\
 \item 
 Suppose $\vx$ is the dominant eigenvector of matrix $\mM$  \\
 \begin{align*} 
-\mM\vx &= \vx \\
-& = [\alpha\mP+(1-\alpha)\vv\ve^T]\vx \\ 
-[\mI-(\alpha\mP+(1-\alpha)\vv\ve^T)]\vx=0 \\
+\mM\vx &= \vx  = [\alpha\mP+(1-\alpha)\vv\ve^T]\vx \\ 
+[\mI-(\alpha\mP+(1-\alpha)\vv\ve^T)]\vx &=0 \\
 \end{align*} 
 We know that $\vv\ve^T\vx = \vx$ \\ 
 Then \\
