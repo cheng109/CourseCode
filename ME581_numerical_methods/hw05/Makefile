@@ -1,4 +1,4 @@
 all: 
-	g++ quad2standard.cpp 
-	#g++ problem.cpp
+	#g++ quad2standard.cpp 
+	g++ problem5.cpp
 	./a.out

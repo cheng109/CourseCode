@@ -2,15 +2,23 @@
 #include <cmath> 
 using namespace std; 
 
-double func4(double u, double v) {
+double func4(double u, double v, ) {
 	//return -3*(u+4)*(u+4)+27*(v+1)*(v+1); 
 	//return 3*exp(-(u+1)*(u+1)-9*(v+1)*(v+1)); 
-	return 0.5*(1+3*u)*(3+u-v-3*u*v); 
+
+	double q1 = (1-u)*(1-v)*0.25; 
+	double q2 = (1+u)*(1-v)*0.25; 
+	double q3 = (1+u)*(1+v)*0.25; 
+	double q4 = (1-u)*(1+v)*0.25; 
+	//double x = 
+
+	return 0; 
 }
 
 double func(double x, double y) {
-	return exp(-x*x-y*y); 
+	//return exp(-x*x-y*y); 
 	//return -(x+3)*(x+3)+y*y; 
+	return x*y; 
 }
 
 int main() {
@@ -23,24 +31,26 @@ int main() {
 	cout << func4(-a, -a) << endl; 
 
 	cout << "result: " << val << endl; 
-
+	double xlim = 4; 
+	double ylim = 4; 
 
 
 	int n= 1000;
-	int n1= 2*n; 
-	int n2= 6*n;  
-	double area = 2.0*6.0/(n1*n2); 
+	int n1= xlim*n; 
+	int n2= ylim*n;  
+	double area = xlim*ylim/(n1*n2); 
 	double result = 0; 
 	for(int i=0; i<n1; ++i) {
 		for (int j=0; j<n2; ++j) {
-			double x = 0 + 2.0*i/n1; 
-			double y = 0 + 6.0*j/n2; 
+			double x = 0 + xlim*i/n1; 
+			double y = 0 + ylim*j/n2; 
 			//cout << func(x,y) << endl; 
-			result += area*func(x, y); 
+			if(x>2 && y>(2*x-4)) 
+				result += area*func(x, y); 
 		}
 	}
 
-	cout << "True answer: " << result << endl; 
+	cout << "True answer: " << result+16 << endl; 
 	return 0; 
 }
 
