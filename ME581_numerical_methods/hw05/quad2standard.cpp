@@ -2,7 +2,7 @@
 #include <cmath> 
 using namespace std; 
 
-double func4(double u, double v, ) {
+double func4(double u, double v ) {
 	//return -3*(u+4)*(u+4)+27*(v+1)*(v+1); 
 	//return 3*exp(-(u+1)*(u+1)-9*(v+1)*(v+1)); 
 
@@ -18,7 +18,8 @@ double func4(double u, double v, ) {
 double func(double x, double y) {
 	//return exp(-x*x-y*y); 
 	//return -(x+3)*(x+3)+y*y; 
-	return x*y; 
+	//return x*y; 
+	return exp(-(x+3)*(x+3)-y*y); 
 }
 
 int main() {
@@ -31,9 +32,8 @@ int main() {
 	cout << func4(-a, -a) << endl; 
 
 	cout << "result: " << val << endl; 
-	double xlim = 4; 
+	double xlim = 6; 
 	double ylim = 4; 
-
 
 	int n= 1000;
 	int n1= xlim*n; 
@@ -42,15 +42,19 @@ int main() {
 	double result = 0; 
 	for(int i=0; i<n1; ++i) {
 		for (int j=0; j<n2; ++j) {
-			double x = 0 + xlim*i/n1; 
-			double y = 0 + ylim*j/n2; 
+			double x = -3 + xlim*i/n1; 
+			double y = -2 + ylim*j/n2; 
 			//cout << func(x,y) << endl; 
-			if(x>2 && y>(2*x-4)) 
-				result += area*func(x, y); 
+
+			if(x<-1 && y>2*x+4) 
+				continue; 
+			if(x>1 && y<2*x-4)
+				continue; 
+			result += area*func(x, y); 
 		}
 	}
 
-	cout << "True answer: " << result+16 << endl; 
+	cout << "True answer: " << result << endl; 
 	return 0; 
 }
 

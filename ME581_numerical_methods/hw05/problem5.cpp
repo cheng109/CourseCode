@@ -20,7 +20,8 @@ double func4(double u, double v, Point a1, Point a2, Point a3, Point a4,
 	double x = a1.x*q1 + a2.x*q2 + a3.x*q3 + a4.x*q4; 
 	double y = a1.y*q1 + a2.y*q2 + a3.y*q3 + a4.y*q4; 
 	double J = a+ b*u + c*v; 
-	double original = x*y; 
+	//double original = x*y; 
+	double original = exp(-(x+3)*(x+3)-y*y); 
 	return original*J; 
 }
 
@@ -44,6 +45,7 @@ int main() {
 	Point a4(0, 4);  */
 
 	// Problem #7 
+	
 	Point a1(-3, -2); 
 	Point a2(1, -2); 
 	Point a3(3, 2); 
