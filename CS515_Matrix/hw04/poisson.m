@@ -24,13 +24,13 @@ for i=0:n
      end
  end
 end
-u = A\f;
-B = G 
+u = A\f
+B = G ;
 for i=1:n+1
     for j =1:n+1
         B(i,j) = u(G(i,j))
     end
 end
 
-[X, Y] = meshgrid(1:n+1)
-mesh(B)
+[X, Y] = meshgrid(1:n+1);
+mesh(B);
