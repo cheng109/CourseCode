@@ -35,13 +35,85 @@
 
 \begin{enumerate} 
 \item 
-
+Suppose $\mA$ is a complex $n\times n$ matrix, with $a_{ij}$. Compute all the sum of the absolute values of the non-diagnonal entries in the i-th row $R_i=\sum_{j\neq i}|a_{ij}| $.   Then if we draw some closed disc centered at $a_{ii}$ with radius $R_i$, each eigenvalue of $\mA$ lies in at least one of those discs.  Those discs are called Gershgorin disc.  
 \item 
+The function for ploting Gershgorin Discs is shown as below: \\
+\begin{lstlisting} 
+function h= plotDisk(A); 
+[n,m] = size(A); 
+R =zeros(n, 1); 
+lam = eig(A); 
+for i=1:n 
+    for j=1:n
+        if i~=j
+            R(i)=R(i)+abs(A(i,j)); 
+        end
+    end
+    %diskPlot(A(i,i), 0, R(i)); 
+    th = 0:pi/50:2*pi;
+    xunit = R(i) * cos(th) + A(i,i);
+    yunit = R(i) * sin(th) + 0;
+    h = plot(xunit, yunit);
+    scatter(lam(i), 0, 100); 
+    axis equal; 
+    hold on; 
+end
+end
+\end{lstlisting} 
 
-
+\item
+The Gershgorin discs plot is shown in Figure 1. \\
+\begin{figure}
+\includegraphics[width=0.7\textwidth]{problem1_3} 
+\centering 
+\caption{The Gershgorin discs for a matrix in Problme 1.3. All the small circle are the position of true eigenvalues.} 
+\end{figure}
 \end{enumerate}
+
+\hypertarget{}{}
+\subsection*{{Problem 2:More eigenvalues and convergence theory}}
 \label{}
 
+\begin{enumerate} 
+\item 
+To show that the Jacobi iteration converges for 2-by-2 symmetric, positive, definite systems,  the matrix $\mA$ 
+satisfies $\vx^T\mA\vx >0 (\forall x\neq0) $ 
+\begin{align*} 
+\mA &=\bmat{a & c \\ c& b} \\
+\mA &= \mD +\mR \\
+\mD &= \bmat{a & 0 \\ 0 & b} \\
+\mR & = \bmat{0 & c \\ c & 0 } \\
+\end{align*} 
+Then the Jacobian iteration is $ \vx^{(k+1)} = \mD^{-1} (\vb-\mR\vx^{(k))}$. \\ 
+For a symmetric definite matrix, we have $a>0, b>0$ and $det(\mA)>0$. \\
+\begin{align*}
+det(\mA) = ab-c^2 >0 \\
+\frac{c^2}{ab}<1 \\
+\end{align*}
+Then  \begin{align*} 
+det(\mD^{-1}\mR-\lambda \mI) = \lambda^2-\frac{c^2}{ab} \\
+|\lambda|<1 
+\end{align*} 
+Then we know that the absolute value of all eigenvalues for $\mD^{-1}\mR$ are smaller than 1. \\
+\begin{align*} 
+\rho(\mD^{-1}\mR)<1\\
+\end{align*}
+That indicates the Jacobian iteration method converges. \\
+
+\item 
+If $\rho(\mM^{-1}\mN)<1$  and $e^{(k)} = e^{(k)} -x$ 
+\begin{align*} 
+e^{(k)} &=\mM^{-1}\mN e^{(k-1)} \\
+& = \mG e^{(k-1)} \\
+& = \mG^ke^{(0)} \\
+\mM(\vx^{(k)}-x)  &= \mN(x^{(k-1)}-x)
+\end{align*} 
+This is the solution of equation $\mM\vx = \mN\vx = \vb $ and $\mA\vx = \vb$ where $\mA=\mM+\mN$.  
+Then the matrix $\mA$ can not be a singular matrix. Therefore if $\mA$ is singular, then we can never have $\rho(\mM^{-1}\mN)<1$. \\
+ 
+
+
+\end{enumerate} 
 
 
 

@@ -1,18 +1,20 @@
-%% plot Gershgorin circle. 
-n = 4; 
-A =rand(n,n); 
-x = rand(n, 1); 
+function h= plotDisk(A); 
+[n,m] = size(A); 
 R =zeros(n, 1); 
-%A = x*A*x'; 
-c = randi(10, n);
-
+lam = eig(A); 
 for i=1:n 
     for j=1:n
         if i~=j
-            R(i)=R(i)+A(i,j); 
+            R(i)=R(i)+abs(A(i,j)); 
         end
     end
-    scatter(A(i,i), 0, R(i), c, 'filled', 'MarkerEdgeColor', 'k')
+    %diskPlot(A(i,i), 0, R(i)); 
+    th = 0:pi/50:2*pi;
+    xunit = R(i) * cos(th) + A(i,i);
+    yunit = R(i) * sin(th) + 0;
+    h = plot(xunit, yunit);
+    scatter(lam(i), 0, 100); 
+    axis equal; 
+    hold on; 
 end
-% Plot the disk centered at A(i,i) with radius R(i); 
-
+end
