@@ -1,10 +1,10 @@
 #include <iostream> 
-
+#include <cmath> 
 
 using namespace std; 
 
 double func(double t, double y) {
-	return -16.1*t; 
+	return pow(y, 1/3.) ; 
 }
 
 
@@ -26,9 +26,9 @@ double RK(double y0, double h, int iter_Num) {
 int main() {
 	double h = 0.02; 
 	for(int i=0; i<50; ++i) {
-		double val = RK(0, h, i); 
-		cout << "Iteration: " << i*h << "\t" << val << endl; 
-
+		double val = RK(1.0e-16, h, i); 
+		//cout << "Iteration: " << i*h << "\t" << val << endl; 
+		cout << i*h << "\t" << val << endl; 	
 	}
 
 
