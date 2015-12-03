@@ -3,12 +3,14 @@
 
 using namespace std; 
 
-double func(double t, double y) {
-	return pow(y, 1/3.) ; 
+double func(double t, double y, double y_0) {
+	return 1*y ; 
 }
 
 
-double RK(double y0, double h, int iter_Num) {
+
+
+double RK(double y0, double h, int iter_Num)) {
 	double a, b, c, d; 
 	double y = y0; 
 	double t = 0; 
@@ -24,14 +26,16 @@ double RK(double y0, double h, int iter_Num) {
 }
 
 int main() {
-	double h = 0.02; 
-	for(int i=0; i<50; ++i) {
-		double val = RK(1.0e-16, h, i); 
+	double h = 0.01; 
+	vector<double> y1; 
+	vector<double> y2; 
+	y1.pushback(100); 
+	y2.pushback(10); 
+	for(int i=0; i<2000; ++i) {
+		//double val = RK(1, h, i); 
+		double =RK(1, h, i);  
 		//cout << "Iteration: " << i*h << "\t" << val << endl; 
 		cout << i*h << "\t" << val << endl; 	
 	}
-
-
-
 	return 0; 
 }
