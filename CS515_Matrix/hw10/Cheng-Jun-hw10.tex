@@ -35,6 +35,36 @@
 \label{}
 
 
+\begin{enumerate} 
+\item 
 
+The convergence plots are shown in Figure \ref{fig:problem1_1}.  
+
+\begin{figure} 
+\includegraphics[width=0.8\textwidth]{MIRES} 
+\includegraphics[width=0.8\textwidth]{GMRES} 
+\label{fig:problem1_1}
+\center
+\caption{Convergence for both MIRES and GMRES} 
+\end{figure}
+
+\item 
+
+If we use a $ichol$ incomplete Cholesky preconditioner it will take 319 iterations to converge. MINRES doesn't benefit from and incomplete Cholesky preconditioner.  Figure \ref{fig:problem1_2} shows the convergence of GMRES with incomplete Cholesky preconditioner. \\
+
+\begin{figure} 
+\includegraphics[width=0.8\textwidth]{GMRES_ICHOL} 
+\label{fig:problem1_2}
+\caption{GMRES with $ichol$} 
+\end{figure}
+
+\item 
+Eigenvalues before preconditioning: 
+Eigenvalues after preconditioning: 
+
+
+
+
+\end{enumerate} 
 
 \end{document}
