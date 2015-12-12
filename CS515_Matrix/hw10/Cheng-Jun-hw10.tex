@@ -12,7 +12,7 @@
 \usepackage{xspace}
 \usepackage[usenames,dvipsnames]{color}
 \hypersetup{colorlinks=true,urlcolor=blue}
-
+\newcommand{\forceindent}{\leavevmode{\parindent=1em\indent}}
 
 \usepackage[framed,numbered,autolinebreaks,useliterate] {mcode}
 
@@ -40,7 +40,7 @@
 
 The convergence plots are shown in Figure \ref{fig:problem1_1}.  
 
-\begin{figure} 
+\begin{figure}[h!]
 \includegraphics[width=0.8\textwidth]{MIRES} 
 \includegraphics[width=0.8\textwidth]{GMRES} 
 \label{fig:problem1_1}
@@ -52,19 +52,75 @@ The convergence plots are shown in Figure \ref{fig:problem1_1}.
 
 If we use a $ichol$ incomplete Cholesky preconditioner it will take 319 iterations to converge. MINRES doesn't benefit from and incomplete Cholesky preconditioner.  Figure \ref{fig:problem1_2} shows the convergence of GMRES with incomplete Cholesky preconditioner. \\
 
-\begin{figure} 
+\begin{figure} [h!]
 \includegraphics[width=0.8\textwidth]{GMRES_ICHOL} 
 \label{fig:problem1_2}
 \caption{GMRES with $ichol$} 
 \end{figure}
 
 \item 
-Eigenvalues before preconditioning: 
-Eigenvalues after preconditioning: 
+Eigenvalues before and after preconditioning are show in Figure \ref{fig:eig}
+
+\begin{figure}[h!]
+\includegraphics[width=0.5\textwidth]{before}
+\includegraphics[width=0.5\textwidth]{after}
+\label{fig:eig}
+\caption{Eigenvalues before and after preconditioning}
+\end{figure}
+
+We can see see some clustering before preconditioning. 
+
+\end{enumerate}
+
+\hypertarget{}{}
+\subsection*{{Problem 2: }}
+\label{}
+\begin{enumerate}
+
+\item 
+In the following expressions, $g_0$indicates the old residual and $g_1$ indicates the new residual. 
+
+\begin{align*} 
+g_0 & =\mA x_0-b \\
+\mu  &= \frac{g_0^Tg}{g_0^T\mA g_0} \\
+x_1 & = x_0 - \mu g_0 \\
+g_1 & = \mA x_1-b = \mA ( x_0 - \mu g_0) - b  \\
+& = \mA [ x_0-\frac{g_0^Tg}{g_0^T\mA g_0} g_0] -b \\
+g_0^Tg_1 &= g_0^T[\mA x_0-b - \mA \frac{g_0^Tg}{g_0^T\mA g_0} g_0] \\
+ & = g_0^T(\mA x_0 -b) - g_0^Tg_0  \\
+ & =  g_0^Tg_0 -  g_0^Tg_0 \\
+ & = 0 
+\end{align*} 
+
+\end{enumerate}
+
+
+\hypertarget{}{}
+\subsection*{{Problem 3: }}
+\label{}
+
+For a linear system of equation with \begin{align*} 
+\mA = \mI + \ve \ve^T 
+\end{align*}
+
+The number of steps to converge is $ rank(\ve \ve^T) + 1 = 1$ 
+
+\hypertarget{}{}
+\subsection*{{Problem 4: }}
+\label{}
+
+To solve this problem we should use the simultaneous iteration. 
+\\
+\\
+Pick $\hat{Q}^{(0)} \in \rm I\!R^ {m \times n}$ with orthonormal columns. \\
+for k = 1, 2, ....  \\
+\forceindent $Z = A\hat{Q}^{(k-1)}$ \\
+\forceindent $\hat{Q}^{(k)}\hat{R}^{(k)} = Z $  \\
+
+After several iterations, the matrix $\hat{Q}$ would contain the orthonormal basis of the 8-dimensional eigenspace. 
 
 
 
 
-\end{enumerate} 
 
 \end{document}
