@@ -40,13 +40,28 @@
 \label{}
 \begin{enumerate} 
 \item 
-\begin{align} 
+\begin{align*} 
 \mA &= \bmat{1 & 1 & 2 & 1 \\ 1 & 2 & 4 & -2 }  \\ 
 \vb &= \bmat{1 \\ 0 }  \\
-rank(\mA) = 2 \\
-rank(\mA, \vb) = 2 \\
-\end{align} 
+rank(\mA) &= 2 \\
+rank(\mA, \vb) &= 2 \\
+\end{align*} 
 Based on Theorem 2.1, $rank(\mA) = rank(\mA,\vb) $, then the system has a solution. 
+\begin{align*}
+\bmat{1 & 1\\ 1 & 2} \bmat{x_1 \\ x_2} &= \bmat{1-2d_3-d_4 \\ -4x_3-2x_4}  \\
+\bmat{x_1\\ x_2} &= \bmat{2 & -1 \\ -1 & 1} \bmat{1-2d_3-d_4 \\ -4x_3-2x_4} \\
+& = \bmat{2 \\ -1-2d_3}
+\end{align*}
+
+
+\item 
+\begin{align*}
+\mA& =\bmat{2 & 1 & 2 & 1\\ 6 & 3 & 6 & 3} \\
+\vb &= \bmat{0 \\ 1 } \\
+rank(\mA) &= 1\\
+rank(\mA, \vb)& = 2
+\end{align*} 
+Based on Theorem 2.1, $rank(\mA) \neq rank(\mA, \vb)$, then the system has no solutions. 
 \end{enumerate}
 
 
@@ -54,6 +69,12 @@ Based on Theorem 2.1, $rank(\mA) = rank(\mA,\vb) $, then the system has a soluti
 \hypertarget{}{}
 \subsection*{{Problem 5: }}
 \label{}
+\begin{align*}
+\mA &= \bmat{c & 0 & a \\ 0 & b & b \\ b & a & 0 } \\
+\vb &= \bmat{b \\ a \\ c } \\
+\mA^{-1} = \bmat {}  
+\end{align*}
+
 
 \hypertarget{}{}
 \subsection*{{Problem 6: }}
@@ -92,6 +113,52 @@ Then \begin{align*}
 \end{array}  \right]
 \end{align*}
 
+\hypertarget{}{}
+\subsection*{{Problem 7: }}
+\label{}
+
+
+\hypertarget{}{}
+\subsection*{{Problem 8: }}
+\label{}
+\begin{enumerate}
+\item
+$f(x_1, x_2) = x_1^2 + x_2^2 + 4x_1x_2 +\frac{2}{3}x_2^3-2x_2 + 7$ \\
+\begin{align*}
+\frac{\partial f}{\partial x_1} &= 2x_1+4x_2 = 0\\
+\frac{\partial f}{\partial x_2} &= 2x_2 +4x_1 + 2x_2^2 - 2 = 0 \\
+ x_1 &= -6.6 \\ x_2 & = 3.3 \\
+ or \\
+ x_1 & = 0.6 \\ x_2 & = -0.3 \\
+\end{align*}
+So there are two extremum points $(-6.6, 3.3) $ and $(0.6, -0.3) $ 
+\item 
+
+\end{enumerate}
+
+\hypertarget{}{}
+\subsection*{{Problem 9: }}
+\label{}
+\begin{enumerate}
+\item 
+$f(x_1, x_2,x_3, x_4) = 7x_1^2+x_3^2-2x_1x_3+x_1x_4$ \\
+\begin{align*} 
+f &=\frac{1}{2}\vx^T\mQ\vx \\
+& =\frac{1}{2} \bmat{x_1 &  x_2 & x_3 & x_4 } \bmat{ 14 & 0 & -2 & 1 \\ 0 & 0 & 0 & 0 \\ -2 & 0 & 2 & 0 \\ 1 & 0 & 0 & 0  } \bmat{x_1 \\  x_2 \\  x_3 \\ x_4}
+\end{align*}
+\item 
+$f(x_1, x_2,x_3) = x_2^2-3x_1x_2$\\
+\begin{align*} 
+f &=\frac{1}{2}\vx^T\mQ\vx \\
+& =\frac{1}{2} \bmat{x_1 &  x_2 & x_3 } \bmat{ 0 & -3 & 0 \\ -3 & 2 & 0 \\ 0 & 0 & 0  } \bmat{x_1 \\  x_2 \\  x_3 }
+\end{align*}
+\item 
+$f(x_1, x_2,x_3) = 2x_1^2-5x_2^2 +2x_1x_2 $
+\begin{align*} 
+f &=\frac{1}{2}\vx^T\mQ\vx \\
+& =\frac{1}{2} \bmat{x_1 &  x_2 & x_3 } \bmat{ 4 & 2 & 0 \\ 2 & -5 & 0 \\ 0 & 0 & 0  } \bmat{x_1 \\  x_2 \\  x_3 }
+\end{align*}
+\end{enumerate}
 
 
 
