@@ -1,0 +1,38 @@
+\documentclass{article}
+
+% Packages required to support encoding
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage{graphicx} 
+% Packages required by code
+
+% Packages always used
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{xspace}
+\usepackage[usenames,dvipsnames]{color}
+\hypersetup{colorlinks=true,urlcolor=blue}
+
+
+\usepackage[framed,numbered,autolinebreaks,useliterate] {mcode}
+
+\input{homework.tex}
+
+
+\begin{document} 
+
+\hypertarget{}{}
+\subsection*{{Problem 1: }}
+\label{}
+Using master theorem: \\
+\begin{align*} 
+a &=4 \\ 
+b &= 4 \\ 
+f(n) &= n\log{n} \\
+\end{align*} 
+Then \begin{align*} 
+\log_b^a & = 1\\
+f(n) &= \Omega(n^{\log_b^a-\epsilon})  
+\end{align*} 
+Therefore, \begin{align*} T(n) = \Theta(n\log{n}) \end{align*} 
+\end{document}
