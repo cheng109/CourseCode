@@ -1,21 +1,22 @@
 \documentclass{article}
-
+\usepackage[]{algorithm2e}
 % Packages required to support encoding
 \usepackage{ucs}
 \usepackage[utf8x]{inputenc}
 \usepackage{graphicx} 
 % Packages required by code
-
+\usepackage{enumitem}
 % Packages always used
 \usepackage{listings}
 \usepackage{hyperref}
 \usepackage{xspace}
 \usepackage[usenames,dvipsnames]{color}
 \hypersetup{colorlinks=true,urlcolor=blue}
-
+\newcommand\floor[1]{\lfloor#1\rfloor}
+\newcommand\ceil[1]{\lceil#1\rceil}
 
 \usepackage[framed,numbered,autolinebreaks,useliterate] {mcode}
-
+\usepackage{algpseudocode}
 \input{homework.tex}
 
 
@@ -35,4 +36,118 @@ Then \begin{align*}
 f(n) &= \Omega(n^{\log_b^a-\epsilon})  
 \end{align*} 
 Therefore, \begin{align*} T(n) = \Theta(n\log{n}) \end{align*} 
+
+\hypertarget{}{}
+\subsection*{{Problem 2: }}
+We guess $\Theta(n) $: 
+\begin{align*} 
+T(n) & = T(\floor{\frac{n}{7}}) + 5T(\floor{\frac{n}{6}}) + cn \\
+	& = \left( \frac{1}{7} + \frac{5}{6}  + 1 \right) nc \\
+	& = \frac{83}{42} nc 
+\end{align*} 
+
+\hypertarget{}{}
+\subsection*{{Problem 3: }}
+
+
+For the SoSoSplotchy numbers, we know that : 
+\begin{align*} 
+S(0) &= 1 \\
+S(1) &=2 \\
+S(n) &= 2S(n-1)+S(n-2) \\
+\end{align*}
+\begin{enumerate} [label=(\alph*)]
+\item
+To prove $S(n) = S(a+1)S(n-a-1) + S(a)S(n-2-a) $ \\
+Basis:   $(a=0)$ and $n\geq2$ \\
+\begin{align*} S(n)  &= S(a+1)S(n-a-1) + S(a)S(n-2-a) \\
+	& = S(1)S(n-1) + S(0)S(n-2) \\
+	& = 2S(n-1) + S(n-2)     \\
+\end{align*} 
+Induction step: $(a > 0)$  \\ 
+If we know: 
+\begin{align*} 
+	S(n) & = S(a+1)S(n-a-1)+S(a)S(n-a-2)  \\
+		& = S(a+1)[2S(n-a-2)+S(n-a-3)] + S(a)S(n-2-a) \\
+		& = [2S(a+1) +S(a) ] S(n-a-2) + S(a+1) S(n-a-3)  \\ 
+		& = S(a+2) S(n-a-2) + S(a+1) S(n-a-3)   \checkmark
+\end{align*} 
+Then for $a+1$, we will have 
+\begin{align*} 
+	S(n) & = S(a+2) S(n-a-2) + S(a+1) S(n-a-3) \\
+		& = S(a+2)S(n-a-2) +S(a+1)S(n-a-3) \\
+\end{align*}
+	
+% part (b) 	
+\item 
+Assuming the fact from part a, and let $n=2k$ and $a=k-1$, we will have: \\
+\begin{align*} 
+S(n) & = S(a+1)S(n-a-1) + S(a)S(n-2-a)\\
+S(2k) &= S(k)S(k) + S(k-1)S(k-1) 
+\end{align*} 
+If we let $n=2k+1$ and $a+1=k+1$, then we will have: 
+\begin{align*} 
+S(2k+1) & = S(k+1)S(k) + S(k)S(k-1) \\
+	& =[2S(k)+S(k-1)]S(k) + S(k)S(k-1)  \\
+	& = 2S(k)S(k) + 2S(k-1)S(k)  \\
+\end{align*} 
+% part C
+\item 
+We know  $ S(2k+1)= 2S(k)S(k) + 2S(k-1)S(k) $ \\
+Replace $k$ with $k-1$, then we will have: 
+\begin{align*} 
+S(2k-1) & =2S(k-1)S(k-1)+2S(k-1)S(k-2)  \\
+	    & = 2S(k-1)S(k-1) +2S(k-1)[S(k) -2S(k-1)] \\
+	    & = 2S(k-1)[S(k)-S(k-1) ]	 	
+\end{align*} 
+% part D
+\item 
+If $n$ is an odd number,  let $2k+1=n$  and $k=\frac{n-1}{2}$ , then 
+\begin{align*} 
+S(n) &= S(2k+1)  \\ 
+	&= 2S(k)S(k) + 2S(k-1)S(k) \\
+	& = 2S(\frac{n-1}{2})S(\frac{n-1}{2}) + 2S(\frac{n-3}{2})S(\frac{n-1}{2}) \\
+S(n-1)  & = S(2k) \\
+ 	& = S(k)S(k) + S(k-1)S(k-1) \\
+	& = S(\frac{n-1}{2})S(\frac{n-1}{2}) + S(\frac{n-3}{2})S(\frac{n-3}{2}) 
+\end{align*}
+
+If $n$ is an even number,  let $2k=n$  and $k=\frac{n}{2}$ , then 
+\begin{align*} 
+S(n) &= S(2k)  \\ 
+	& = S(k)S(k) + S(k-1)S(k-1) \\
+	& = S(\frac{n}{2})S(\frac{n}{2}) + S(\frac{n-2}{2}S(\frac{n-2}{2}) \\
+S(n-1) &= S(2k-1)  \\ 
+	&= 2S(k-1)S(k) - 2S(k-1)S(k-1) \\
+	& = 2S(\frac{n-2}{2})S(\frac{n}{2}) - 2S(\frac{n-2}{2})S(\frac{n-2}{2}) \\
+\end{align*}
+Pseudocode:  \\
+\begin{algorithm}[H]
+Function $SoSoSplotchy (n)$: \\
+\eIf{ $n=1$} 
+	{return (2, 1)} 
+{
+\uIf {$n = odd$ }  
+{\begin{align*}
+	&S(\frac{n-1}{2}), S(\frac{n-3}{2}) = SoSoplotchy (\frac{n-1}{2})  \\
+	&S(n) = 2S(\frac{n-1}{2})S(\frac{n-1}{2}) + 2S(\frac{n-3}{2})S(\frac{n-1}{2})\\
+	&S(n-1) = S(\frac{n-1}{2})S(\frac{n-1}{2}) + S(\frac{n-3}{2})S(\frac{n-3}{2}) \\
+\end{align*} }
+\uIf {$n = even$} {
+ \begin{align*}
+	&S(\frac{n}{2}), S(\frac{n-2}{2}) = SoSoplotchy (\frac{n}{2})  \\
+	&S(n) = S(\frac{n}{2})S(\frac{n}{2}) + S(\frac{n-2}{2}S(\frac{n-2}{2}) \\
+	&S(n-1) = 2S(\frac{n-2}{2})S(\frac{n}{2}) - 2S(\frac{n-2}{2})S(\frac{n-2}{2}) \\
+\end{align*}    }
+}
+return $S(n), S(n-1)$ 
+
+\end{algorithm}
+\item 
+
+\end{enumerate}
+
+
+
+
 \end{document}
