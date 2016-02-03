@@ -30,17 +30,41 @@ x^2+y^2 &> 0  \\
 y(y^2+x^2) &> x(x^2+y^2) \\
  y^3+yx^2 &> x^3+xy^2 \\
 \end{align*}
-So $y^3+yx^2\leq x^3+xy^2$ is not true. Therefore the statement is true. 
+So $y^3+yx^2\leq x^3+xy^2$ is not true. Therefore the statement is true. \\
 
-
+Source: http://www.people.vcu.edu/~rhammack/BookOfProof/Contrapositive.pdf
 \subsection*{{Problem 2: }}
-
-
-
-
+(Contradiction): There is no rational number solution to the equation$ x^5 + x^4 +x^3 +x^2 + 1 = 0 $ \\
+Suppose there is a rational solution to this equation $ \frac{p}{q} $where both $p$ and $q$ are integers and  $ \frac{p}{q}  $ is in a reduced form.  Then 
+\begin{align*} 
+p^5 + p^4q + p^3q^2 + p^2q^3 + q^5 = 0 
+\end{align*} 
+Case 1: $p$ and $q$ are both odd, then the left hand side of the equation above is odd. But the right hand side zero is even which leaves us a contradiction. \\ 
+Case 2: $p$ is even and $q$ is odd, then the left hand side is still odd which leaves us a contradiction. \\
+Case 3: $p$ is odd and $q$ is even, then the left hand side is still odd which leaves us a contradiction. \\
+Overall, it is impossible for the equation above to have a rational solution. \\
+Source:  http://zimmer.csufresno.edu/~larryc/proofs/proofs.contradict.html
 \subsection*{{Problem 3: }}
-
-
+(Induction) : For all positive integers, $1^2 + 2^2 + 3^2 + ... + n^2 = \frac{1}{6}n(n+1)(2n+1) $ \\
+Base case: $n=1$  
+\begin{align*} 
+LHS &= 1 \\
+RHS &=  \frac{1}{6}\times 1 \times 2 \times 3 \\
+&= 1 \\
+LHS &= RHS \\
+\end{align*}	
+By induction hypothesis, if $1^2 + 2^2 + 3^2 + ... + k^2 = \frac{1}{6}k(k+1)(2k+1) $ is known, then for $n= k+1$, we have 
+\begin{align*} 
+LHS & = 1^2 + 2^2 + 3^2 + ... + k^2 + (k+1)^2 \\
+& = \frac{1}{6}k(k+1)(2k+1) + (k+1)^2 \\
+& = [\frac{1}{6}k(2k+1)+(k+1)](k+1) \\
+& =  \frac{1}{6}(k+1)(2k^2+7k+6) \\
+& = \frac{1}{6}(k+1)(k+2)(2k+3)  \\
+RHS &= \frac{1}{6}(k+1)(k+2)(2k+3) \\
+LHS &= RHS \\
+\end{align*}
+Therefore, the statement is true. \\
+Source: http://zimmer.csufresno.edu/~larryc/proofs/proofs.mathinduction.html
 \hypertarget{}{}
 \subsection*{{Problem 4: }}
 \label{}
