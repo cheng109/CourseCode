@@ -163,8 +163,24 @@ Then the point $(-3, 2)$ is a strict local minimizer.
 \end{enumerate} 
 
 \subsection*{Problem 6: } 
-
-
+\begin{align*} 
+f(\vx) & = \vx^T\bmat{1 & 0 \\ 1 & 1 } \vx \\
+& = x_1^2 + x_1x_2 + x_2^2 \\
+\end{align*} 
+The direction of travel is:  \\
+\begin{align*} 
+\vd = -\vg = -\frac{df}{d\vx} = (\mA + \mA^T) \vx = -\bmat{2 & 1 \\ 1 & 2 } \vx  = \bmat{-2x_1-x_2 \\ -x_1-2x_2}\\
+\end{align*} 
+when $ \epsilon_1  = 0.1;  f(x^{(0)} )= 1.065 $ \\
+\begin{align*} 
+\vx^{(1)} &= \vx^{(0)} + \epsilon_1 \cdot \vd    \\
+	& = \bmat{0.55 \\ 0.55} 
+\end{align*} 
+when $ \epsilon_2  = 0.2 ; f(x^{(1)} )= 1.65    $\\
+\begin{align*} 
+\vx^{(2)} & = \vx^{(1)} + \epsilon_2 \cdot \vd    \\
+	& = \bmat{-0.11 \\ -0.11} 
+\end{align*} 
 
 \subsection*{Problem 7: } 
 
