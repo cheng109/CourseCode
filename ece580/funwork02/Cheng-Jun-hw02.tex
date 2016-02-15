@@ -165,5 +165,33 @@ Then the point $(-3, 2)$ is a strict local minimizer.
 \subsection*{Problem 6: } 
 
 
+
+\subsection*{Problem 7: } 
+
+
+\subsection*{Problem 8: } 
+
+
+\subsection*{Problem 9: } 
+\begin{lstlisting} 
+[X, Y] = meshgrid(-1:0.1:1, -1:0.1:1); 
+Z = (X-Y).^4 + 12*X.*Y - Y + X + 5; 
+mesh(X, Y, Z) ; 
+contour(X, Y, Z, 20 ) ; 
+%xlabel(X1) ; 
+%ylabel(X2); 
+box on;
+\end{lstlisting} 
+
+\begin{figure} 
+\includegraphics[width=0.5\textwidth]{mesh} 
+\includegraphics[width=0.5\textwidth]{contour} 
+
+\caption{Left: Problem 9(a) Mesh plot . Right: Problem 9(b) Contour plot. } 
+
+\end{figure} 
+
+
+
 \end{document}
 
