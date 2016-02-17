@@ -157,7 +157,7 @@ Then Hessian is : \begin{align*} \bmat{1 & 2 \\ 2 & 2x_2 + 1} \end{align*} \\
 For point $(-1, 1)$ , \\
 $H = \bmat {1 & 2 \\ 2 & 3} $  is indefinite
 For point $(-3, 2) $ , \\
-$H = \bmat{1 & 2 \\ 2 & 5} $ is positive definite
+$H = \bmat{1 & 2 \\ 2 & 5} $ is positive definite. \\
 Then the point $(-3, 2)$ is a strict local minimizer. 
 
 \end{enumerate} 
@@ -183,10 +183,54 @@ when $ \epsilon_2  = 0.2 ; f(x^{(1)} )= 1.65    $\\
 \end{align*} 
 
 \subsection*{Problem 7: } 
+See Table 1 for  Golden Section search. 
+\begin{table}[]
+\centering
+\caption{Problem 7 Golden section search.}
+\label{my-label}
+\begin{tabular}{llllll}
+k & $a_k$    & $b_k$    & f($a_k$) & f($b_k$) & New interval \\
+1 & -0.3    & -0.14   & 0.27    & 0.0588  & 0.576      \\
+2 & -0.14   & -0.0457 & 0.0588  & 0.006   & 0.356        \\
+3 & -0.0407 & 0.0137  & 0.006   & 000056  & 0.22       \\
+4 & 0.0137  & 0.05    & 0.00056 & 0.0075  & 0.135        \\
+5 & 0.009   & 0.0137  & 0.0002  & 0.0006  & 0.083       
+\end{tabular}
+\end{table}
+
 
 
 \subsection*{Problem 8: } 
+See Table 2 for Fibonacci search. 
 
+\begin{table}[]
+\centering
+\caption{Problem 8:  Fibonacci search}
+\label{my-label}
+\begin{tabular}{llllll}
+k & $a_k$   & $b_k$  & f($a_k$) & f($b_k$) & New interval \\
+1 & -0.42  & -0.19 & 0.53    & 0.108   & 0.58         \\
+2 & -0.2   & -0.05 & 0.12    & 0.0075  & 0.36         \\
+3 & -0.056 & 0.016 & 0.009   & 0.0007  & 0.072       
+\end{tabular}
+\end{table}
+
+For Newton Method :\\
+\begin{align*} 
+f(x) & = 3x^2\\
+f'(x) & = 6x\\
+f"(x) & = 6\\
+\frac{f'(x)}{f"(x)} &= x\\
+\end{align*} 
+Therefore, we can pick up a random staring point within the initial range, then one step would be enough for a quadratic equation.
+\begin{align*} 
+x^{(0)} &= 0.46 \\
+x^{(1)} & = x^{(0)} - \frac{f'(x^{(0)})}{f"(x^{(0)})} \\
+& = 0.46 - 0.46 \\
+& = 0 \\
+x^{(2)} & = x^{(1)} - \frac{f'(x^{(1)})}{f"(x^{(1)})} \\
+& = 0 \\
+\end{align*} 
 
 \subsection*{Problem 9: } 
 \begin{lstlisting} 
