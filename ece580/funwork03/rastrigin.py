@@ -60,9 +60,22 @@ def steepesDescent():
 
 
 def main():
-    cs = plotContour()
+    #cs = plotContour()
     #plt.show()
-    X0 =
+    # testLineSearchFunction
+    X0= (7.5, 9.0)
+    alpha = []
+    func = []
+    for i in np.arange(-10, 10, 0.1):
+        alpha.append(i)
+        func.append(lineSearchFunc(X0, i))
+    plt.plot(alpha, func, '-')
+    plt.xlabel(r"$\alpha$")
+    plt.ylabel(r"$f(x-\alpha*g)$")
+    plt.show()
+
+
+
 
 if  __name__ == "__main__":
     main()
