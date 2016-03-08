@@ -67,15 +67,21 @@ def steepesDescent(X0, tol):
     x1_current = X0[0]
     x2_current = X0[1]
     g1, g2 = 1.0, 1.0
+    counter = 0 
     while np.sqrt(g1**2 + g2**2) > tol:
         x1List.append(x1_current)
         x2List.append(x2_current)
-        print x1_current, x2_current
+        #print x1_current, x2_current
         g1, g2 = gradientRastrigin(x1_current, x2_current)
         iLeft, iRight = bracket(0, lineSearchFunc, (x1_current, x2_current), (-g1, -g2), epsilon=0.001)
         alpha = goldenSection(lineSearchFunc,(x1_current, x2_current),(-g1, -g2), iLeft, iRight, tol)
         x1_current = x1_current - alpha * g1
         x2_current = x2_current - alpha * g2
+        counter += 1
+        if counter>100:
+            print "Iteration more than 100"
+            break
+
 
     return x1List, x2List
 
@@ -91,7 +97,7 @@ def conjugateGradient(X0, tol) :
     while np.sqrt(g1**2 + g2**2) > tol: # and counter < 10:
         x1List.append(x1_current)
         x2List.append(x2_current)
-        print x1_current, x2_current
+        #print x1_current, x2_current
         g1, g2 = gradientRastrigin(x1_current, x2_current)
         iLeft, iRight = bracket(0, lineSearchFunc, (x1_current, x2_current), (d1, d2), epsilon=0.001)
         alpha = goldenSection(lineSearchFunc,(x1_current, x2_current),(d1, d2), iLeft, iRight, tol)
@@ -104,7 +110,11 @@ def conjugateGradient(X0, tol) :
         d1 = -g1_new + beta * d1
         d2 = -g2_new + beta * d2
 
+        
         counter += 1
+        if counter>100:
+            print "Iteration more than 100"
+            break
     return x1List, x2List
 
 def rankone(X0, tol):
@@ -117,11 +127,11 @@ def rankone(X0, tol):
     H = np.identity(2)
     D =-H * np.matrix([[g1], [g2]])
     d1, d2 = D.tolist()[0][0], D.tolist()[1][0]
-
+    counter = 0 
     while np.sqrt(g1**2 + g2**2) > tol: # and counter < 100:
         x1List.append(x1_current)
         x2List.append(x2_current)
-        print x1_current, x2_current
+        #print x1_current, x2_current
         g1, g2 = gradientRastrigin(x1_current, x2_current)
         iLeft, iRight = bracket(0, lineSearchFunc, (x1_current, x2_current), (d1, d2), epsilon=0.001)
         alpha = goldenSection(lineSearchFunc,(x1_current, x2_current),(d1, d2), iLeft, iRight, tol)
@@ -140,6 +150,11 @@ def rankone(X0, tol):
         D = -H* np.matrix([[g1_new], [g2_new]])
         d1, d2 = D.tolist()[0][0], D.tolist()[1][0]
 
+        counter += 1
+        if counter>100:
+            print "Iteration more than 100"
+            break
+
 
     return x1List, x2List
 
@@ -157,7 +172,7 @@ def DFP(X0, tol):
     while np.sqrt(g1**2 + g2**2) > tol: # and counter < 100:
         x1List.append(x1_current)
         x2List.append(x2_current)
-        print x1_current, x2_current
+        #print x1_current, x2_current
         g1, g2 = gradientRastrigin(x1_current, x2_current)
         iLeft, iRight = bracket(0, lineSearchFunc, (x1_current, x2_current), (d1, d2), epsilon=0.001)
         alpha = goldenSection(lineSearchFunc,(x1_current, x2_current),(d1, d2), iLeft, iRight, tol)
@@ -200,7 +215,7 @@ def BFGS(X0, tol):
     while np.sqrt(g1**2 + g2**2) > tol:
         x1List.append(x1_current)
         x2List.append(x2_current)
-        print x1_current, x2_current
+        #print x1_current, x2_current
         g1, g2 = gradientRastrigin(x1_current, x2_current)
         iLeft, iRight = bracket(0, lineSearchFunc, (x1_current, x2_current), (d1, d2), epsilon=0.001)
         alpha = goldenSection(lineSearchFunc,(x1_current, x2_current),(d1, d2), iLeft, iRight, tol)
@@ -249,15 +264,18 @@ def minfinder(method):
     x1List, x2List = method(X0_p, tol=1.0e-8)
     ax1.annotate('(%s, %s)'% X0_p, xy= X0_p, textcoords='data' )
     ax1.plot(x1List, x2List, 'o-')
+    ax1.axis('equal')
+    print "[" + str(x1List[-1]) + ", "  + str(x2List[-1]) + "]"
 
     ## For starting point (-7.0, -7.5)
     plotContour(ax2, [-12.0,-6.00] , [-12.0,-6.0])
     x1List, x2List = method(X0_n, tol=1.0e-8)
     ax2.annotate('(%s, %s)'% X0_n, xy= X0_n, textcoords='data' )
     ax2.plot(x1List, x2List, 'o-')
+    ax2.axis('equal')
 
 
-    print len(x1List)
+    print "[" + str(x1List[-1]) + ", "  + str(x2List[-1]) + "]"
     plt.show()
 
 def main():
