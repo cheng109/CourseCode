@@ -117,8 +117,8 @@ def rankone(X0, tol):
     H = np.identity(2)
     D =-H * np.matrix([[g1], [g2]])
     d1, d2 = D.tolist()[0][0], D.tolist()[1][0]
-    counter = 0
-    while np.sqrt(g1**2 + g2**2) > tol and counter < 100:
+
+    while np.sqrt(g1**2 + g2**2) > tol: # and counter < 100:
         x1List.append(x1_current)
         x2List.append(x2_current)
         print x1_current, x2_current
@@ -139,12 +139,102 @@ def rankone(X0, tol):
         H =  H + 1.0/denom*numerator
         D = -H* np.matrix([[g1_new], [g2_new]])
         d1, d2 = D.tolist()[0][0], D.tolist()[1][0]
-        counter = counter + 1
+
 
     return x1List, x2List
 
+def DFP(X0, tol):
+
+    x1List = []
+    x2List = []
+    x1_current = X0[0]
+    x2_current = X0[1]
+    g1, g2 = gradientRastrigin(x1_current, x2_current)
+    H = np.identity(2)
+    D =-H * np.matrix([[g1], [g2]])
+    d1, d2 = D.tolist()[0][0], D.tolist()[1][0]
+    counter = 0
+    while np.sqrt(g1**2 + g2**2) > tol: # and counter < 100:
+        x1List.append(x1_current)
+        x2List.append(x2_current)
+        print x1_current, x2_current
+        g1, g2 = gradientRastrigin(x1_current, x2_current)
+        iLeft, iRight = bracket(0, lineSearchFunc, (x1_current, x2_current), (d1, d2), epsilon=0.001)
+        alpha = goldenSection(lineSearchFunc,(x1_current, x2_current),(d1, d2), iLeft, iRight, tol)
 
 
+
+        x1_current = x1_current + alpha * d1
+        x2_current = x2_current + alpha * d2
+
+        g1_new, g2_new = gradientRastrigin(x1_current, x2_current)
+        diff_x = alpha * np.matrix([[d1], [d2]])
+        diff_g = np.matrix([[g1_new-g1], [g2_new-g2]])
+        denom1 = np.dot(diff_x.transpose(), diff_g).tolist()[0][0]
+        numerator1 = diff_x * (diff_x.transpose())
+
+        denom2 =np.dot( diff_g.transpose(), H*diff_g).tolist()[0][0]
+        numerator2 = (H*diff_g)*((H*diff_g).transpose())
+        H =  H + numerator1/denom1 - numerator2/denom2  #denom*numerator
+        D = -H* np.matrix([[g1_new], [g2_new]])
+        d1, d2 = D.tolist()[0][0], D.tolist()[1][0]
+
+        counter += 1
+        if counter>100:
+            print "Iteration more than 100"
+            break
+
+    return x1List, x2List
+
+def BFGS(X0, tol):
+
+    x1List = []
+    x2List = []
+    x1_current = X0[0]
+    x2_current = X0[1]
+    g1, g2 = gradientRastrigin(x1_current, x2_current)
+    H = np.identity(2)
+    D =-H * np.matrix([[g1], [g2]])
+    d1, d2 = D.tolist()[0][0], D.tolist()[1][0]
+    counter = 0
+    while np.sqrt(g1**2 + g2**2) > tol:
+        x1List.append(x1_current)
+        x2List.append(x2_current)
+        print x1_current, x2_current
+        g1, g2 = gradientRastrigin(x1_current, x2_current)
+        iLeft, iRight = bracket(0, lineSearchFunc, (x1_current, x2_current), (d1, d2), epsilon=0.001)
+        alpha = goldenSection(lineSearchFunc,(x1_current, x2_current),(d1, d2), iLeft, iRight, tol)
+
+
+
+        x1_current = x1_current + alpha * d1
+        x2_current = x2_current + alpha * d2
+
+        g1_new, g2_new = gradientRastrigin(x1_current, x2_current)
+        diff_x = alpha * np.matrix([[d1], [d2]])
+        diff_g = np.matrix([[g1_new-g1], [g2_new-g2]])
+
+        denom0      =   np.dot(diff_g.transpose(), diff_x).tolist()[0][0]
+        numerator0  =   np.dot(diff_g.transpose(), H*diff_g).tolist()[0][0]
+
+
+        denom1      = np.dot(diff_x.transpose(), diff_g)
+        numerator1  = diff_x * (diff_x.transpose())
+        denom2 =np.dot( diff_g.transpose(), diff_x).tolist()[0][0]
+        numerator2 = H*diff_g*(diff_x.transpose()) + (H*diff_g*(diff_x.transpose())).transpose()
+
+        H =  H + (1+numerator0/denom0)*numerator1/denom1 - numerator2/denom2  #denom*numerator
+
+        D = -H* np.matrix([[g1_new], [g2_new]])
+        d1, d2 = D.tolist()[0][0], D.tolist()[1][0]
+        counter +=  1
+        if counter>100:
+            print "Iteration more than 100"
+            break
+
+
+
+    return x1List, x2List
 
 
 
@@ -173,7 +263,9 @@ def minfinder(method):
 def main():
     #minfinder(method = steepesDescent)
     #minfinder(method = conjugateGradient)
-    minfinder(method= rankone)
+    #minfinder(method=rankone)
+    #minfinder(method= DFP)
+    minfinder(method=BFGS)
 
 
 
