@@ -5,12 +5,6 @@ def func(x1, x2):
     return -20 - 0.01*x1**2 - 0.01*x2**2 \
            + 10*(np.cos(0.2*np.pi*x1)+np.cos(0.2*np.pi*x2))
 
-
-def originFunc(x1, x2):
-    return 20 + 0.01*x1**2 + 0.01*x2**2 \
-           - 10*(np.cos(0.2*np.pi*x1)+np.cos(0.2*np.pi*x2))
-
-
 def plotContour(ax, xlim, ylim):
     delta = 0.1
     x = np.arange(xlim[0], xlim[1], delta)

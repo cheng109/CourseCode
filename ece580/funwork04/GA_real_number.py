@@ -6,11 +6,6 @@ def func(x1, x2):
            + 10*(np.cos(0.2*np.pi*x1)+np.cos(0.2*np.pi*x2))
 
 
-def originFunc(x1, x2):
-    return 20 + 0.01*x1**2 + 0.01*x2**2 \
-           - 10*(np.cos(0.2*np.pi*x1)+np.cos(0.2*np.pi*x2))
-
-
 def plotContour(ax, xlim, ylim):
     delta = 0.1
     x = np.arange(xlim[0], xlim[1], delta)
@@ -28,10 +23,6 @@ def mapping(binNum, n):
     decVal = 20.0 * binNum/(np.power(2, n-1)) -10
     return decVal
 
-def int2bin(val):
-    return
-
-
 
 def init(ax, n):
     x0_dec = []
@@ -47,7 +38,7 @@ def init(ax, n):
     ax.plot(x0_dec, x1_dec, 'ob')
     return x0_bin, x1_bin, x0_dec, x1_dec
 
-def selection(x0_bin, x1_bin, x0_dec, x1_dec, k):
+def selection(x0_dec, x1_dec, k):
     f = []
     for i in range(len(x0_dec)):
         f.append(func(x0_dec[i], x1_dec[i]))
@@ -56,8 +47,8 @@ def selection(x0_bin, x1_bin, x0_dec, x1_dec, k):
     cumSum = np.cumsum(f)
     new_x0_dec = []
     new_x1_dec = []
-    new_x0_bin = []
-    new_x1_bin = []
+    #new_x0_bin = []
+    #new_x1_bin = []
     f_index = [0] * k
 
 
@@ -73,15 +64,15 @@ def selection(x0_bin, x1_bin, x0_dec, x1_dec, k):
     for index in f_index:
         new_x0_dec.append(x0_dec[f_index[index]])
         new_x1_dec.append(x1_dec[f_index[index]])
-        new_x0_bin.append(x0_bin[f_index[index]])
-        new_x1_bin.append(x1_bin[f_index[index]])
-    return new_x0_bin, new_x1_bin, new_x0_dec, new_x1_dec
+        #new_x0_bin.append(x0_bin[f_index[index]])
+        #new_x1_bin.append(x1_bin[f_index[index]])
+    return  new_x0_dec, new_x1_dec
 
 
-def crossover(x0_bin, x1_bin, x0_dec, x1_dec, n):
+def crossover(x0_dec, x1_dec, n):
 
     pc = 0.65
-    pm = 0.0075
+    pm = 0.075
 
     # choosing crossing site;
     N = 2* int(pc *  n/2)   #  number of parents who are ready to do crossover.
@@ -89,70 +80,51 @@ def crossover(x0_bin, x1_bin, x0_dec, x1_dec, n):
     parent_index =  sample(xrange(len(x0_dec)), N)
     i=0
     while i<len(parent_index):
-        parent1 = "{0:b}".format( x0_bin[parent_index[i]]*np.power(2, L/2) + x1_bin[parent_index[i]]).zfill(L)
-        parent2 = "{0:b}".format( x0_bin[parent_index[i+1]]*np.power(2, L/2)+ x1_bin[parent_index[i+1]]).zfill(L)
-        site = np.random.randint(0,L-1)
-        child1 = parent1[0:site] + parent2[site:L]
-        child2 = parent2[0:site] + parent1[site:L]
+        parent1_x0 = x0_dec[parent_index[i]]
+        parent1_x1 = x1_dec[parent_index[i]]
+        parent2_x0 = x0_dec[parent_index[i+1]]
+        parent2_x1 = x1_dec[parent_index[i+1]]
+
+        w = np.random.normal(0, 0.1, 4)
+        child1_x0  = (parent1_x0+parent2_x0)/2 + w[0]
+        child1_x1  = (parent1_x1+parent2_x1)/2 + w[1]
+        child2_x0  = (parent1_x0+parent2_x0)/2 + w[2]
+        child2_x1  = (parent1_x1+parent2_x1)/2 + w[3]
+
+        x0_dec[parent_index[i]] = child1_x0
+        x1_dec[parent_index[i]] = child1_x1
+        x0_dec[parent_index[i+1]] = child2_x0
+        x1_dec[parent_index[i+1]] = child2_x1
 
 
-        x0_bin[parent_index[i]]  =  int(child1[0:L/2], 2)
-        x0_bin[parent_index[i+1]]=  int(child2[L/2:L], 2)
-        x1_bin[parent_index[i]]  =  int(child1[L/2:L], 2)
-        x1_bin[parent_index[i+1]]=  int(child2[0:L/2], 2)
         i+=2
 
 
     ## Mutation
-    for i in range(len(x0_bin)):
-        s = "{0:b}".format(x0_bin[i]).zfill(L/2)
-        new_s = ""
-        for j in range(len(s)):
-            val = np.random.rand()
-            if val < pm:
-                new_s += str(1- int(s[j]))
-            else:
-                new_s += s[j]
-        x0_bin[i] = int(new_s, 2)
+    for i in range(len(x0_dec)):
+        val = np.random.rand()
 
-        s1 = "{0:b}".format(x1_bin[i]).zfill(L/2)
-        new_s1 = ""
-        for j in range(len(s1)):
-            val = np.random.rand()
-            if val < pm:
-                new_s1 += str(1- int(s1[j]))
-            else:
-                new_s1 += s1[j]
-
-        x1_bin[i] = int(new_s1, 2)
+        if val < pm :
+            w = np.random.normal(0, 0.1, 2)
+            x0_dec[i] += w[0]
+            x1_dec[i] += w[1]
 
 
-        break
-    #update x0_dec and x1_dec:
-    for i in range(len(x0_bin)):
-        x0_dec[i]  = mapping(x0_bin[i], L/2)
-        x1_dec[i]  = mapping(x1_bin[i], L/2)
 
-
-    return x0_bin, x1_bin, x0_dec, x1_dec
+    return  x0_dec, x1_dec
 
 
 def ga(ax):
-    n = 100   #  number of initial points.
+    n = 50   #  number of initial points.
     L = 32
 
     x0_bin, x1_bin, x0_dec, x1_dec = init(ax, n)
 
     for iter in range(50):
-        x0_bin, x1_bin, x0_dec, x1_dec = selection(x0_bin, x1_bin, x0_dec, x1_dec, k=len(x0_dec))
-        x0_bin, x1_bin, x0_dec, x1_dec = crossover(x0_bin, x1_bin, x0_dec, x1_dec, n)  # crossover and mutation
+        x0_dec, x1_dec = selection(x0_dec, x1_dec, k=len(x0_dec))
+        x0_dec, x1_dec = crossover(x0_dec, x1_dec, n)  # crossover and mutation
 
     plt.plot(x0_dec, x1_dec, '*r')
-
-
-
-
-
 
 def main():
     f, (ax) = plt.subplots(1,1, sharex=False)
