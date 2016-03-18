@@ -121,7 +121,7 @@ def crossover(x0_bin, x1_bin, x0_dec, x1_dec, n):
         x1_bin[i] = int(new_s1, 2)
 
 
-        break
+
     #update x0_dec and x1_dec:
     for i in range(len(x0_bin)):
         x0_dec[i]  = mapping(x0_bin[i], L/2)
@@ -130,18 +130,58 @@ def crossover(x0_bin, x1_bin, x0_dec, x1_dec, n):
 
     return x0_bin, x1_bin, x0_dec, x1_dec
 
+def getBestPlot(x0_dec, x1_dec):
+
+    f = []
+    for i in range(len(x0_dec)):
+        f.append(-func(x0_dec[i], x1_dec[i]))
+    best = min(f)
+    worst = max(f)
+    ave = np.mean(f)
+    ind = np.argmin(f)
+    return ind, best, worst, ave
+
+
+
+
 
 def ga(ax):
-    n = 100   #  number of initial points.
-    L = 32
+    n = 50   #  number of initial points.
+    bestList = []
+    worstList = []
+    aveList = []
+    counter = []
 
     x0_bin, x1_bin, x0_dec, x1_dec = init(ax, n)
 
-    for iter in range(50):
+    for i in range(50):
         x0_bin, x1_bin, x0_dec, x1_dec = selection(x0_bin, x1_bin, x0_dec, x1_dec, k=len(x0_dec))
         x0_bin, x1_bin, x0_dec, x1_dec = crossover(x0_bin, x1_bin, x0_dec, x1_dec, n)  # crossover and mutation
 
+        ind, best, worst, ave  = getBestPlot(x0_dec, x1_dec)
+
+        counter.append(i+1)
+        bestList.append(best)
+        worstList.append(worst)
+        aveList.append(ave)
+
+    print x0_dec[ind], x1_dec[ind], -func(x0_dec[ind], x1_dec[ind])
+
     plt.plot(x0_dec, x1_dec, '*r')
+
+    fig2 = plt.figure()
+    ax1 = fig2.add_subplot(111)
+    ax1.plot(counter, bestList, '-o',label='best')
+    ax1.plot(counter, aveList, '-*', label = 'average')
+    ax1.plot(counter, worstList, '--', label='worst')
+    ax1.set_xlabel("Generations")
+    ax1.set_ylabel("Objective Function Value")
+    ax1.set_title("Canonical genetic algorithm")
+    ax1.legend()
+    plt.show()
+
+
+
 
 
 

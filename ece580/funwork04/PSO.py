@@ -4,8 +4,8 @@ import sys
 
 import numpy as np
 def func(x1, x2):
-    return 20 + 0.01*x1**2 + 0.01*x2**2 \
-           - 10*(np.cos(0.2*np.pi*x1)+np.cos(0.2*np.pi*x2))
+    return -20 - 0.01*x1**2 - 0.01*x2**2 \
+           + 10*(np.cos(0.2*np.pi*x1)+np.cos(0.2*np.pi*x2))
 
 
 def plotContour(ax, xlim, ylim):
@@ -22,66 +22,64 @@ def plotContour(ax, xlim, ylim):
 
 def getGbest(p0, p1):
     # find the global best from the personal best.
-    gBest = func(p0[0], p1[0])
-    g0 = 0
-    g1 = 0
+    f = []
     for i in range(len(p0)):
-        val = func(p0[i], p1[i])
-        if val< gBest:
-            gBest = val
-            g0 = p0[i]
-            g1 = p1[i]
+        f.append(func(p0[i], p1[i]))
+    gBest = min(f)
+    ind = np.argmin(f)
+    g0 = p0[ind]
+    g1 = p1[ind]
+
     return gBest, g0, g1
 
 def init(ax, n):
     #n = 100
-    x0 = 20* (np.random.rand( n)-0.5)
-    x1 = 20* (np.random.rand( n)-0.5)
+    x0 = 20* (np.random.rand(n)-0.5)
+    x1 = 20* (np.random.rand(n)-0.5)
     # personal best
     p0 = x0
     p1 = x1
 
 
-    v0 = 20* (np.random.rand( n)-0.5)
-    v1 = 20* (np.random.rand( n)-0.5)
+    v0 = 0.1*np.random.rand(n)
+    v1 = 0.1*np.random.rand(n)
     gBest, g0, g1 = getGbest(p0, p1)
-    ax.plot(x0, x1, '*')
+    ax.plot(x0, x1, 'or')
     pBest = []
     for i in range(n):
         pBest.append(func(x0[i], x1[i]))
     return x0, x1, v0, v1, p0,p1,pBest, g0, g1, gBest
 
-def get3List(x0, x1,):
+def getBestPlot(x0_dec, x1_dec):
 
-    best = func(x0[0], x1[0])
-    ave = 0
-    worst = func(x0[0], x1[0])
+    f = []
+    for i in range(len(x0_dec)):
+        f.append(func(x0_dec[i], x1_dec[i]))
+    best = min(f)
+    worst = max(f)
+    ave = np.mean(f)
+    ind = np.argmin(f)
+    return ind, best, worst, ave
 
-    for i in range(len(x0)):
-        val = func(x0[i], x1[i])
-        if val < best:
-            best = val
-        if val > worst:
-            worst = val
-        ave += val
-    ave = ave/len(x0)
-    return best, ave, worst
 
 
 
 def pmo(ax):
-    n =100
+    n =50
     c1 = 2.01
     c2 = 2.09
-    x0, x1, v0, v1, p0,p1,pBest,  g0, g1, gBest  = init(ax, n )
-    k = 0.729
-    # update velocity
-    bestList  = []
-    aveList   = []
+
+    bestList = []
     worstList = []
-    iter = []
-    for i in range(1000):
-        iter.append(i+1)
+    aveList = []
+    counter = []
+    x0, x1, v0, v1, p0,p1,pBest,  g0, g1, gBest  = init(ax, n )
+
+    k = 0.729
+
+
+    for i in range(20):
+
         r0 = np.random.rand(n)
         r1 = np.random.rand(n)
         s0 = np.random.rand(n)
@@ -97,26 +95,35 @@ def pmo(ax):
                 p0[j] = x0[j]
                 p1[j] = x1[j]
 
-        g0Curr, g1Curr,gCurrBest = getGbest(p0, p1)
+
+        gCurrBest, g0Curr, g1Curr = getGbest(p0, p1)
+        #print g0Curr, g1Curr,gCurrBest, func(g0Curr, g1Curr)
         if gCurrBest < gBest:
             gBest = gCurrBest
             g0 = g0Curr
             g1 = g1Curr
-            print "gBest", g0, g1
-        ### record the best, average, and worst:
-    #     best, ave, worst = get3List(x0, x1)
-    #     bestList.append(best)
-    #     aveList.append(ave)
-    #     worstList.append(worst)
-    #
-    #
-    # fig2 = plt.figure()
-    # ax1 = fig2.add_subplot(111)
-    # ax1.plot(iter, bestList, '-o', iter, aveList, '-*', iter, worstList, '--')
-    # plt.show()
+            print "gBest", g0, g1, gBest, func(g0, g1)
 
-    ax.plot(x0, x1, "o")
-    #print g0, g1, gBest
+        ind, best, worst, ave  = getBestPlot(x0, x1)
+        counter.append(i+1)
+        bestList.append(best)
+        worstList.append(worst)
+        aveList.append(ave)
+
+
+    ax.plot(x0, x1, "*b")
+    fig2 = plt.figure()
+    ax1 = fig2.add_subplot(111)
+    ax1.plot(counter, bestList, '-o',label='best')
+    ax1.plot(counter, aveList, '-*', label = 'average')
+    ax1.plot(counter, worstList, '--', label='worst')
+    ax1.set_xlabel("Generations")
+    ax1.set_ylabel("Objective Function Value")
+    ax1.set_title("PSO algorithm")
+    ax1.legend()
+    plt.show()
+
+
 
 
 
