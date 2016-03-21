@@ -61,6 +61,8 @@ def getBestPlot(x0_dec, x1_dec):
     ind = np.argmin(f)
     return ind, best, worst, ave
 
+def clampVelocity(vCurr, vmax):
+    return  min(vmax, max(-vmax, vCurr))
 
 
 
@@ -77,8 +79,8 @@ def pmo(ax):
 
     k = 0.729
 
-
-    for i in range(20):
+    vmax = 4.0
+    for i in range(50):
 
         r0 = np.random.rand(n)
         r1 = np.random.rand(n)
@@ -87,6 +89,10 @@ def pmo(ax):
         for j in range(n):
             v0[j] = k*(v0[j] + c1*r0[j]*(p0[j]-x0[j])+ c2*s0[j]*(g0-x0[j]))
             v1[j] = k*(v1[j] + c1*r1[j]*(p1[j]-x1[j])+ c2*s1[j]*(g1-x1[j]))
+            # clamping velocity
+            v0[j] = min(vmax, max(-vmax, v0[j]))
+            v1[j] = min(vmax, max(-vmax, v1[j]))
+
             x0[j] = x0[j] + v0[j]
             x1[j] = x1[j] + v1[j]
             val = func(x0[j], x1[j])
@@ -106,9 +112,9 @@ def pmo(ax):
 
         ind, best, worst, ave  = getBestPlot(x0, x1)
         counter.append(i+1)
-        bestList.append(best)
-        worstList.append(worst)
-        aveList.append(ave)
+        bestList.append(-best)
+        worstList.append(-worst)
+        aveList.append(-ave)
 
 
     ax.plot(x0, x1, "*b")
@@ -120,7 +126,7 @@ def pmo(ax):
     ax1.set_xlabel("Generations")
     ax1.set_ylabel("Objective Function Value")
     ax1.set_title("PSO algorithm")
-    ax1.legend()
+    ax1.legend(loc=4)
     plt.show()
 
 

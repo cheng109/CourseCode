@@ -38,19 +38,42 @@ f(x_0,x_1) & =  2.28836604776e-07
 \begin{figure}[h]
 \includegraphics[width=0.7\textwidth]{PSO} 
 \centering
-\caption{PSO Algorithm: circle points are randomly generated 50 initial points. Stars indicate the positions after 50 iterations. }
+\caption{PSO Algorithm (problem 2): circle points are randomly generated 50 initial points. Stars indicate the positions after 50 iterations. }
 
 \end{figure}
 
 \begin{figure}[h]
 \includegraphics[width=0.7\textwidth]{PSO_min_best} 
 \centering
-\caption{PSO Algorithm: plots of the best, average, and the worst objective function values in the population for 50 generations }
+\caption{PSO Algorithm (problem 2): plots of the best, average, and the worst objective function values in the population for 50 generations }
 
 \end{figure}
 
 
 \subsection*{{Problem 3: }}
+
+Using PSO algorithm, we can find the maximizer: \\
+\begin{align*}
+x_0 & =  -5.02482780601\\
+x_1 & =  5.02524813509\\
+f(x_0,x_1) & = -40.5025451078 
+\end{align*}
+In fact, there are several other global maximizers. PSO method will converge to different global maximizer depending on the initial points which are randomly chosen.   
+\begin{figure}[h]
+\includegraphics[width=0.7\textwidth]{PSO_max} 
+\centering
+\caption{PSO Algorithm (problem 3): circle points are randomly generated 50 initial points. Stars indicate the positions after 50 iterations. }
+
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[width=0.7\textwidth]{PSO_max_best} 
+\centering
+\caption{PSO Algorithm (problem 3): plots of the best, average, and the worst objective function values in the population for 50 generations }
+
+\end{figure}
+
+
 
 
 
@@ -75,7 +98,7 @@ f(x_1, x_2) & = 0.00229673023909
 \begin{figure} [h]
 \includegraphics[width=0.7\textwidth]{GA_canonical}
 \centering
-\caption{Canonical Genetic Algorithm: circle points are randomly generated 50 initial points. Stars indicate the positions after 50 iterations. }
+\caption{Canonical Genetic Algorithm (problem 4): circle points are randomly generated 50 initial points. Stars indicate the positions after 50 iterations. }
 
 \includegraphics[width=0.7\textwidth]{GA_real_number}
 \centering
@@ -86,7 +109,7 @@ f(x_1, x_2) & = 0.00229673023909
 \begin{figure}
 \includegraphics[width=0.7\textwidth]{Canonical_GA_best_plot}
 \centering
-\caption{Canonical Genetic Algorithm: plots of the best, average, and the worst objective function values in the population for 50 generations}
+\caption{Canonical Genetic Algorithm (problem 4): plots of the best, average, and the worst objective function values in the population for 50 generations}
 
 
 \includegraphics[width=0.7\textwidth]{Real_number_GA}
