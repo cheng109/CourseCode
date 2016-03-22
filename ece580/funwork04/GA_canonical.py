@@ -61,7 +61,6 @@ def selection(x0_bin, x1_bin, x0_dec, x1_dec, k):
             if alpha[i]> cumSum[j]:
                 f_index[i] += 1
             else:
-
                 break
 
     for index in f_index:
