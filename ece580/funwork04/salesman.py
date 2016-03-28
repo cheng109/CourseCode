@@ -60,18 +60,33 @@ def listInsert(l, l1,  pivot):
         new_list.append(l[i])
     return new_list
 
+def findMinComb(zList):
+    minD = float("inf")
+    ind = 0
+    for i in range(len(zList)):
+        comb = zList[i]
+        if getDist(comb) < minD:
+            minD = getDist(comb)
+            ind = i
+    return i
+
+
 def selection(zList):
     f = []
     k = len(zList)
+    new_zList =[]
 
+    minIndex = findMinComb(zList)
+    new_zList.append(zList[minIndex])   # retain the minimum from the previous generation.
 
     for comb in zList:
+
         f.append(-getDist(comb))
     base = min(f)
     f = [x-base for x in f]
     cumSum = np.cumsum(f)
-    alpha = np.random.rand(k)*sum(f)
-    f_index = [0]* k
+    alpha = np.random.rand(k-1)*sum(f)
+    f_index = [0]* (k-1)
     for i in range(len(alpha)):
         for j in range(len(cumSum)):
             if alpha[i] > cumSum[j]:
@@ -79,7 +94,7 @@ def selection(zList):
             else:
                 break
     #print f_index
-    new_zList =[]
+
     for ind in f_index:
         new_zList.append(zList[ind])
 

@@ -24,7 +24,7 @@
 
 \subsection*{{Problem 1: }}
 \begin{align*} 
-y_k=ay_{k-1} + bu_k + v_k\\
+y_k=ay_{k-1} + bu_k + v_k
 \end{align*}
 Then \begin{align*}
 y_1 &= ay_0 + bu_1 +v_1 \\
@@ -46,7 +46,7 @@ We can write those equation in a matrix form: \\
 \end{align*}
 where \begin{align*}  
 \mC &= \bmat{b& 0& 0& 0& ..& ..& 0 \\ab& a& 0& 0& ..& ..& 0 \\a^2 b& ab& b& 0& ..& ..& 0\\ .. \\ .. \\ a^{k-1}b& a^{k-2}b& a^{k-3}b& ..& ..& ..& b  }\\
-\mD & = \bmat{1& 0& 0& 0& ..& ..& 0 \\a& 1& 0& 0& ..& ..& 0 \\a^2& a& 1& 0& ..& ..& 0 \\ .. \\ .. \\ 1& a^{k-1}& a^{k-2} & a^{k-3} & ..& ..& 1 }\\
+\mD & = \bmat{1& 0& 0& 0& ..& ..& 0 \\a& 1& 0& 0& ..& ..& 0 \\a^2& a& 1& 0& ..& ..& 0 \\ .. \\ .. \\  a^{k-1}& a^{k-2} & a^{k-3} & ..& ..& ..&  1 }\\
 \vb &= \mD^{-1}\vy\\
 \mA & = \mD^{-1}\mC
 \end{align*}
@@ -336,7 +336,7 @@ def main():
     plt.show()
 \end{lstlisting} 
 
-Canonical GA algorithm (problem 4) code : \\
+Canonical GA algorithm (problem 4) code : 
 \begin{lstlisting} 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -515,7 +515,7 @@ if  __name__ == "__main__":
     main()
 \end{lstlisting}
 
-Real number GA algorithm: \\
+Real number GA algorithm: 
 \begin{lstlisting} 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -569,14 +569,12 @@ def selection(x0_dec, x1_dec, k):
     #new_x1_bin = []
     f_index = [0] * k
 
-
     alpha = np.random.rand(k)*sum(f)
     for i in range(k):
         for j in range(len(x0_dec)):
             if alpha[i]> cumSum[j]:
                 f_index[i] += 1
             else:
-
                 break
 
     for index in f_index:
@@ -586,12 +584,9 @@ def selection(x0_dec, x1_dec, k):
         #new_x1_bin.append(x1_bin[f_index[index]])
     return  new_x0_dec, new_x1_dec
 
-
 def crossover(x0_dec, x1_dec, n):
-
     pc = 0.65
     pm = 0.075
-
     # choosing crossing site;
     N = 2* int(pc *  n/2)   #  number of parents who are ready to do crossover.
     L = 32
