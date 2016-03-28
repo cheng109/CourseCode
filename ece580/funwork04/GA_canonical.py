@@ -22,11 +22,6 @@ def mapping(binNum, n):
     decVal = 20.0 * binNum/(np.power(2, n-1)) -10
     return decVal
 
-def int2bin(val):
-    return
-
-
-
 def init(ax, n):
     x0_dec = []
     x1_dec = []
