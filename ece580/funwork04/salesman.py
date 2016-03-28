@@ -151,9 +151,6 @@ def GA_algorithm(locX, locY):
 
 
         best.append(bestDist)
-        #print bestDist
-
-
     print bestDist
     plt.plot(counter, best, '-')
     plt.xlabel("Generations")
@@ -171,8 +168,7 @@ def main():
             8.0298, 8.2941, 0.6621, 9.6546, 6.8045, 8.0196, 8.1590, 8.0531]
     locY = [0.8955, 9.8352, 7.7070, 0.0784, 4.8838, 3.3703, 6.1604,
             5.5397, 1.2147, 2.5383, 0.5923, 9.2022, 2.8386, 7.1041, 1.8498]
-
-    locX, locY = GA_algorithm(locX, locY)
+    GA_algorithm(locX, locY)
 
 
 
