@@ -156,12 +156,40 @@ By the Lagrange condition:  \begin{align*}
 2x_2 -\lambda\times 2 x_2 & = 0 \\
 x_1^2 + x_2^2 - 9 & = 0 \\ 
 \end{align*} 
-Then we can have $\lambda = 1 $ \\
+If $\lambda = -1 $, we have: 
 \begin{align*} 
 \vx &= \bmat{2 & \sqrt{5} } \\
 \vx &= \bmat{2 & -\sqrt{5} } 
 \end{align*} 
-
+If $\lambda = \frac{2}{3}$, we have:  $\vx = \bmat{-3 & 0 }  $ \\
+If $\lambda = -\frac{2}{3}$, we have:  $\vx = \bmat{3 & 0 }  $ \\
+Since we want maximizers only, we keep $\lambda = -1$. Now we want to show that 
+\begin{align*}
+\vx &= \bmat{2 & \sqrt{5} }\\
+ \vx &= \bmat{2 & -\sqrt{5} } 
+ \end{align*}  are indeed the maximizers. 
+The Hessian matrix is :
+\begin{align*} 
+H(x_1, x_2) &= \bmat{0 & 0 \\ 0 & 2 } + \lambda\bmat{2 & 0 \\ 0 & 2 } \\
+& = \bmat{-2 & 0 \\ 0 & 0 }
+ \end{align*}
+ To find the tangent space we have : 
+ \begin{align*} 
+ \bmat{x_1 & x_2 } \bmat{y_1 \\ y_2 } 
+ =  \bmat{2 & \pm\sqrt{5} } \bmat{y_1 \\ y_2 }  = 0 
+ \end{align*}
+ So the tangent space is $\bmat{\frac{\sqrt{5}}{2}a, & a } $ and $\bmat{-\frac{\sqrt{5}}{2}a, & a } $ 
+ Then, \begin{align*}
+ \bmat{\frac{\sqrt{5}}{2}a, &a} \bmat{-2 & 0 \\ 0 & 0 } \bmat{\frac{\sqrt{5}}{2}a \\a} &= -\frac{5}{2}a^2 < 0 \\
+ \bmat{\frac{-\sqrt{5}}{2}a, &a} \bmat{-2 & 0 \\ 0 & 0 } \bmat{\frac{-\sqrt{5}}{2}a \\a} &= -\frac{5}{2}a^2 < 0 
+ \end{align*} 
+ Therefore, \begin{align*}
+\vx &= \bmat{2 & \sqrt{5} }\\
+ \vx &= \bmat{2 & -\sqrt{5} } 
+ \end{align*}  are indeed the maximizers.
+ 
+ 
+  
 \hypertarget{}{}
 \subsection*{{Problem 4: Exercise 20.9}}
 \label{}
@@ -176,14 +204,24 @@ Then we can have : \\
 \begin{align*} 
 \mP^{-1}\mQ = \bmat{9 & -2 \\ -2 & 6 } \\
 \end{align*} 
-The eigenvalues are $\lambda = 10 $ and $\lambda = 5$, corresponding two extremizers are $\bmat{-2 & 1} $ and $\bmat{1 & 2 } $. \\
-For \begin{align*} 
-\vx &= \bmat{-2 \\ 1} \\
-f(\vx )& = 10  \\
-\vx &= \bmat{1 \\ 2} \\
-f(\vx )& = 5  \\
+The eigenvalues are $\lambda = 10 $ and $\lambda = 5$, 
+Since we are looking for maximizer, we keep $\lambda=10$ only. 
+Now we will show that the $\bmat{-\frac{2}{\sqrt{10}},  \frac{1}{\sqrt{10} }}$  and  $\bmat{\frac{2}{\sqrt{10}},  -\frac{1}{\sqrt{10} }}$and is indeed the maximizer.\\
+The Hessian is \begin{align*} 
+H(x_1, x_2) = 2\mQ - 2\lambda\mP  = \bmat{-8 & -8 \\ -8 & -16 } 
 \end{align*}
-
+ To find the tangent space we have:  \begin{align*} 
+ \bmat{4x^*_1, 4x^*_2} \bmat{y_1 \\ y_2} &=  0 \\
+\bmat{y_1 \\ y_2 } &= \bmat{a \\ 2a}  
+\end{align*}
+Then \begin{align*} 
+\bmat{a & 2a} \bmat{-8 & -8 \\ -8 & -16 }  \bmat{y_1 \\ y_2}  \bmat{a \\ 2a} = -104a^2 <0 
+\end{align*}
+Therefore, \begin{align*} 
+ \vx & =  \bmat{-\frac{2}{\sqrt{10}},  \frac{1}{\sqrt{10} }} \\
+ \vx & =  \bmat{\frac{2}{\sqrt{10}},  -\frac{1}{\sqrt{10} }} 
+\end{align*}
+are indeed the maximizers. 
 
 \hypertarget{}{}
 \subsection*{{Problem 5: Exercise 21.2}}
@@ -202,25 +240,18 @@ g_1 (\vx)  &=  \rfrac{1}{5} x_2 -x_1^2  \leq 0 \\
 g_2(\vx) & =  5x_1+\rfrac{1}{2}x_2 - 5 \leq 0 \\
 \triangledown f(\vx) &= \bmat{2x_1 - 2,  & 2x_2-10} \\
 \triangledown g_1(\vx) &= \bmat{-2x_1, & \rfrac{1}{5} } \\
-\triangledown g_2(\vx) &= \bmat{ 5, & -\rfrac{1}{2}} 
+\triangledown g_2(\vx) &= \bmat{ 5, & \rfrac{1}{2}} 
 \end{align*} 
 Write the KKT condition: 
 \begin{align*} 
-(2x_1-2) +2 \mu_1 x_1 &= 0 \\
-(2x_2-10) - \mu_2 \frac{1}{5} & = 0 \\
-\mu_1 (\frac{1}{5} -x_1^2 ) + \mu_2(5x_1-\frac{1}{2} - 5) & = 0 \\
+(2x_1-2) -2 \mu_1 x_1  + 5\mu_2 &= 0 \\
+(2x_2-10) +\frac{1}{5}\mu_1 + \frac{1}{2} \mu_2 & = 0 \\
+\mu_1 (\frac{1}{5}x_2 -x_1^2 ) + \mu_2(5x_1-\frac{1}{2} - 5) & = 0 \\
 \end{align*} 
-If both $\mu_1 $ and $\mu_2 $ are positive or negative, we will have : \begin{align*} 
-\frac{1}{5} x_2 -x_1^2 & = 0\\
-5x_1 -\frac{1}{2}x_2 -5 & = 0\\
-\end{align*} 
-Then \begin{align*} 
-x_1 &= 1 \\
-x_2 &= 5 
-\end{align*}
-which will lead $\mu_1 = 0 $ and $ \mu_2 = 0 $, which contradicts with assumption. Hence at least one of $\mu_1$ , $\mu_2$ is zero. \\
-If $\mu_1=0 $, we will have $(1, 0) $ and $ (1, 5) $ . \\
-If $\mu_2=0 $, we will have $(-1, 5) $ 
+If  $\mu_1 = 0  $ and $\mu_2  = 0 $, we have \begin{align*} \vx = \bmat{1, & 5} \end{align*} which does not satisfy $g_2(x) \leq 0 $, so no feasible solutions.  \\
+If  $\mu_1 \neq 0  $ and $\mu_2  = 0 $, we have only one feasible solution:  \begin{align*} \vx = \bmat{-1.02, & 5.2} \end{align*}  \\
+If  $\mu_1 = 0  $ and $\mu_2  \neq 0 $, we do not have only one feasible solution. \\
+If  $\mu_1 \neq 0  $ and $\mu_2 \neq 0 $, we have only one feasible solution:  \begin{align*} \vx = \bmat{-1+\sqrt{2},  & 3-2\sqrt{2}} \end{align*}  \\
 
 \item 
 \begin{align*} 
@@ -234,15 +265,15 @@ g_3(\vx) & = x_1 +x_2 -5 \geq 0 \\
 \triangledown g_3(\vx) &= \bmat{1, & 1}  \\
 \end{align*}
 Then we have \begin{align*} 
-2x_1 - \mu_1 -\mu_3 & = 0 \\
-2x_2 - \mu_2 -\mu_3 & = 0 \\
+2x_1 + \mu_1 +\mu_3 & = 0 \\
+2x_2 + \mu_2 +\mu_3 & = 0 \\
 x_1 & \geq 0 \\
 x_2 & \geq 0 \\
 \mu_1 x_1 + \mu_2x_2 + \mu_3 (x_1 + x_2 -5)  & = 0 \\
 \end{align*} 
-If $\mu_3 = 0 $ we will have $ x_1 = x_2 = 0, \mu_1 = \mu_2 = 0 $ which is not feasible. \\
-If $\mu_1 = \mu_2 =  0$  then $x_1= x_2 = \frac{5}{2} $\\
-The extreminzer is $(\frac{5}{2}, \frac{5}{2}) $ 
+If $\mu_1 = \mu_2 =  0$ and $\mu_3\neq 0 $  then $x_1= x_2 = \frac{5}{2} $\\
+After trying different combination of $\mu_1$, $\mu_2$ and $\mu_3$ 
+The only extreminzer is $(\frac{5}{2}, \frac{5}{2}) $ 
 
 
 \item 
@@ -255,16 +286,16 @@ g_2(\vx) & = 2x_1 -2x_2 - 1 \leq 0 \\
 \triangledown g_2(\vx) &= \bmat{2, &-2}  \\
 \end{align*} 
 Then we have \begin{align*} 
-(2x_1 + 6x_2 -4) -\mu_1(2x_1) -2\mu_2 & = 0 \\
-(6x_1-2) -2\mu_1 -2\mu_2 &= 0 \\
+(2x_1 + 6x_2 -4) +\mu_1(2x_1) +2\mu_2 & = 0 \\
+(6x_1-2) +2\mu_1 -2\mu_2 &= 0 \\
 x_1^2 +2x_2-1 &\leq 0 \\
 2x_1-2x_2-1 &\leq 0 \\
 \mu_1(x_1^2 +2x_2 -1) + \mu_2 (2x_1-2x_2-1 ) &= 0 \\
 \end{align*} 
-If $\mu_1 = 0 $ and $\mu_2 = 0 $:  \\ we can get $x_1=\frac{1}{3} $ and $x_2 = \frac{5}{9} $, which will make $x_1^2+2x_2-1 = \frac{2}{9} > 0  $, not feasible. \\
-If $\mu_1 = 0 $ and $\mu_2 \neq 0 $:  \\ we can get $ x_1 = \frac{5}{2} $ and $x_2 = 2 $ \\ 
-If $\mu_1 \neq 0 $ and $\mu_2 =0 $: \\ we can not get any solutions. \\
-If $\mu_1 \neq 0 $ and $\mu_2 \neq 0 $: \\ we can get two points $(-1-\sqrt{3}, \frac{3}{2} + \sqrt{3} ) $and $(-1+\sqrt{3}, \frac{3}{2} -\sqrt{3}) $ \\ 
+If $\mu_1 = 0 $ and $\mu_2 = 0 $:   we can get $x_1=\frac{1}{3} $ and $x_2 = \frac{5}{9} $, which will make $x_1^2+2x_2-1 = \frac{2}{9} > 0  $, not feasible. \\
+If $\mu_1 = 0 $ and $\mu_2 \neq 0 $:   we can get $ \bmat {\rfrac{1}{7}, & x_2 = \rfrac{9}{14}} $ \\ 
+If $\mu_1 \neq 0 $ and $\mu_2 =0 $:  we can not get any solutions. \\
+If $\mu_1 \neq 0 $ and $\mu_2 \neq 0 $:  we can get only one feasible point $\bmat{-1-\sqrt{2}, 3+2\sqrt{2} } $.\\ 
 
 
 
